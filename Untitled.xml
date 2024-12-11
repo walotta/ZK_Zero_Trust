@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+        PolicyId="SamplePolicy"
+        RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides"
+        Version="1.0">
+    
+    <Target>
+        <!-- This applies to all subjects, resources, actions, and environments -->
+    </Target>
+
+    <!-- Rule to allow access only for users with Manager role and specific IP range -->
+    <Rule RuleId="Allow-Manager-Access" Effect="Permit">
+        
+        <Target>
+            <!-- Target specific actions and resources -->
+            <AnyOf>
+                <AllOf>
+                    <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Manager</AttributeValue>
+                        <AttributeDesignator AttributeId="subject:role" Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
+                    </Match>
+                </AllOf>
+            </AnyOf>
+            <AnyOf>
+                <AllOf>
+                    <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
+                        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">^192\.168\.1\.[0-9]+$</AttributeValue>
+                        <AttributeDesignator AttributeId="environment:ipAddress" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
+                    </Match>
+                </AllOf>
+            </AnyOf>
+        </Target>
+        
+        <Condition>
+            <!-- Additional condition if needed, for time-based access, etc. -->
+        </Condition>
+    </Rule>
+
+    <!-- Default deny rule -->
+    <Rule RuleId="Deny-All-Others" Effect="Deny"/>
+</Policy>
