@@ -1,0 +1,27 @@
+
+use policy_core::Inputs;
+use regex::Regex;
+use risc0_zkvm::guest::env;
+
+fn main() {
+    let inp: Inputs = env::read();
+
+    let rule_res_0_cond0_cond0_cond0 = inp.user_role == "Manager";
+    let rule_res_0_cond0_cond0 = rule_res_0_cond0_cond0_cond0;
+
+    let rule_res_0_cond0 = rule_res_0_cond0_cond0;
+    
+
+    let rule_res_0_cond1_cond0_cond0 = Regex::new(r"^192\.168\.1\.[0-9]+$").unwrap().is_match(&inp.ip);
+    let rule_res_0_cond1_cond0 = rule_res_0_cond1_cond0_cond0;
+
+    let rule_res_0_cond1 = rule_res_0_cond1_cond0;
+    
+    let rule_res_0 = rule_res_0_cond0 || rule_res_0_cond1;
+    
+    let rule_res_1 = false;
+    
+    let result = rule_res_0 || rule_res_1;
+    
+    env::commit(&result);
+}

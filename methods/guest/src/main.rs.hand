@@ -12,6 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use policy_core::Inputs;
+use regex::Regex;
+use risc0_zkvm::guest::env;
+
 fn main() {
-    risc0_build::embed_methods();
+    let inp: Inputs = env::read();
+    // Rule 1
+    if inp.user_role == "Manager" {
+        env::commit(&true);
+        return
+    }
+    // if inp.ip.starts_with("192.168.1.") {
+    //     env::commit(&true);
+    //     return
+    // }
+    let ip_regex = Regex::new(r"^192\.168\.1\.[0-9]+$").unwrap();
+    if ip_regex.is_match(&inp.ip) {
+        env::commit(&true);
+        return
+    }
+    // Rule 2
+    env::commit(&false);
+    return
 }

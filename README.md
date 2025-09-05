@@ -1,4 +1,16 @@
 # Zero-Knowledge Zero Trust
+Updated on Sep 5, 2025
+
+# How to install
+
+1. install `risc0`
+
+# Running with batch
+
+```bash
+python batch_exec.py
+```
+--------------------------------------
 
 Created by Dec 3, 2024
 

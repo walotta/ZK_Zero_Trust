@@ -1,4 +1,7 @@
-.DS_Store
-Cargo.lock
-methods/guest/Cargo.lock
-target/
+logs
+.envrc
+.direnv
+venv
+tmp
+target
+pic_output

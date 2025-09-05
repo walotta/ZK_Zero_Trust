@@ -1,0 +1,10 @@
+[package]
+name = "policy-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+risc0-zkvm = { version = "2.0.2" , default-features = false }
+# risc0-zkvm = { path = "../../../risc0/zkvm" , default-features = false }
+serde = "1.0"
+rand = { version = "0.8.4", features = ["std", "std_rng"] }

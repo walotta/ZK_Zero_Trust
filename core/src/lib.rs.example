@@ -14,30 +14,19 @@
 
 use serde::{Deserialize, Serialize};
 
-use rand::Rng;
-
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-pub struct Outputs {
-    pub m: usize,
-    pub p: usize,
-    pub data: Vec<usize>,
-}
-
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub struct Inputs {
-    pub m: usize,
-    pub n: usize,
-    pub p: usize,
-    pub data: Vec<usize>,
+    pub user_name: String,
+    pub user_role: String,
+    pub ip: String,
 }
 
 impl Inputs{
-    pub fn new(m: usize, n: usize, p: usize) -> Inputs{
-        let mut rng = rand::thread_rng();
-        let mut initial_inputs: Vec<usize> = Vec::with_capacity(m*n+n*p);
-        for _ in 0..(m*n+n*p){
-            initial_inputs.push(rng.gen::<usize>() % 100);
+    pub fn new(user_name: String, user_role: String, ip: String) -> Self {
+        Self {
+            user_name,
+            user_role,
+            ip,
         }
-        Inputs{m, n, p, data: initial_inputs}
     }
 }
