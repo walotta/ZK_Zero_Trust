@@ -8,7 +8,7 @@ from datetime import datetime
 POLICY_PROJECT = os.getcwd()
 
 # Source directories
-SOURCE_BASE     = os.path.join(POLICY_PROJECT, 'tools/xacml-to-rust/zkvm_testing')
+SOURCE_BASE     = os.path.join(POLICY_PROJECT, 'tools/xacml-to-rust/output')
 INPUT_DEF_DIR   = os.path.join(SOURCE_BASE, 'input_definition')
 POLICY_CODE_DIR = os.path.join(SOURCE_BASE, 'policies_code')
 REQUESTS_DIR     = os.path.join(SOURCE_BASE, 'Requests')
@@ -17,6 +17,7 @@ RESPONSES_DIR    = os.path.join(SOURCE_BASE, 'Responses')
 # Target Risc0 example project
 TARGET_LIB  = os.path.join(POLICY_PROJECT, 'core',    'src',   'lib.rs')
 TARGET_MAIN = os.path.join(POLICY_PROJECT, 'methods', 'guest', 'src', 'main.rs')
+GUEST_DIR = os.path.join(POLICY_PROJECT, 'methods', 'guest', 'src')
 
 # Ensure target directories exist
 os.makedirs(os.path.dirname(TARGET_LIB),  exist_ok=True)
@@ -27,10 +28,13 @@ timestamp = datetime.now().strftime("logs/batch_%m_%d_%H_%M.log")
 log_path = os.path.join(POLICY_PROJECT, timestamp)
 print(f"All cargo output will be redirected to {log_path}")
 
-testcases_names = ['_'.join(f.split('.')[0].split('_')[1:]) for f in os.listdir(POLICY_CODE_DIR)]
+os.system(f"cp {os.path.join(SOURCE_BASE, POLICY_CODE_DIR)}/*.bin {GUEST_DIR}/.")
+
+testcases_names = ['_'.join(f.split('.')[0].split('_')[1:]) for f in os.listdir(POLICY_CODE_DIR) if f.endswith(".rs")]
 testcases_names.sort()
-# testcases_names = ["IIA003"]
+# testcases_names = ["IIC057"]
 testcases = dict()
+
 for tc in testcases_names:
     testcases[tc] = {
         'request': os.path.join(REQUESTS_DIR, f"Request_{tc}.json"),

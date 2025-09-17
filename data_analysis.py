@@ -4,7 +4,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import statistics
 
-LOG_FILE = 'batch_08_14_12_08.log'
+LOG_FILE = 'logs/batch_09_10_09_00.log'
 assert os.path.exists(LOG_FILE), "Log file does not exist."
 
 # Create output directory for pictures

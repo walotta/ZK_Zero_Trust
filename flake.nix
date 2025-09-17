@@ -18,7 +18,7 @@
             '';
             src = pkgs.fetchurl {
               url = "https://risc0-artifacts.s3.us-west-2.amazonaws.com/rzup/prod/Linux-X64/rzup";
-              hash = "sha256-1p1rK/XLbzcpblZKS7gCUZj7paZ2/N/HgHDIv0hOMms=";
+              hash = "sha256-fNwd1dS47zjqYXDEW9Kbpl04nw6Ws2XaYWMdH8XGwco=";
             };
             meta.homepage = "https://github.com/risc0/risc0";
         };
@@ -45,7 +45,7 @@
 			];
             shellHook = ''
                 export PATH="$HOME/.risc0/bin:$PATH"
-                export LD_LIBRARY_PATH=${pkgs.zlib}/lib:${pkgs.xz}/lib:$LD_LIBRARY_PATH
+                export LD_LIBRARY_PATH=${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.xz}/lib:$LD_LIBRARY_PATH
                 export EXTRA_CCFLAGS="-I/usr/include"
                 export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=${pkgs.stdenv.cc}/bin/gcc
             '';

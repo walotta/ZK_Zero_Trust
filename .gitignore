@@ -5,3 +5,5 @@ venv
 tmp
 target
 pic_output
+.stignore
+.stfolder
