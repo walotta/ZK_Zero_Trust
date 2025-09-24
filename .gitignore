@@ -5,5 +5,7 @@ venv
 tmp
 target
 pic_output
+output
 .stignore
 .stfolder
+__pycache__

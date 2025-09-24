@@ -32,7 +32,7 @@ os.system(f"cp {os.path.join(SOURCE_BASE, POLICY_CODE_DIR)}/*.bin {GUEST_DIR}/."
 
 testcases_names = ['_'.join(f.split('.')[0].split('_')[1:]) for f in os.listdir(POLICY_CODE_DIR) if f.endswith(".rs")]
 testcases_names.sort()
-# testcases_names = ["IIC057"]
+testcases_names = ["IIC057"]
 testcases = dict()
 
 for tc in testcases_names:
