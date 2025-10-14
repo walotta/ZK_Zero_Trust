@@ -2837,6 +2837,7 @@ dependencies = [
  "policy-core",
  "policy-methods",
  "rand 0.8.5",
+ "regex",
  "regex-automata",
  "risc0-zkvm",
  "serde",
