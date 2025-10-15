@@ -159,6 +159,7 @@ fn policy_verify(inp: Inputs) -> String {
 
 
     println!("Number of segments: {}", prove_info.stats.segments);
+    println!("Total cycles: {}", prove_info.stats.total_cycles);
     println!("User cycles: {}", prove_info.stats.user_cycles);
     println!("Proof size: {} bytes", prove_info.receipt.inner.composite().unwrap().seal_size());
     println!("Gen time elapsed: {:?}", gen_end_time.duration_since(gen_start_time));
