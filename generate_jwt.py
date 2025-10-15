@@ -200,6 +200,12 @@ def main():
     # Convert to JWK format
     jwk, key_id = private_key_to_jwk(private_key)
 
+    # Get the modulus n from the private key and output its size
+    private_numbers = private_key.private_numbers()
+    public_numbers = private_numbers.public_numbers
+    n_bit_size = public_numbers.n.bit_length()
+    print(f"Modulus (n) size: {n_bit_size} bits")
+
     print("Creating JWT payload...")
 
     # Create JWT payload

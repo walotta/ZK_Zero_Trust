@@ -24,3 +24,6 @@ policy-core = { path = "../../core" }
 risc0-zkvm = { version = "3.0" , default-features = false, features = [
   "std",
 ] }
+
+[patch.crates-io]
+rsa = { git = "https://www.github.com/risc0/RustCrypto-RSA.git", rev = "v0.9.6-risczero.0" }
