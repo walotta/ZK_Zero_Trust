@@ -1,0 +1,18 @@
+[package]
+name = "rsa_verify"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+base64 = "0.21"
+risc0-zkvm = { version = "3.0" , default-features = false, features = [
+  "std",
+] }
+rsa = "0.9"
+sha2 = { version = "0.10", features = ["oid"] }
+signature = "2"
+
+[patch.crates-io]
+rsa = { git = "https://www.github.com/risc0/RustCrypto-RSA.git", rev = "v0.9.6-risczero.0" }
