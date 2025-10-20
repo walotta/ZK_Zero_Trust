@@ -18,9 +18,9 @@ def base64url_encode(data):
 def base64url_decode(data):
     """Base64 URL-safe decode with padding"""
     # Add padding if needed
-    padding = 4 - (len(data) % 4)
-    if padding != 4:
-        data += '=' * padding
+    padding_len = 4 - (len(data) % 4)
+    if padding_len != 4:
+        data += '=' * padding_len
     return base64.urlsafe_b64decode(data)
 
 def generate_rsa_key_pair(key_size=2048):
@@ -166,73 +166,67 @@ def sign_jwt(private_key, key_id, payload):
 
     return jwt_token
 
-def generate_rust_constants(jwk, key_id, jwt_token):
+def generate_rust_constants_include_bytes(jwk, key_id, jwt_token, private_key,
+                                          jwt_rs_path="jwt.rs",
+                                          bin_dir="keys"):
     """Generate Rust constants in the required format"""
+    pub_numbers = private_key.public_key().public_numbers()
+    n = pub_numbers.n.to_bytes((pub_numbers.n.bit_length() + 7) // 8, "big")
+    e = pub_numbers.e.to_bytes((pub_numbers.e.bit_length() + 7) // 8, "big")
 
-    # Format the SECRET_KEY as a Rust static string
+    os.makedirs(os.path.dirname(jwt_rs_path) or ".", exist_ok=True)
+    os.makedirs(bin_dir, exist_ok=True)
+
+    n_path = os.path.join(bin_dir, "modulus.bin")
+    e_path = os.path.join(bin_dir, "exponent.bin")
+    with open(n_path, "wb") as f:
+        f.write(n)
+    with open(e_path, "wb") as f:
+        f.write(e)
+
     secret_key_json = json.dumps(jwk, indent=2)
-    secret_key_rust = f'static SECRET_KEY: &str = r#"\n{secret_key_json}\n"#;'
+    secret_key_rust = f'static SECRET_KEY: &str = r#"\\n{secret_key_json}\\n"#;'
 
-    # Get modulus and exponent for the guest code
-    modulus_b64 = jwk['n']
-    exponent_b64 = jwk['e']
-
-    # Format the complete Rust code
-    rust_code = f'''// Generated JWT constants
+    rust_code = f'''// Generated JWT constants (N/E via include_bytes!, no base64 at runtime)
 {secret_key_rust}
 
-const JWT: &str = "{jwt_token}";
+pub const JWT: &str = "{jwt_token}";
+pub const KEY_ID: &str = "{key_id}";
 
-const MODULUS_B64: &str = "{modulus_b64}";
-const EXPONENT_B64: &str = "{exponent_b64}";
-
-const KEY_ID: &str = "{key_id}";
+pub static N_BYTES: &[u8] = include_bytes!("keys/modulus.bin");
+pub static E_BYTES: &[u8] = include_bytes!("keys/exponent.bin");
 '''
-
-    return rust_code
+    with open(jwt_rs_path, "w") as f:
+        f.write(rust_code)
 
 def main():
-    # Get or create RSA key pair (stored in jwt_key file)
     private_key = get_or_create_private_key("jwt_key", 2048)
-
     print("Converting to JWK format...")
-
-    # Convert to JWK format
     jwk, key_id = private_key_to_jwk(private_key)
 
-    # Get the modulus n from the private key and output its size
     private_numbers = private_key.private_numbers()
     public_numbers = private_numbers.public_numbers
     n_bit_size = public_numbers.n.bit_length()
     print(f"Modulus (n) size: {n_bit_size} bits")
 
     print("Creating JWT payload...")
-
-    # Create JWT payload
     payload = create_jwt_payload()
 
     print("Signing JWT...")
-
-    # Sign JWT
     jwt_token = sign_jwt(private_key, key_id, payload)
 
-    print("Generating Rust constants...")
+    print("Generating Rust constants (include_bytes)...")
+    generate_rust_constants_include_bytes(jwk, key_id, jwt_token, private_key,
+                                          jwt_rs_path="jwt.rs",
+                                          bin_dir="keys")
 
-    # Generate Rust code
-    rust_code = generate_rust_constants(jwk, key_id, jwt_token)
-
-    # Write to jwt.rs file
-    with open('jwt.rs', 'w') as f:
-        f.write(rust_code)
-
-    print("Generated jwt.rs file successfully!")
+    print("Generated jwt.rs and key bins successfully!")
     print(f"Key ID: {key_id}")
     print(f"JWT length: {len(jwt_token)} characters")
-
-    # Also print some info for verification
     print("\nGenerated constants:")
-    print(f"MODULUS_B64 length: {len(jwk['n'])}")
-    print(f"EXPONENT_B64: {jwk['e']}")
+    print(f"MODULUS_BYTES length: {(public_numbers.n.bit_length() + 7) // 8}")
+    print(f"EXPONENT_BYTES length: {(public_numbers.e.bit_length() + 7) // 8}")
 
 if __name__ == "__main__":
     main()
+

@@ -21,8 +21,10 @@ fn eval_regex(regex_input: &str, regex_exp: &[u8]) -> bool {
     }
 }
 
-const MODULUS_B64: &str = "6scD7VyKosMBqvDwZZDIGmjGAzn6nUK83PsaVwtOBqrJBDqOGcqqFpiKdqV9N_SjZVEslzo8_0gq5MYqNp3fzkHBIUr_7oTgVlfpXGJOspV4abPTeoXQYYVSJT_RyPQLTPZ17O_D-cvGEC0bjFN--Aa8iPnz4lU8sD-oeCqEuZDHTHQgmZhM-_kVIiysfDz968R5rXUi_G44arVbXIwRZUC0SCZq96syQIxedGUkWRvQyehHnxuBS69xCSDBqxK66c3DXy0aWpVvW1Q0oaMcnzUPFl-g-LqULt5L1BFfDYVcICXms12HQFola2rho-I67-UnFecVsWTTQ8LgBQV0GQ";
-const EXPONENT_B64: &str = "AQAB";
+// const MODULUS_B64: &str = "6scD7VyKosMBqvDwZZDIGmjGAzn6nUK83PsaVwtOBqrJBDqOGcqqFpiKdqV9N_SjZVEslzo8_0gq5MYqNp3fzkHBIUr_7oTgVlfpXGJOspV4abPTeoXQYYVSJT_RyPQLTPZ17O_D-cvGEC0bjFN--Aa8iPnz4lU8sD-oeCqEuZDHTHQgmZhM-_kVIiysfDz968R5rXUi_G44arVbXIwRZUC0SCZq96syQIxedGUkWRvQyehHnxuBS69xCSDBqxK66c3DXy0aWpVvW1Q0oaMcnzUPFl-g-LqULt5L1BFfDYVcICXms12HQFola2rho-I67-UnFecVsWTTQ8LgBQV0GQ";
+// const EXPONENT_B64: &str = "AQAB";
+static MODULUS: &[u8] = include_bytes!("modulus.bin");
+static EXPONENT: &[u8] = include_bytes!("exponent.bin");
 const JWT_FIELD: &[&str] = &["subject_id"];
 
 fn extract_jwt(token: &str, positions: &Vec<usize>) -> Vec<String> {
@@ -37,10 +39,12 @@ fn extract_jwt(token: &str, positions: &Vec<usize>) -> Vec<String> {
     let payload = engine.decode(payload_b64).expect("payload base64");
     let signature_bytes = engine.decode(signature_b64).expect("signature base64");
 
-    let n_bytes = engine.decode(MODULUS_B64).expect("modulus base64");
-    let e_bytes = engine.decode(EXPONENT_B64).expect("exponent base64");
-    let n = BigUint::from_bytes_be(&n_bytes);
-    let e = BigUint::from_bytes_be(&e_bytes);
+    // let n_bytes = engine.decode(MODULUS_B64).expect("modulus base64");
+    // let e_bytes = engine.decode(EXPONENT_B64).expect("exponent base64");
+    // let n = BigUint::from_bytes_be(&n_bytes);
+    // let e = BigUint::from_bytes_be(&e_bytes);
+    let n = BigUint::from_bytes_be(MODULUS);
+    let e = BigUint::from_bytes_be(EXPONENT);
     let public_key = RsaPublicKey::new(n, e).expect("valid RSA public key");
     let verifying_key = VerifyingKey::<Sha256>::new(public_key);
     let signature = Signature::try_from(signature_bytes.as_slice()).expect("signature format");
