@@ -9,3 +9,4 @@ output
 .stignore
 .stfolder
 __pycache__
+paper
