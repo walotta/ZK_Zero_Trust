@@ -298,6 +298,8 @@ def main() -> int:
         try:
             # if idx == 97:
             #     raise TimeoutError("timeout when compile pattern")
+            # if idx == 148:
+            #     raise TimeoutError("timeout when compile pattern")
             # compiled_bytes = compile_pattern(pattern)
             # write_regex_bytes(compiled_bytes, pattern)
             write_regex_bytes(None, pattern)

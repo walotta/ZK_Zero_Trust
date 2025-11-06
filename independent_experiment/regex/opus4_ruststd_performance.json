@@ -1468,5 +1468,25 @@
     "user_cycles": 447075,
     "error": null,
     "python_match": true
+  },
+  {
+    "pattern": "^(\\+\\d{1,3}[- ]?)?\\d{10}$",
+    "str": "+915551234567",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 6.22s\n     Running `target/release/jwt-rsa-verify +915551234567`\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: rx len failed\n\nCaused by:\n    failed to fill whole buffer\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Z]{2,4}[0-9]{6,12}$",
+    "str": "USA123456789",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 12.16s\n     Running `target/release/jwt-rsa-verify USA123456789`\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: rx len failed\n\nCaused by:\n    failed to fill whole buffer\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
   }
 ]
