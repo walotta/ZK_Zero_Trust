@@ -1,33 +1,44 @@
-use policy_core::Inputs;
-use regex_automata::dfa::{dense::DFA, Automaton};
-use regex_automata::Input;
-use risc0_zkvm::guest::env;
 use base64::engine::general_purpose::URL_SAFE_NO_PAD;
 use base64::Engine;
-use rsa::{pkcs1v15::{Signature, VerifyingKey}, BigUint, RsaPublicKey};
+use policy_core::Inputs;
+use risc0_zkvm::guest::env;
+use rsa::{
+    pkcs1v15::{Signature, VerifyingKey},
+    BigUint, RsaPublicKey,
+};
 use sha2::Sha256;
 use signature::Verifier;
 
-fn eval_regex(regex_input: &str, regex_exp: &[u8]) -> bool {
-    match DFA::from_bytes(regex_exp) {
-        Ok((dfa, _)) => {
-            let input = Input::new(regex_input);
-            match dfa.try_search_fwd(&input) {
-                Ok(result) => result.is_some(),
-                Err(_) => false,
+fn jwt_field_check(inp: &Inputs, extracted_values: &[String]) -> bool {
+    for (i, field) in JWT_FIELD.iter().enumerate() {
+        match *field {
+            "sub" => {
+                if extracted_values[i] != inp.access_subject_subject_id {
+                    return false;
+                }
             }
+            "role" => {
+                if extracted_values[i] != inp.access_subject_role {
+                    return false;
+                }
+            }
+            "age" => {
+                // Age might be numeric — convert if needed
+                if extracted_values[i] != inp.access_subject_age.to_string() {
+                    return false;
+                }
+            }
+            _ => unreachable!("Unknown field — should be impossible due to codegen"),
         }
-        Err(_) => false,
     }
-}
 
-// const MODULUS_B64: &str = "6scD7VyKosMBqvDwZZDIGmjGAzn6nUK83PsaVwtOBqrJBDqOGcqqFpiKdqV9N_SjZVEslzo8_0gq5MYqNp3fzkHBIUr_7oTgVlfpXGJOspV4abPTeoXQYYVSJT_RyPQLTPZ17O_D-cvGEC0bjFN--Aa8iPnz4lU8sD-oeCqEuZDHTHQgmZhM-_kVIiysfDz968R5rXUi_G44arVbXIwRZUC0SCZq96syQIxedGUkWRvQyehHnxuBS69xCSDBqxK66c3DXy0aWpVvW1Q0oaMcnzUPFl-g-LqULt5L1BFfDYVcICXms12HQFola2rho-I67-UnFecVsWTTQ8LgBQV0GQ";
-// const EXPONENT_B64: &str = "AQAB";
+    true
+}
 static MODULUS: &[u8] = include_bytes!("modulus.bin");
 static EXPONENT: &[u8] = include_bytes!("exponent.bin");
-const JWT_FIELD: &[&str] = &["subject_id"];
+const JWT_FIELD: &[&str] = &["sub"];
 
-fn extract_jwt(token: &str, positions: &Vec<usize>) -> Vec<String> {
+fn extract_jwt(token: &str, positions: &Vec<usize>, inp: &Inputs) -> bool {
     let mut parts = token.split('.');
     let header_b64 = parts.next().expect("jwt header");
     let payload_b64 = parts.next().expect("jwt payload");
@@ -71,26 +82,32 @@ fn extract_jwt(token: &str, positions: &Vec<usize>) -> Vec<String> {
 
         // Verify the separator between key and value (should only contain spaces and colon)
         let separator = &payload_str[key_end + 1..value_start];
-        assert!(separator.chars().all(|c| c == ' ' || c == ':'), "Separator should only contain spaces and colon");
+        assert!(
+            separator.chars().all(|c| c == ' ' || c == ':'),
+            "Separator should only contain spaces and colon"
+        );
         let colon_count = separator.chars().filter(|&c| c == ':').count();
         assert_eq!(colon_count, 1, "Separator must contain exactly one colon");
 
         // Verify value quotes are correct
-        assert_eq!(&payload_str[value_start..value_start+1], "\"", "Value should start with quote");
-        assert_eq!(&payload_str[value_end..value_end+1], "\"", "Value should end with quote");
+        assert_eq!(
+            &payload_str[value_start..value_start + 1],
+            "\"",
+            "Value should start with quote"
+        );
+        assert_eq!(
+            &payload_str[value_end..value_end + 1],
+            "\"",
+            "Value should end with quote"
+        );
 
         // Extract the value (without quotes)
-        let value = &payload_str[value_start+1..value_end];
+        let value = &payload_str[value_start + 1..value_end];
         extracted_values.push(value.to_string());
     }
-    return extracted_values;
+
+    return jwt_field_check(&inp, &extracted_values);
 }
-
-static RE_2648DA3939BEBE6640528CB1A7924ED9: &[u8] =
-    include_bytes!("RE_2648DA3939BEBE6640528CB1A7924ED9.bin");
-
-static RE_ADEA8ABAFA89413F0FAB690611A89A56: &[u8] =
-    include_bytes!("RE_ADEA8ABAFA89413F0FAB690611A89A56.bin");
 
 #[derive(Debug, PartialEq)]
 enum Result {
@@ -99,26 +116,30 @@ enum Result {
     NotApplicable,
 }
 
-fn evaluate_cond_policy_rule(inp: &Inputs, jwt_dict: &Vec<String>) -> bool {
-    (eval_regex(
-        &jwt_dict[0],
-        &RE_2648DA3939BEBE6640528CB1A7924ED9,
-    )) || (eval_regex(
-        &jwt_dict[0],
-        &RE_ADEA8ABAFA89413F0FAB690611A89A56,
-    ))
+fn evaluate_target_policy_rule(inp: &Inputs) -> bool {
+    (("Julius Hibbert" == inp.access_subject_subject_id)
+        && ("http://medico.com/record/patient/BartSimpson" == inp.resource_resource_id)
+        && (("read" == inp.action_action_id) || ("write" == inp.action_action_id)))
 }
 
-fn evaluate_rule_policy_rule(inp: &Inputs, jwt_dict: &Vec<String>) -> Result {
-    if evaluate_cond_policy_rule(inp, jwt_dict) {
-        return Result::Permit;
-    } else {
+fn evaluate_rule_policy_rule(inp: &Inputs) -> Result {
+    if !evaluate_target_policy_rule(inp) {
         return Result::NotApplicable;
     }
+
+    return Result::Permit;
 }
 
-fn evaluate_policy_policy(inp: &Inputs, jwt_dict: &Vec<String>) -> Result {
-    let results = vec![evaluate_rule_policy_rule(inp, jwt_dict)];
+fn evaluate_target_policy(inp: &Inputs) -> bool {
+    true
+}
+
+fn evaluate_policy_policy(inp: &Inputs) -> Result {
+    if !evaluate_target_policy(inp) {
+        return Result::NotApplicable;
+    }
+
+    let results = vec![evaluate_rule_policy_rule(inp)];
 
     //deny-overrides
     let mut atleast_one_permit = false;
@@ -137,13 +158,18 @@ fn evaluate_policy_policy(inp: &Inputs, jwt_dict: &Vec<String>) -> Result {
 
 fn main() {
     let inp: Inputs = env::read();
-    let jwt_positions: Vec<usize> = env::read();
-    let jwt_dict: Vec<String> = extract_jwt(&inp.jwt, &jwt_positions);  // if no jwt field used, put this None
 
-    let decision = match evaluate_policy_policy(&inp, &jwt_dict) {
+    let decision = match evaluate_policy_policy(&inp) {
         Result::Permit => true,
         _ => false,
     };
 
+    let jwt: String = env::read();
+    let jwt_positions: Vec<usize> = env::read();
+    if !extract_jwt(&jwt, &jwt_positions, &inp) {
+        decision = false;
+    }
+
     env::commit(&decision);
+    env::commit(&inp);
 }
