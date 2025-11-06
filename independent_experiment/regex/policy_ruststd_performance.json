@@ -1,0 +1,62 @@
+[
+  {
+    "pattern": "read|write",
+    "str": "read",
+    "proof_seconds": 61.495715487,
+    "verify_seconds": 0.017360662000000002,
+    "total_cycles": 524288,
+    "user_cycles": 246685,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "read|write",
+    "str": "delete",
+    "proof_seconds": 61.620549456,
+    "verify_seconds": 0.017338812000000002,
+    "total_cycles": 524288,
+    "user_cycles": 246886,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "J.* Hibbert",
+    "str": "Julius Hibbert",
+    "proof_seconds": 314.4029864,
+    "verify_seconds": 0.053723132,
+    "total_cycles": 2621440,
+    "user_cycles": 2116733,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "B.* Simpson",
+    "str": "Julius Hibbert",
+    "proof_seconds": 509.037443057,
+    "verify_seconds": 0.072911317,
+    "total_cycles": 4194304,
+    "user_cycles": 3506492,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "J.* K.* Hibbert",
+    "str": "Julius Hibbert",
+    "proof_seconds": 127.269982819,
+    "verify_seconds": 0.018873401,
+    "total_cycles": 1048576,
+    "user_cycles": 381613,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "B.* O.* Simpson",
+    "str": "Julius Hibbert",
+    "proof_seconds": 128.196585367,
+    "verify_seconds": 0.018570882,
+    "total_cycles": 1048576,
+    "user_cycles": 350537,
+    "error": null,
+    "python_match": false
+  }
+]

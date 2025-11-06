@@ -17,6 +17,7 @@ from compile_regex import create_dfa_bytes
 # Regex evaluation cases are sourced from an external JSON file at runtime.
 ROOT = Path(__file__).resolve().parent
 REGEX_BIN_PATH = ROOT / "methods" / "guest" / "src" / "regex.bin"
+REGEX_STR_PATH = ROOT / "methods" / "guest" / "src" / "regex.txt"
 DEFAULT_JSON_OUTPUT_PATH = ROOT / "regex_metrics.json"
 
 
@@ -199,12 +200,18 @@ def compile_pattern(pattern: str) -> bytes:
     return create_dfa_bytes(pattern)
 
 
-def write_regex_bytes(buf: bytes) -> None:
+def write_regex_bytes(buf: bytes, pattern: str) -> None:
     tmp_path = ROOT / "regex.bin.tmp"
-    with tmp_path.open("wb") as f:
-        f.write(buf)
-    os.system(f"rm -f '{REGEX_BIN_PATH}'")
-    os.system(f"mv '{tmp_path}' '{REGEX_BIN_PATH}'")
+    tmp_str_path = ROOT / "regex.txt.tmp"
+    if buf is not None:
+        with tmp_path.open("wb") as f:
+            f.write(buf)
+        os.system(f"rm -f '{REGEX_BIN_PATH}'")
+        os.system(f"mv '{tmp_path}' '{REGEX_BIN_PATH}'")
+    with tmp_str_path.open("w") as f:
+        f.write(pattern)
+    os.system(f"rm -f '{REGEX_STR_PATH}'")
+    os.system(f"mv '{tmp_str_path}' '{REGEX_STR_PATH}'")
 
 
 def run_host(eval_str: str) -> subprocess.CompletedProcess[str]:
@@ -291,8 +298,9 @@ def main() -> int:
         try:
             # if idx == 97:
             #     raise TimeoutError("timeout when compile pattern")
-            compiled_bytes = compile_pattern(pattern)
-            write_regex_bytes(compiled_bytes)
+            # compiled_bytes = compile_pattern(pattern)
+            # write_regex_bytes(compiled_bytes, pattern)
+            write_regex_bytes(None, pattern)
         except Exception as exc:
             message = f"compile/write failed: {exc}"
             print(f"  {case_label} {message}", file=sys.stderr)

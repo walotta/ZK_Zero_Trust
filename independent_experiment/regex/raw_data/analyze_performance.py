@@ -80,7 +80,9 @@ class FrameworkSummary:
     total_cases: int
     error_cases: int
     proof_avg: Optional[float]
+    proof_std: Optional[float]
     verify_avg: Optional[float]
+    verify_std: Optional[float]
 
     @property
     def error_rate(self) -> float:
@@ -149,24 +151,29 @@ def entry_has_error(entry: dict) -> bool:
     return False
 
 
-def average_time(entries: Iterable[dict], key: str) -> Optional[float]:
+def average_time(entries: Iterable[dict], key: str) -> Tuple[Optional[float], Optional[float]]:
     values = [entry[key] for entry in entries if isinstance(entry.get(key), (int, float))]
     if not values:
-        return None
-    return sum(values) / len(values)
+        return None, None
+    avg = sum(values) / len(values)
+    variance = sum((value - avg) ** 2 for value in values) / len(values)
+    std_dev = math.sqrt(variance)
+    return avg, std_dev
 
 
 def summarize_records(name: str, records: Sequence[dict]) -> FrameworkSummary:
     error_count = sum(1 for entry in records if entry_has_error(entry))
     successes = [entry for entry in records if not entry_has_error(entry)]
-    proof_avg = average_time(successes, "proof_seconds")
-    verify_avg = average_time(successes, "verify_seconds")
+    proof_avg, proof_std = average_time(successes, "proof_seconds")
+    verify_avg, verify_std = average_time(successes, "verify_seconds")
     return FrameworkSummary(
         name=name,
         total_cases=len(records),
         error_cases=error_count,
         proof_avg=proof_avg,
+        proof_std=proof_std,
         verify_avg=verify_avg,
+        verify_std=verify_std,
     )
 
 
@@ -468,10 +475,12 @@ def print_dataset_report(dataset_summary: DatasetSummary) -> None:
         summary = dataset_summary.summaries[label]
         err_pct = summary.error_rate * 100 if not math.isnan(summary.error_rate) else float("nan")
         proof = "N/A" if summary.proof_avg is None else f"{summary.proof_avg:.3f}s"
+        proof_std = "N/A" if summary.proof_std is None else f"{summary.proof_std:.3f}s"
         verify = "N/A" if summary.verify_avg is None else f"{summary.verify_avg:.3f}s"
+        verify_std = "N/A" if summary.verify_std is None else f"{summary.verify_std:.3f}s"
         print(
             f"  {summary.name}: {summary.error_cases}/{summary.total_cases} errors "
-            f"({err_pct:.2f}%), avg proof {proof}, avg verify {verify}"
+            f"({err_pct:.2f}%), avg proof {proof} (std {proof_std}), avg verify {verify} (std {verify_std})"
         )
     print()
 
@@ -512,10 +521,12 @@ def main() -> None:
         summary = combined_summary[framework]
         err_pct = summary.error_rate * 100 if not math.isnan(summary.error_rate) else float("nan")
         proof = "N/A" if summary.proof_avg is None else f"{summary.proof_avg:.3f}s"
+        proof_std = "N/A" if summary.proof_std is None else f"{summary.proof_std:.3f}s"
         verify = "N/A" if summary.verify_avg is None else f"{summary.verify_avg:.3f}s"
+        verify_std = "N/A" if summary.verify_std is None else f"{summary.verify_std:.3f}s"
         print(
             f"  {summary.name}: {summary.error_cases}/{summary.total_cases} errors "
-            f"({err_pct:.2f}%), avg proof {proof}, avg verify {verify}"
+            f"({err_pct:.2f}%), avg proof {proof} (std {proof_std}), avg verify {verify} (std {verify_std})"
         )
     print()
 
