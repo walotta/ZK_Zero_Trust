@@ -1,0 +1,1442 @@
+[
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$",
+    "pattern_original": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$",
+    "str": "user@example.com",
+    "proof_seconds": 11.313,
+    "verify_seconds": 0.171,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+    "pattern_original": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+    "str": "very.unusual.@.unusual-example@domains.example.com",
+    "proof_seconds": 12.314,
+    "verify_seconds": 0.178,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$",
+    "pattern_original": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$",
+    "str": "Passw0rd@2025VeryStrong",
+    "proof_seconds": 12.31,
+    "verify_seconds": 0.177,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$",
+    "pattern_original": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$",
+    "str": "weak",
+    "proof_seconds": 11.983,
+    "verify_seconds": 0.182,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^Bearer\\s+[A-Za-z0-9\\-._~+/]+=*$",
+    "pattern_original": "^Bearer\\s+[A-Za-z0-9\\-._~+/]+=*$",
+    "str": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+    "proof_seconds": 13.618,
+    "verify_seconds": 0.177,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+    "pattern_original": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+    "str": "192.168.1.1",
+    "proof_seconds": 13.394,
+    "verify_seconds": 0.333,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+    "pattern_original": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+    "str": "999.999.999.999",
+    "proof_seconds": 11.934,
+    "verify_seconds": 0.191,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^(?:(?:[^\\n]*?/../)+|.*(?:.{2,}|/\\s*.{2}|\\%2e%2e)).*$",
+    "pattern_original": "^(?:(?:[^\\n]*?/../)+|.*(?:.{2,}|/\\s*.{2}|\\%2e%2e)).*$",
+    "str": "../../../../etc/passwd",
+    "proof_seconds": 16.164,
+    "verify_seconds": 0.318,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:(?:[^\\n]*?/../)+|.*(?:.{2,}|/\\s*.{2}|\\%2e%2e)).*$",
+    "pattern_original": "^(?:(?:[^\\n]*?/\\.\\./)+|.*(?:\\.{2,}|/\\s*\\.{2}|\\%2e%2e)).*$",
+    "str": "safe/path/to/file.txt",
+    "proof_seconds": 16.099,
+    "verify_seconds": 0.323,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "pattern_original": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "str": "123e4567-e89b-12d3-a456-426614174000",
+    "proof_seconds": 13.906,
+    "verify_seconds": 0.2,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "pattern_original": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "str": "invalid-guid-format",
+    "proof_seconds": 13.464,
+    "verify_seconds": 0.199,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^$2[ayb]$\\d{2}$[A-Za-z0-9./]{53}$",
+    "pattern_original": "^\\$2[ayb]\\$\\d{2}\\$[A-Za-z0-9./]{53}$",
+    "str": "\\$2b\\$12\\$KIXjOh6HXsY.gMzXIgkCCeW3PnS7.bVbq321t1234567890123456",
+    "proof_seconds": 13.837,
+    "verify_seconds": 0.198,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^$2[ayb]$\\d{2}$[A-Za-z0-9./]{53}$",
+    "pattern_original": "^\\$2[ayb]\\$\\d{2}\\$[A-Za-z0-9./]{53}$",
+    "str": "\\$2a\\$10\\$randomstringtoolongtofitthehashformatexactlybydesign",
+    "proof_seconds": 13.633,
+    "verify_seconds": 0.2,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$",
+    "pattern_original": "^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$",
+    "str": "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+    "proof_seconds": 14.73,
+    "verify_seconds": 0.243,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$",
+    "pattern_original": "^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$",
+    "str": "2001::1",
+    "proof_seconds": 13.475,
+    "verify_seconds": 0.197,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "(?i)(union|select|insert|update|delete|drop|exec|or 1=1|--|;|')",
+    "pattern_original": "(?i)(union|select|insert|update|delete|drop|exec|or 1=1|--|;|')",
+    "str": "admin' OR '1'='1",
+    "proof_seconds": 10.414,
+    "verify_seconds": 0.17,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "(?i)(union|select|insert|update|delete|drop|exec|or 1=1|--|;|')",
+    "pattern_original": "(?i)(union|select|insert|update|delete|drop|exec|or 1=1|--|;|')",
+    "str": "normal-user-input-123",
+    "proof_seconds": 11.901,
+    "verify_seconds": 0.211,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9._-]{2,}[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9].[a-zA-Z]{2,}$",
+    "pattern_original": "^[a-zA-Z][a-zA-Z0-9._-]{2,}[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9].[a-zA-Z]{2,}$",
+    "str": "a.b-c_d@sub.domain.example.co.uk",
+    "proof_seconds": 12.071,
+    "verify_seconds": 0.18,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([_\\-\\.])?([a-zA-Z0-9]))*(@){1}[a-zA-Z0-9]+[\\.]{1}(([a-zA-Z]{2,63})|([a-zA-Z]{2,63}\\.[a-zA-Z]{2,63}))$",
+    "pattern_original": "^([a-zA-Z0-9])(([_\\-\\.])?([a-zA-Z0-9]))*(@){1}[a-zA-Z0-9]+[\\.]{1}(([a-zA-Z]{2,63})|([a-zA-Z]{2,63}\\.[a-zA-Z]{2,63}))$",
+    "str": "test_email-sub.domain@very.long.subdomain.example.com",
+    "proof_seconds": 15.454,
+    "verify_seconds": 0.31,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^https?:\\/\\/[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}(/[a-zA-Z0-9._~/-]*)*(\\?[;&a-zA-Z0-9=%_-]*)?(#[a-zA-Z0-9_-]*)?$",
+    "pattern_original": "^https?:\\/\\/[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}(/[a-zA-Z0-9._~/-]*)*(\\?[;&a-zA-Z0-9=%_-]*)?(#[a-zA-Z0-9_-]*)?$",
+    "str": "https://login.example.com/auth?redirect=https://dashboard.example.com&amp;state=abc123#token",
+    "proof_seconds": 13.107,
+    "verify_seconds": 0.185,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^https?:\\/\\/[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}(/[a-zA-Z0-9._~/-]*)*(\\?[;&a-zA-Z0-9=%_-]*)?(#[a-zA-Z0-9_-]*)?$",
+    "pattern_original": "^https?:\\/\\/[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}(/[a-zA-Z0-9._~/-]*)*(\\?[;&a-zA-Z0-9=%_-]*)?(#[a-zA-Z0-9_-]*)?$",
+    "str": "http://xn--fsqu00a.xn--0zwm56d/%20%20/%2E%2E/secret",
+    "proof_seconds": 12.536,
+    "verify_seconds": 0.184,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]+={0,2}$",
+    "pattern_original": "^[A-Za-z0-9+/]+={0,2}$",
+    "str": "SGVsbG8gd29ybGQh",
+    "proof_seconds": 11.037,
+    "verify_seconds": 0.171,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]+={0,2}$",
+    "pattern_original": "^[A-Za-z0-9+/]+={0,2}$",
+    "str": "NotBase64!!@",
+    "proof_seconds": 11.345,
+    "verify_seconds": 0.176,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[0-9]{1,3}\\b",
+    "pattern_original": "^[0-9]{1,3}\\b",
+    "str": "0",
+    "negated": false,
+    "regex_matched": true,
+    "error": {
+      "step": "prove",
+      "exit_code": 101,
+      "output": "reef\n\nthread 'main' (146636) panicked at src/frontend/regex/parser.rs:10:67:\ncalled `Result::unwrap()` on an `Err` value: \"Unsupported regex (regex_syntax) WordBoundary(\\n    Unicode,\\n)\"\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    }
+  },
+  {
+    "pattern": "^[0-9]{1,3}\\b",
+    "pattern_original": "^[0-9]{1,3}\\b",
+    "str": "999",
+    "negated": false,
+    "regex_matched": true,
+    "error": {
+      "step": "prove",
+      "exit_code": 101,
+      "output": "reef\n\nthread 'main' (146686) panicked at src/frontend/regex/parser.rs:10:67:\ncalled `Result::unwrap()` on an `Err` value: \"Unsupported regex (regex_syntax) WordBoundary(\\n    Unicode,\\n)\"\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    }
+  },
+  {
+    "pattern": "^[0-9]{1,3}\\b",
+    "pattern_original": "^[0-9]{1,3}\\b",
+    "str": "1000",
+    "negated": true,
+    "regex_matched": false,
+    "error": {
+      "step": "prove",
+      "exit_code": 101,
+      "output": "reef\n\nthread 'main' (146736) panicked at src/frontend/regex/parser.rs:10:67:\ncalled `Result::unwrap()` on an `Err` value: \"Unsupported regex (regex_syntax) WordBoundary(\\n    Unicode,\\n)\"\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    }
+  },
+  {
+    "pattern": "^({)?[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}(})?$",
+    "pattern_original": "^({)?[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}(})?$",
+    "str": "{12345678-1234-1234-1234-123456789012}",
+    "proof_seconds": 13.538,
+    "verify_seconds": 0.189,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(X-)?[A-Za-z-]+:\\s*.*$",
+    "pattern_original": "^(X-)?[A-Za-z-]+:\\s*.*$",
+    "str": "X-Forwarded-For: 203.0.113.195",
+    "proof_seconds": 11.003,
+    "verify_seconds": 0.172,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(X-)?[A-Za-z-]+:\\s*.*$",
+    "pattern_original": "^(X-)?[A-Za-z-]+:\\s*.*$",
+    "str": "Authorization: Bearer abc123.def456.ghi789",
+    "proof_seconds": 11.159,
+    "verify_seconds": 0.172,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(/[a-zA-Z0-9._~-]+)+/?(\\?.*)?(#.*)?$",
+    "pattern_original": "^(/[a-zA-Z0-9._~-]+)+/?(\\?.*)?(#.*)?$",
+    "str": "/api/v1/users/me?include=profile#settings",
+    "proof_seconds": 11.159,
+    "verify_seconds": 0.174,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(/[a-zA-Z0-9._~-]+)+/?(\\?.*)?(#.*)?$",
+    "pattern_original": "^(/[a-zA-Z0-9._~-]+)+/?(\\?.*)?(#.*)?$",
+    "str": "//etc/passwd",
+    "proof_seconds": 11.361,
+    "verify_seconds": 0.172,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+    "pattern_original": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+    "str": "2025-04-05T14:30:00Z",
+    "proof_seconds": 12.279,
+    "verify_seconds": 0.179,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+    "pattern_original": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+    "str": "2025-04-05 14:30:00",
+    "proof_seconds": 12.833,
+    "verify_seconds": 0.186,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^$pbkdf2-(sha(1|256|512))$\\d+$[a-zA-Z0-9./]+$[a-zA-Z0-9./]+$",
+    "pattern_original": "^\\$pbkdf2-(sha(1|256|512))\\$\\d+\\$[a-zA-Z0-9./]+\\$[a-zA-Z0-9./]+$",
+    "str": "\\$pbkdf2-sha256\\$50000\\$saltsalt\\$abcd1234efgh5678",
+    "proof_seconds": 12.386,
+    "verify_seconds": 0.185,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^$$?(?:[0-9a-fA-F]{1,4}:){6}(?:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})$$?$",
+    "pattern_original": "^$$?(?:[0-9a-fA-F]{1,4}:){6}(?:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})$$?$",
+    "str": "[2001:db8:85a3:8d3:1319:8a2e:370:7348]",
+    "negated": false,
+    "regex_matched": null,
+    "error": {
+      "step": "prove",
+      "exit_code": 101,
+      "output": "reef\n\nthread 'main' (148986) panicked at src/frontend/regex/parser.rs:10:52:\ncalled `Result::unwrap()` on an `Err` value: ParseError(3, TargetNotRepeatable)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    }
+  },
+  {
+    "pattern": "^(.+?)(?:@(.*))?$",
+    "pattern_original": "^(.+?)(?:@(.*))?$",
+    "str": "user@host.com",
+    "proof_seconds": 8.458,
+    "verify_seconds": 0.133,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(.+?)(?:@(.*))?$",
+    "pattern_original": "^(.+?)(?:@(.*))?$",
+    "str": "nouseronlyhost",
+    "proof_seconds": 8.447,
+    "verify_seconds": 0.133,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]*(?:[._-][a-zA-Z0-9]+)*$",
+    "pattern_original": "^[a-zA-Z][a-zA-Z0-9]*(?:[._-][a-zA-Z0-9]+)*$",
+    "str": "valid_user_name_v1",
+    "proof_seconds": 11.47,
+    "verify_seconds": 0.173,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]*(?:[._-][a-zA-Z0-9]+)*$",
+    "pattern_original": "^[a-zA-Z][a-zA-Z0-9]*(?:[._-][a-zA-Z0-9]+)*$",
+    "str": "_invalid_start",
+    "proof_seconds": 11.115,
+    "verify_seconds": 0.172,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$",
+    "pattern_original": "^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$",
+    "str": "12345678123456781234567812345678",
+    "proof_seconds": 13.768,
+    "verify_seconds": 0.201,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "pattern_original": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "aGVscCBtZQ==",
+    "proof_seconds": 11.045,
+    "verify_seconds": 0.173,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?!(?:10|172.(1[6-9]|2[0-9]|3[01])|192.168).)((25[0-5]|2[0-4]\\d|[01]?\\d\\d?).){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$",
+    "pattern_original": "^(?!(?:10|172.(1[6-9]|2[0-9]|3[01])|192.168).)((25[0-5]|2[0-4]\\d|[01]?\\d\\d?).){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$",
+    "str": "8.8.8.8",
+    "negated": false,
+    "regex_matched": true,
+    "error": {
+      "step": "prove",
+      "exit_code": 101,
+      "output": "reef\n\nthread 'main' (150384) panicked at src/frontend/regex/parser.rs:10:67:\ncalled `Result::unwrap()` on an `Err` value: \"Unsupported regex (fancy_regex) LookAround(\\n    Concat(\\n        [\\n            Alt(\\n                [\\n                    Concat(\\n                        [\\n                            Literal {\\n                                val: \\\"1\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"0\\\",\\n                                casei: false,\\n                            },\\n                        ],\\n                    ),\\n                    Concat(\\n                        [\\n                            Literal {\\n                                val: \\\"1\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"7\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"2\\\",\\n                                casei: false,\\n                            },\\n                            Any {\\n                                newline: false,\\n                            },\\n                            Group(\\n                                Alt(\\n                                    [\\n                                        Concat(\\n                                            [\\n                                                Literal {\\n                                                    val: \\\"1\\\",\\n                                                    casei: false,\\n                                                },\\n                                                Delegate {\\n                                                    inner: \\\"[6-9]\\\",\\n                                                    size: 1,\\n                                                    casei: false,\\n                                                },\\n                                            ],\\n                                        ),\\n                                        Concat(\\n                                            [\\n                                                Literal {\\n                                                    val: \\\"2\\\",\\n                                                    casei: false,\\n                                                },\\n                                                Delegate {\\n                                                    inner: \\\"[0-9]\\\",\\n                                                    size: 1,\\n                                                    casei: false,\\n                                                },\\n                                            ],\\n                                        ),\\n                                        Concat(\\n                                            [\\n                                                Literal {\\n                                                    val: \\\"3\\\",\\n                                                    casei: false,\\n                                                },\\n                                                Delegate {\\n                                                    inner: \\\"[01]\\\",\\n                                                    size: 1,\\n                                                    casei: false,\\n                                                },\\n                                            ],\\n                                        ),\\n                                    ],\\n                                ),\\n                            ),\\n                        ],\\n                    ),\\n                    Concat(\\n                        [\\n                            Literal {\\n                                val: \\\"1\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"9\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"2\\\",\\n                                casei: false,\\n                            },\\n                            Any {\\n                                newline: false,\\n                            },\\n                            Literal {\\n                                val: \\\"1\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"6\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"8\\\",\\n                                casei: false,\\n                            },\\n                        ],\\n                    ),\\n                ],\\n            ),\\n            Any {\\n                newline: false,\\n            },\\n        ],\\n    ),\\n    LookAheadNeg,\\n)\"\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    }
+  },
+  {
+    "pattern": "^(?!(?:10|172\\.(1[6-9]|2[0-9]|3[01])|192\\.168)\\.)((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$",
+    "pattern_original": "^(?!(?:10|172\\.(1[6-9]|2[0-9]|3[01])|192\\.168)\\.)((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$",
+    "str": "192.168.1.1",
+    "negated": true,
+    "regex_matched": false,
+    "error": {
+      "step": "prove",
+      "exit_code": 101,
+      "output": "reef\n\nthread 'main' (150434) panicked at src/frontend/regex/parser.rs:10:67:\ncalled `Result::unwrap()` on an `Err` value: \"Unsupported regex (fancy_regex) LookAround(\\n    Concat(\\n        [\\n            Alt(\\n                [\\n                    Concat(\\n                        [\\n                            Literal {\\n                                val: \\\"1\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"0\\\",\\n                                casei: false,\\n                            },\\n                        ],\\n                    ),\\n                    Concat(\\n                        [\\n                            Literal {\\n                                val: \\\"1\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"7\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"2\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\".\\\",\\n                                casei: false,\\n                            },\\n                            Group(\\n                                Alt(\\n                                    [\\n                                        Concat(\\n                                            [\\n                                                Literal {\\n                                                    val: \\\"1\\\",\\n                                                    casei: false,\\n                                                },\\n                                                Delegate {\\n                                                    inner: \\\"[6-9]\\\",\\n                                                    size: 1,\\n                                                    casei: false,\\n                                                },\\n                                            ],\\n                                        ),\\n                                        Concat(\\n                                            [\\n                                                Literal {\\n                                                    val: \\\"2\\\",\\n                                                    casei: false,\\n                                                },\\n                                                Delegate {\\n                                                    inner: \\\"[0-9]\\\",\\n                                                    size: 1,\\n                                                    casei: false,\\n                                                },\\n                                            ],\\n                                        ),\\n                                        Concat(\\n                                            [\\n                                                Literal {\\n                                                    val: \\\"3\\\",\\n                                                    casei: false,\\n                                                },\\n                                                Delegate {\\n                                                    inner: \\\"[01]\\\",\\n                                                    size: 1,\\n                                                    casei: false,\\n                                                },\\n                                            ],\\n                                        ),\\n                                    ],\\n                                ),\\n                            ),\\n                        ],\\n                    ),\\n                    Concat(\\n                        [\\n                            Literal {\\n                                val: \\\"1\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"9\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"2\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\".\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"1\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"6\\\",\\n                                casei: false,\\n                            },\\n                            Literal {\\n                                val: \\\"8\\\",\\n                                casei: false,\\n                            },\\n                        ],\\n                    ),\\n                ],\\n            ),\\n            Literal {\\n                val: \\\".\\\",\\n                casei: false,\\n            },\\n        ],\\n    ),\\n    LookAheadNeg,\\n)\"\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    }
+  },
+  {
+    "pattern": "^[a-zA-Z]+://[^\\s:/]+(\\:[0-9]+)?/.+$",
+    "pattern_original": "^[a-zA-Z]+://[^\\s:/]+(\\:[0-9]+)?/.+$",
+    "str": "https://api.service.com/v1/login",
+    "proof_seconds": 11.558,
+    "verify_seconds": 0.176,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[a-zA-Z]+://[^\\s:/]+(\\:[0-9]+)?/.+$",
+    "pattern_original": "^[a-zA-Z]+://[^\\s:/]+(\\:[0-9]+)?/.+$",
+    "str": "ftp://localhost:21/upload/file.txt",
+    "proof_seconds": 11.424,
+    "verify_seconds": 0.174,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}$",
+    "pattern_original": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}$",
+    "str": "user+tag@example-domain.site",
+    "proof_seconds": 11.835,
+    "verify_seconds": 0.179,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^$2[ay]$\\d{2}$[A-Za-z0-9./]{53}$",
+    "pattern_original": "^\\$2[ay]\\$\\d{2}\\$[A-Za-z0-9./]{53}$",
+    "str": "\\$2a\\$10\\$Yg9HxKkH7d8f6h5G4j3k2i1u9t8s7r6q5p4o3n2m1l0k9j8h7g6f5e4d3c2",
+    "proof_seconds": 13.815,
+    "verify_seconds": 0.194,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d@$!%*#?&]{8,}$",
+    "pattern_original": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d@$!%*#?&]{8,}$",
+    "str": "GoodPass1!",
+    "proof_seconds": 11.729,
+    "verify_seconds": 0.176,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d@$!%*#?&]{8,}$",
+    "pattern_original": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d@$!%*#?&]{8,}$",
+    "str": "nouppercase1",
+    "negated": true,
+    "regex_matched": false,
+    "error": {
+      "step": "prove",
+      "exit_code": 101,
+      "output": "reef\nFinal Batch Size: 9\nMerkle: false / Hybrid: false / Projections: false\nNumber of constraints (primary circuit): 22098\nEstimated Number of constraints: 8747\nNumber of constraints (secondary circuit): 10347\nNumber of variables (primary circuit): 22335\nNumber of variables (secondary circuit): 10329\nSolving thread starting...\nProving thread starting...\n\nthread '<unnamed>' (151772) panicked at src/backend/framework.rs:402:9:\nNo solution found\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' (151755) panicked at src/backend/framework.rs:667:43:\ncalled `Result::unwrap()` on an `Err` value: RecvError\n"
+    }
+  },
+  {
+    "pattern": "^([0-9a-f]{12}|[0-9a-f]{16})$",
+    "pattern_original": "^([0-9a-f]{12}|[0-9a-f]{16})$",
+    "str": "a1b2c3d4e5f6",
+    "proof_seconds": 11.592,
+    "verify_seconds": 0.176,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([0-9a-f]{12}|[0-9a-f]{16})$",
+    "pattern_original": "^([0-9a-f]{12}|[0-9a-f]{16})$",
+    "str": "gibberish!",
+    "proof_seconds": 11.825,
+    "verify_seconds": 0.187,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^https://[a-zA-Z0-9.-]+.googleapis.com/auth/[^\\s]+$",
+    "pattern_original": "^https://[a-zA-Z0-9.-]+.googleapis.com/auth/[^\\s]+$",
+    "str": "https://www.googleapis.com/auth/userinfo.email",
+    "proof_seconds": 13.519,
+    "verify_seconds": 0.188,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^https://[a-zA-Z0-9.-]+\\.googleapis\\.com/auth/[^\\s]+$",
+    "pattern_original": "^https://[a-zA-Z0-9.-]+\\.googleapis\\.com/auth/[^\\s]+$",
+    "str": "http://malicious.com/auth",
+    "proof_seconds": 13.202,
+    "verify_seconds": 0.197,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^ey[A-Za-z0-9+/=]+\\.[ey][A-Za-z0-9+/=]+\\.[A-Za-z0-9+/=]*$",
+    "pattern_original": "^ey[A-Za-z0-9+/=]+\\.[ey][A-Za-z0-9+/=]+\\.[A-Za-z0-9+/=]*$",
+    "str": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+    "proof_seconds": 14.707,
+    "verify_seconds": 0.18,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^ey[A-Za-z0-9+/=]+\\.[ey][A-Za-z0-9+/=]+\\.[A-Za-z0-9+/=]*$",
+    "pattern_original": "^ey[A-Za-z0-9+/=]+\\.[ey][A-Za-z0-9+/=]+\\.[A-Za-z0-9+/=]*$",
+    "str": "not.a.jwt.token",
+    "proof_seconds": 11.402,
+    "verify_seconds": 0.179,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])(.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}$",
+    "pattern_original": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])(.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}$",
+    "str": "255.255.255.255",
+    "proof_seconds": 11.817,
+    "verify_seconds": 0.183,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}$",
+    "pattern_original": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}$",
+    "str": "256.256.256.256",
+    "proof_seconds": 11.882,
+    "verify_seconds": 0.191,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]*(?:[._][a-zA-Z0-9]+)*@[a-zA-Z0-9][a-zA-Z0-9.-]*.[a-zA-Z]{2,}$",
+    "pattern_original": "^[a-zA-Z][a-zA-Z0-9]*(?:[._][a-zA-Z0-9]+)*@[a-zA-Z0-9][a-zA-Z0-9.-]*.[a-zA-Z]{2,}$",
+    "str": "test.user_name@valid-site.example.org",
+    "proof_seconds": 11.911,
+    "verify_seconds": 0.175,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:{)?[0-9a-fA-F]{32}(?:})?$",
+    "pattern_original": "^(?:{)?[0-9a-fA-F]{32}(?:})?$",
+    "str": "{a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5}",
+    "proof_seconds": 13.566,
+    "verify_seconds": 0.185,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:\\{)?[0-9a-fA-F]{32}(?:\\})?$",
+    "pattern_original": "^(?:\\{)?[0-9a-fA-F]{32}(?:\\})?$",
+    "str": "g0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5",
+    "proof_seconds": 13.639,
+    "verify_seconds": 0.2,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^\\d{3}-\\d{2}-\\d{4}$",
+    "pattern_original": "^\\d{3}-\\d{2}-\\d{4}$",
+    "str": "123-45-6789",
+    "proof_seconds": 10.784,
+    "verify_seconds": 0.175,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\d{3}-\\d{2}-\\d{4}$",
+    "pattern_original": "^\\d{3}-\\d{2}-\\d{4}$",
+    "str": "123456789",
+    "proof_seconds": 11.259,
+    "verify_seconds": 0.18,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,6}$",
+    "pattern_original": "^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,6}$",
+    "str": "test+label@sub.domain.example.museum",
+    "proof_seconds": 12.118,
+    "verify_seconds": 0.176,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "pattern_original": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "QUJDREVGR0g=",
+    "proof_seconds": 11.037,
+    "verify_seconds": 0.174,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "pattern_original": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "NOTBASE64%",
+    "proof_seconds": 11.15,
+    "verify_seconds": 0.175,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{40}$",
+    "pattern_original": "^[a-zA-Z0-9]{40}$",
+    "str": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "proof_seconds": 14.604,
+    "verify_seconds": 0.239,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{40}$",
+    "pattern_original": "^[a-zA-Z0-9]{40}$",
+    "str": "too_short",
+    "proof_seconds": 13.745,
+    "verify_seconds": 0.197,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^$argon2(i|id)?$v=\\d+$m=\\d+,t=\\d+,p=\\d+$[a-zA-Z0-9+/]+$[a-zA-Z0-9+/]+$",
+    "pattern_original": "^\\$argon2(i|id)?\\$v=\\d+\\$m=\\d+,t=\\d+,p=\\d+\\$[a-zA-Z0-9+/]+\\$[a-zA-Z0-9+/]+$",
+    "str": "\\$argon2id\\$v=19\\$m=65536,t=3,p=4\\$c2FsdHNhbHRzYWx0\\$RdescudvJCsgt3ub+b+dPA",
+    "proof_seconds": 13.366,
+    "verify_seconds": 0.21,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^$$(?:[0-9a-fA-F]{1,4}:){5}(?:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})$$$",
+    "pattern_original": "^$$(?:[0-9a-fA-F]{1,4}:){5}(?:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})$$$",
+    "str": "[2001:db8:85a3:0:0:8a2e:370:7334]",
+    "proof_seconds": 13.541,
+    "verify_seconds": 0.2,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^User-Agent:\\s.+$.*[Mm]obile.*$.*$",
+    "pattern_original": "^User-Agent:\\s.+$.*[Mm]obile.*$.*$",
+    "str": "User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15",
+    "proof_seconds": 13.229,
+    "verify_seconds": 0.187,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^User-Agent:\\s.+$.*[Mm]obile.*$.*$",
+    "pattern_original": "^User-Agent:\\s.+$.*[Mm]obile.*$.*$",
+    "str": "User-Agent: curl/7.68.0",
+    "proof_seconds": 12.584,
+    "verify_seconds": 0.185,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[0-9]+ [A-Za-z]{3} [0-9]{4} [0-9:]{8}$",
+    "pattern_original": "^[0-9]+ [A-Za-z]{3} [0-9]{4} [0-9:]{8}$",
+    "str": "05 Apr 2025 14:23:01",
+    "proof_seconds": 11.932,
+    "verify_seconds": 0.181,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^X-API-Key\\s*:\\s*[a-zA-Z0-9\\-_=]{32,}$",
+    "pattern_original": "^X-API-Key\\s*:\\s*[a-zA-Z0-9\\-_=]{32,}$",
+    "str": "X-API-Key: abcdefghijklmnopqrstuvwxyz1234567890-_=",
+    "proof_seconds": 15.156,
+    "verify_seconds": 0.251,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "pattern_original": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "str": "SSBhbSBub3QgYSBqdXdAdA==",
+    "proof_seconds": 11.56,
+    "verify_seconds": 0.176,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}$",
+    "pattern_original": "^\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}$",
+    "str": "192 168 1 1",
+    "proof_seconds": 10.922,
+    "verify_seconds": 0.173,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}$",
+    "pattern_original": "^\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}$",
+    "str": "1.2.3.4",
+    "proof_seconds": 11.239,
+    "verify_seconds": 0.181,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{12,32}$",
+    "pattern_original": "^[a-zA-Z0-9]{12,32}$",
+    "str": "session123456789",
+    "proof_seconds": 13.066,
+    "verify_seconds": 0.184,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^Content-Type:\\s*(application/json|text/plain|multipart/form-data)$",
+    "pattern_original": "^Content-Type:\\s*(application/json|text/plain|multipart/form-data)$",
+    "str": "Content-Type: application/json",
+    "proof_seconds": 12.306,
+    "verify_seconds": 0.18,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$",
+    "pattern_original": "^(?:[0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$",
+    "str": "00:1A:2B:3C:4D:5E",
+    "proof_seconds": 11.883,
+    "verify_seconds": 0.179,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$",
+    "pattern_original": "^(?:[0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$",
+    "str": "ZZ:ZZ:ZZ:ZZ:ZZ:ZZ",
+    "proof_seconds": 12.183,
+    "verify_seconds": 0.183,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^/oauth/(authorize|token|revoke)$",
+    "pattern_original": "^/oauth/(authorize|token|revoke)$",
+    "str": "/oauth/authorize",
+    "proof_seconds": 11.088,
+    "verify_seconds": 0.172,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^/oauth/(authorize|token|revoke)$",
+    "pattern_original": "^/oauth/(authorize|token|revoke)$",
+    "str": "/admin/delete",
+    "proof_seconds": 11.903,
+    "verify_seconds": 0.185,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^([0-9]+.)+[0-9]+$",
+    "pattern_original": "^([0-9]+.)+[0-9]+$",
+    "str": "1.2.3.4.5",
+    "proof_seconds": 11.016,
+    "verify_seconds": 0.175,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([0-9]+\\.)+[0-9]+$",
+    "pattern_original": "^([0-9]+\\.)+[0-9]+$",
+    "str": "v1.2.3",
+    "proof_seconds": 10.748,
+    "verify_seconds": 0.17,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9][a-zA-Z0-9-]*(?:.[a-zA-Z0-9][a-zA-Z0-9-]*)*.[a-zA-Z]{2,}$",
+    "pattern_original": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9][a-zA-Z0-9-]*(?:.[a-zA-Z0-9][a-zA-Z0-9-]*)*.[a-zA-Z]{2,}$",
+    "str": "test@dev.example-internal.co.uk",
+    "proof_seconds": 11.943,
+    "verify_seconds": 0.179,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:[A-Z][a-z]*.?\\s*)+$",
+    "pattern_original": "^(?:[A-Z][a-z]*.?\\s*)+$",
+    "str": "John A. Smith Jr.",
+    "proof_seconds": 11.089,
+    "verify_seconds": 0.173,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:[A-Z][a-z]*\\.?\\s*)+$",
+    "pattern_original": "^(?:[A-Z][a-z]*\\.?\\s*)+$",
+    "str": "mr. john doe",
+    "proof_seconds": 11.35,
+    "verify_seconds": 0.175,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^\\d{1,2}/\\d{1,2}/\\d{4}$",
+    "pattern_original": "^\\d{1,2}/\\d{1,2}/\\d{4}$",
+    "str": "12/31/2025",
+    "proof_seconds": 10.653,
+    "verify_seconds": 0.17,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\d{1,2}/\\d{1,2}/\\d{4}$",
+    "pattern_original": "^\\d{1,2}/\\d{1,2}/\\d{4}$",
+    "str": "30/02/2025",
+    "proof_seconds": 10.684,
+    "verify_seconds": 0.171,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^$6$[a-zA-Z0-9./]{8,16}$[a-zA-Z0-9./]{86}$",
+    "pattern_original": "^\\$6\\$[a-zA-Z0-9./]{8,16}\\$[a-zA-Z0-9./]{86}$",
+    "str": "\\$6\\$saltsalt\\$abcd1234efgh5678ijkl90mn...longhash...",
+    "proof_seconds": 16.046,
+    "verify_seconds": 0.276,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^\\d{5}(?:-\\d{4})?$",
+    "pattern_original": "^\\d{5}(?:-\\d{4})?$",
+    "str": "90210-1234",
+    "proof_seconds": 10.693,
+    "verify_seconds": 0.167,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\+[1-9]\\d{1,14}$",
+    "pattern_original": "^\\+[1-9]\\d{1,14}$",
+    "str": "+123456789012",
+    "proof_seconds": 11.195,
+    "verify_seconds": 0.173,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\+[1-9]\\d{1,14}$",
+    "pattern_original": "^\\+[1-9]\\d{1,14}$",
+    "str": "12345",
+    "proof_seconds": 10.959,
+    "verify_seconds": 0.174,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^\\d{1,3}.\\d{1,3}.\\d{1,3}.\\d{1,3}/\\d{1,2}$",
+    "pattern_original": "^\\d{1,3}.\\d{1,3}.\\d{1,3}.\\d{1,3}/\\d{1,2}$",
+    "str": "192.168.1.0/24",
+    "proof_seconds": 11.69,
+    "verify_seconds": 0.183,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{0,4}$",
+    "pattern_original": "^(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{0,4}$",
+    "str": "2001:db8::1",
+    "proof_seconds": 13.698,
+    "verify_seconds": 0.194,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{0,4}$",
+    "pattern_original": "^(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{0,4}$",
+    "str": "invalid:::address::",
+    "proof_seconds": 14.609,
+    "verify_seconds": 0.255,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^([^-][a-zA-Z0-9-]{0,62}[^-].)+[a-zA-Z]{2,}$",
+    "pattern_original": "^([^-][a-zA-Z0-9-]{0,62}[^-].)+[a-zA-Z]{2,}$",
+    "str": "sub.domain.example.com",
+    "negated": false,
+    "regex_matched": true,
+    "error": {
+      "step": "prove",
+      "exit_code": -6,
+      "output": "reef\n\nthread 'main' (163577) has overflowed its stack\nfatal runtime error: stack overflow, aborting\n"
+    }
+  },
+  {
+    "pattern": "^([^-][a-zA-Z0-9-]{0,62}[^-]\\.)+[a-zA-Z]{2,}$",
+    "pattern_original": "^([^-][a-zA-Z0-9-]{0,62}[^-]\\.)+[a-zA-Z]{2,}$",
+    "str": "-invalid.start.com",
+    "proof_seconds": 17.623,
+    "verify_seconds": 0.408,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^\\d{15,18}$",
+    "pattern_original": "^\\d{15,18}$",
+    "str": "4532123456789012",
+    "proof_seconds": 11.573,
+    "verify_seconds": 0.176,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\d{15,18}$",
+    "pattern_original": "^\\d{15,18}$",
+    "str": "1234",
+    "proof_seconds": 11.643,
+    "verify_seconds": 0.184,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}(:\\d+)?$",
+    "pattern_original": "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}(:\\d+)?$",
+    "str": "user@localhost.local:8080",
+    "proof_seconds": 11.727,
+    "verify_seconds": 0.195,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^https?://[^/]+/api/[vV]\\d+/.+$",
+    "pattern_original": "^https?://[^/]+/api/[vV]\\d+/.+$",
+    "str": "https://api.example.com/v2/users",
+    "proof_seconds": 12.378,
+    "verify_seconds": 0.185,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]{32}-[A-Za-z0-9+/]{8}-[A-Za-z0-9+/]{20}$",
+    "pattern_original": "^[A-Za-z0-9+/]{32}-[A-Za-z0-9+/]{8}-[A-Za-z0-9+/]{20}$",
+    "str": "QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaA==-YWJjZA==-YWJjZGVmZ2hpamtsbW5vcA==",
+    "proof_seconds": 14.412,
+    "verify_seconds": 0.218,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]{32}-[A-Za-z0-9+/]{8}-[A-Za-z0-9+/]{20}$",
+    "pattern_original": "^[A-Za-z0-9+/]{32}-[A-Za-z0-9+/]{8}-[A-Za-z0-9+/]{20}$",
+    "str": "invalid-format-now",
+    "proof_seconds": 13.544,
+    "verify_seconds": 0.218,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^(?:[0-9]{1,3}.){3}[0-9]{1,3}(?:\\s+(?:[0-9]{1,3}.){3}[0-9]{1,3})*$",
+    "pattern_original": "^(?:[0-9]{1,3}.){3}[0-9]{1,3}(?:\\s+(?:[0-9]{1,3}.){3}[0-9]{1,3})*$",
+    "str": "192.168.1.1 10.0.0.1 172.16.0.1",
+    "proof_seconds": 12.112,
+    "verify_seconds": 0.184,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._-]+@([a-zA-Z0-9-]+.)+[a-zA-Z]{2,}$",
+    "pattern_original": "^[a-zA-Z0-9._-]+@([a-zA-Z0-9-]+.)+[a-zA-Z]{2,}$",
+    "str": "test@company.corporate-domain.global",
+    "proof_seconds": 12.383,
+    "verify_seconds": 0.18,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^{{[^{}]*}}$",
+    "pattern_original": "^{{[^{}]*}}$",
+    "str": "{{USER_ID}}",
+    "proof_seconds": 10.662,
+    "verify_seconds": 0.174,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\{\\{[^{}]*\\}\\}$",
+    "pattern_original": "^\\{\\{[^{}]*\\}\\}$",
+    "str": "{{NESTED{{INVALID}}}}",
+    "proof_seconds": 11.398,
+    "verify_seconds": 0.174,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "pattern_original": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "PD94bWwgdmVyc2lvbj0iMS4wIj8+DQo8cm9vdD5IZWxsbyB3b3JsZCE8L3Jvb3Q+",
+    "proof_seconds": 12.886,
+    "verify_seconds": 0.177,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^https?://[^/]+/login\\?[\\w&=%.-]*$",
+    "pattern_original": "^https?://[^/]+/login\\?[\\w&=%.-]*$",
+    "str": "https://example.com/login?next=%2Fdashboard&amp;token=abc123",
+    "proof_seconds": 12.666,
+    "verify_seconds": 0.187,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-fA-F0-9]{64}$",
+    "pattern_original": "^[a-fA-F0-9]{64}$",
+    "str": "da96a6f8d1ceec5d34f5bf0f79d1c3a4693b1b2e47345c3b6e3e8a3d4f6b2c7a",
+    "proof_seconds": 13.551,
+    "verify_seconds": 0.192,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[a-fA-F0-9]{64}$",
+    "pattern_original": "^[a-fA-F0-9]{64}$",
+    "str": "short",
+    "proof_seconds": 13.191,
+    "verify_seconds": 0.216,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^\\d{4} \\d{4} \\d{4} \\d{4}$",
+    "pattern_original": "^\\d{4} \\d{4} \\d{4} \\d{4}$",
+    "str": "1234 5678 9012 3456",
+    "proof_seconds": 11.589,
+    "verify_seconds": 0.175,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\d{4} \\d{4} \\d{4} \\d{4}$",
+    "pattern_original": "^\\d{4} \\d{4} \\d{4} \\d{4}$",
+    "str": "1234-5678-9012-3456",
+    "proof_seconds": 12.353,
+    "verify_seconds": 0.185,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^X-(?:Forwarded|Real)-IP:\\s+\\d{1,3}(?:.\\d{1,3}){3}$",
+    "pattern_original": "^X-(?:Forwarded|Real)-IP:\\s+\\d{1,3}(?:.\\d{1,3}){3}$",
+    "str": "X-Forwarded-IP: 198.51.100.1",
+    "proof_seconds": 12.626,
+    "verify_seconds": 0.183,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^Authorization:\\s+(Basic|Bearer|Digest)\\s+[A-Za-z0-9./+=]+$",
+    "pattern_original": "^Authorization:\\s+(Basic|Bearer|Digest)\\s+[A-Za-z0-9./+=]+$",
+    "str": "Authorization: Bearer abcdefghijklmnopqrstuvwxyz1234567890",
+    "proof_seconds": 12.326,
+    "verify_seconds": 0.178,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+.)+[a-zA-Z]{2,63}$",
+    "pattern_original": "^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+.)+[a-zA-Z]{2,63}$",
+    "str": "user@verylongtopleveldomainnameexample.info",
+    "proof_seconds": 13.892,
+    "verify_seconds": 0.216,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$",
+    "pattern_original": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$",
+    "str": "MyPass1234",
+    "proof_seconds": 10.692,
+    "verify_seconds": 0.174,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$",
+    "pattern_original": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$",
+    "str": "weakpass",
+    "proof_seconds": 11.221,
+    "verify_seconds": 0.176,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^([a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*.)?[a-zA-Z0-9-]+.[a-zA-Z]{2,}$",
+    "pattern_original": "^([a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*.)?[a-zA-Z0-9-]+.[a-zA-Z]{2,}$",
+    "str": "www.sub.domain.example.org",
+    "proof_seconds": 11.781,
+    "verify_seconds": 0.182,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*\\.)?[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}$",
+    "pattern_original": "^([a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*\\.)?[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}$",
+    "str": "invalid..domain",
+    "proof_seconds": 11.486,
+    "verify_seconds": 0.177,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9+/]{64}$",
+    "pattern_original": "^[a-zA-Z0-9+/]{64}$",
+    "str": "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5eg==",
+    "proof_seconds": 14.493,
+    "verify_seconds": 0.217,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9+/]{64}$",
+    "pattern_original": "^[a-zA-Z0-9+/]{64}$",
+    "str": "too short base64",
+    "proof_seconds": 13.514,
+    "verify_seconds": 0.218,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^\\d{9}[\\dX]$",
+    "pattern_original": "^\\d{9}[\\dX]$",
+    "str": "012345678X",
+    "proof_seconds": 10.693,
+    "verify_seconds": 0.173,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\d{9}[\\dX]$",
+    "pattern_original": "^\\d{9}[\\dX]$",
+    "str": "1234567890",
+    "proof_seconds": 10.705,
+    "verify_seconds": 0.189,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[A-Za-z0-9]{10}-[A-Za-z0-9]{5}-[A-Za-z0-9]{15}$",
+    "pattern_original": "^[A-Za-z0-9]{10}-[A-Za-z0-9]{5}-[A-Za-z0-9]{15}$",
+    "str": "ABC123XYZ9-PQ5R8-MN9OL1234PQR5678",
+    "proof_seconds": 13.616,
+    "verify_seconds": 0.201,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^$scrypt$[0-9]+,[0-9]+,[0-9]+$[a-zA-Z0-9+/=]+$[a-zA-Z0-9+/=]+$",
+    "pattern_original": "^\\$scrypt\\$[0-9]+,[0-9]+,[0-9]+\\$[a-zA-Z0-9+/=]+\\$[a-zA-Z0-9+/=]+$",
+    "str": "\\$scrypt\\$16384,8,1\\$saltstring\\$derivedkeyinbase64",
+    "proof_seconds": 12.382,
+    "verify_seconds": 0.185,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}-){5}[0-9a-fA-F]{2}$",
+    "pattern_original": "^(?:[0-9a-fA-F]{2}-){5}[0-9a-fA-F]{2}$",
+    "str": "00-1A-2B-3C-4D-5E",
+    "proof_seconds": 11.762,
+    "verify_seconds": 0.175,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}-){5}[0-9a-fA-F]{2}$",
+    "pattern_original": "^(?:[0-9a-fA-F]{2}-){5}[0-9a-fA-F]{2}$",
+    "str": "00:1A:2B:3C:4D:5E",
+    "proof_seconds": 12.232,
+    "verify_seconds": 0.184,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@([a-zA-Z0-9])(([a-zA-Z0-9-])*[a-zA-Z0-9])?\\.([a-zA-Z0-9]{2,})$",
+    "pattern_original": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@([a-zA-Z0-9])(([a-zA-Z0-9-])*[a-zA-Z0-9])?\\.([a-zA-Z0-9]{2,})$",
+    "str": "user+filter@domain.co.uk",
+    "proof_seconds": 11.635,
+    "verify_seconds": 0.178,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@([a-zA-Z0-9])(([a-zA-Z0-9-])*[a-zA-Z0-9])?\\.([a-zA-Z0-9]{2,})$",
+    "pattern_original": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@([a-zA-Z0-9])(([a-zA-Z0-9-])*[a-zA-Z0-9])?\\.([a-zA-Z0-9]{2,})$",
+    "str": "user@@example.com",
+    "proof_seconds": 11.531,
+    "verify_seconds": 0.176,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^\\d{1,3}(?:,\\d{3})*(?:.\\d+)?$",
+    "pattern_original": "^\\d{1,3}(?:,\\d{3})*(?:.\\d+)?$",
+    "str": "1,234,567.89",
+    "proof_seconds": 11.063,
+    "verify_seconds": 0.174,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\d{1,3}(?:,\\d{3})*(?:\\.\\d+)?$",
+    "pattern_original": "^\\d{1,3}(?:,\\d{3})*(?:\\.\\d+)?$",
+    "str": "1234.56",
+    "proof_seconds": 11.172,
+    "verify_seconds": 0.176,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^\\*(?:.[a-zA-Z0-9-]+)+$",
+    "pattern_original": "^\\*(?:.[a-zA-Z0-9-]+)+$",
+    "str": "*.example.com",
+    "proof_seconds": 10.912,
+    "verify_seconds": 0.178,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\*(?:\\.[a-zA-Z0-9-]+)+$",
+    "pattern_original": "^\\*(?:\\.[a-zA-Z0-9-]+)+$",
+    "str": "sub.example.com",
+    "proof_seconds": 11.401,
+    "verify_seconds": 0.172,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{8}_[a-zA-Z0-9]{8}_[a-zA-Z0-9]{8}$",
+    "pattern_original": "^[a-zA-Z0-9]{8}_[a-zA-Z0-9]{8}_[a-zA-Z0-9]{8}$",
+    "str": "a1b2c3d4_e5f6g7h8_i9j0k1l2",
+    "proof_seconds": 12.645,
+    "verify_seconds": 0.183,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(.[0-9]+)?(Z|([+-][0-9]{2}):([0-9]{2}))$",
+    "pattern_original": "^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(.[0-9]+)?(Z|([+-][0-9]{2}):([0-9]{2}))$",
+    "str": "2025-04-05T10:15:30.123+05:30",
+    "proof_seconds": 12.446,
+    "verify_seconds": 0.182,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(\\.[0-9]+)?(Z|([+-][0-9]{2}):([0-9]{2}))$",
+    "pattern_original": "^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(\\.[0-9]+)?(Z|([+-][0-9]{2}):([0-9]{2}))$",
+    "str": "2025-04-05 10:15:30",
+    "proof_seconds": 12.592,
+    "verify_seconds": 0.187,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]{2,15}$",
+    "pattern_original": "^[a-zA-Z][a-zA-Z0-9]{2,15}$",
+    "str": "userName123",
+    "proof_seconds": 11.534,
+    "verify_seconds": 0.173,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]{2,15}$",
+    "pattern_original": "^[a-zA-Z][a-zA-Z0-9]{2,15}$",
+    "str": "ab",
+    "proof_seconds": 10.604,
+    "verify_seconds": 0.177,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^$s2k2$[a-zA-Z0-9+/=]+$[a-zA-Z0-9+/=]+$",
+    "pattern_original": "^\\$s2k2\\$[a-zA-Z0-9+/=]+\\$[a-zA-Z0-9+/=]+$",
+    "str": "\\$s2k2\\$YWJjZGVmZ2g=\\$aGVsbG93b3JsZA==",
+    "proof_seconds": 12.057,
+    "verify_seconds": 0.179,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^(?:[a-zA-Z0-9+/]{4})*(?:[a-zA-Z0-9+/]{2}==|[a-zA-Z0-9+/]{3}=)?(?:\\s*[a-zA-Z0-9+/]{4})*$",
+    "pattern_original": "^(?:[a-zA-Z0-9+/]{4})*(?:[a-zA-Z0-9+/]{2}==|[a-zA-Z0-9+/]{3}=)?(?:\\s*[a-zA-Z0-9+/]{4})*$",
+    "str": "SGVsbG8gd29ybGQhIFRo\n    pcyBpcyBiYXNlNjQK",
+    "proof_seconds": 12.589,
+    "verify_seconds": 0.181,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+    "pattern_original": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+    "str": "127.0.0.1",
+    "proof_seconds": 12.004,
+    "verify_seconds": 0.21,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+    "pattern_original": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+    "str": "999.999.999.999",
+    "proof_seconds": 11.985,
+    "verify_seconds": 0.19,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,30}$",
+    "pattern_original": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,30}$",
+    "str": "longemailaddresslabel@verylongdomainnameexamplefortestingpurposes.net",
+    "proof_seconds": 14.573,
+    "verify_seconds": 0.194,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(([^<>()[$$\\\\.,;:\\s@\\\"]+(\\.[^<>()[$$\\\\.,;:\\s@\\\"]+)*)|(\".+\"))@(($$[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$$)|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$",
+    "pattern_original": "^(([^<>()[$$\\\\.,;:\\s@\\\"]+(\\.[^<>()[$$\\\\.,;:\\s@\\\"]+)*)|(\".+\"))@(($$[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$$)|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$",
+    "str": "quoted\"user\"@example.com",
+    "negated": true,
+    "regex_matched": false,
+    "error": {
+      "step": "prove",
+      "exit_code": 101,
+      "output": "reef\n\nthread 'main' (175711) panicked at src/frontend/regex/parser.rs:10:52:\ncalled `Result::unwrap()` on an `Err` value: ParseError(151, InvalidClass)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+    }
+  },
+  {
+    "pattern": "^$1$[a-zA-Z0-9./]{8}$[a-zA-Z0-9./]{22}$",
+    "pattern_original": "^\\$1\\$[a-zA-Z0-9./]{8}\\$[a-zA-Z0-9./]{22}$",
+    "str": "\\$1\\$salt1234\\$H/dI19u1bR8VfJ319s2vA0",
+    "proof_seconds": 13.61,
+    "verify_seconds": 0.2,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^([a-zA-Z0-9]|(?:%[0-9a-fA-F]{2}))+",
+    "pattern_original": "^([a-zA-Z0-9]|(?:%[0-9a-fA-F]{2}))+",
+    "str": "hello%20world%21",
+    "proof_seconds": 11.162,
+    "verify_seconds": 0.173,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([a-zA-Z0-9]|(?:%[0-9a-fA-F]{2}))+",
+    "pattern_original": "^([a-zA-Z0-9]|(?:%[0-9a-fA-F]{2}))+",
+    "str": "normalstring",
+    "proof_seconds": 10.921,
+    "verify_seconds": 0.173,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$",
+    "pattern_original": "^(?:[0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$",
+    "str": "01:02:03:04:05:06:07:08",
+    "proof_seconds": 12.003,
+    "verify_seconds": 0.178,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$",
+    "pattern_original": "^(?:[0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$",
+    "str": "01-02-03-04-05-06-07-08",
+    "proof_seconds": 12.85,
+    "verify_seconds": 0.186,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+    "pattern_original": "^\\d{4}-\\d{2}-\\d{2}$",
+    "str": "2025-04-05",
+    "proof_seconds": 10.697,
+    "verify_seconds": 0.173,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+    "pattern_original": "^\\d{4}-\\d{2}-\\d{2}$",
+    "str": "2025/04/05",
+    "proof_seconds": 11.434,
+    "verify_seconds": 0.178,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?(.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$",
+    "pattern_original": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?(.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$",
+    "str": "valid-host-name-label",
+    "proof_seconds": 11.674,
+    "verify_seconds": 0.174,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$",
+    "pattern_original": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$",
+    "str": "-invalid-host",
+    "proof_seconds": 11.127,
+    "verify_seconds": 0.175,
+    "negated": true,
+    "regex_matched": false
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "pattern_original": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "str": "Tm8gc3BlY2lhbCBjaGFyYWN0ZXJzLCBidXQgc3RpbGwgYmFzZTY0Lg==",
+    "proof_seconds": 12.657,
+    "verify_seconds": 0.172,
+    "negated": false,
+    "regex_matched": true
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "pattern_original": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "str": "special chars! not base64",
+    "proof_seconds": 11.74,
+    "verify_seconds": 0.178,
+    "negated": true,
+    "regex_matched": false
+  }
+]

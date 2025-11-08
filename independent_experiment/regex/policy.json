@@ -1,0 +1,26 @@
+[
+  {
+    "pattern": "read|write",
+    "str": "read"
+  },
+  {
+    "pattern": "read|write",
+    "str": "delete"
+  },
+  {
+    "pattern": "J.* Hibbert",
+    "str": "Julius Hibbert"
+  },
+  {
+    "pattern": "B.* Simpson",
+    "str": "Julius Hibbert"
+  },
+  {
+    "pattern": "J.* K.* Hibbert",
+    "str": "Julius Hibbert"
+  },
+  {
+    "pattern": "B.* O.* Simpson",
+    "str": "Julius Hibbert"
+  }
+]

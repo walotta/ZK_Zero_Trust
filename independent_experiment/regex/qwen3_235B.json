@@ -1,0 +1,630 @@
+[
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$",
+    "str": "user@example.com"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+    "str": "very.unusual.@.unusual-example@domains.example.com"
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$",
+    "str": "Passw0rd@2025VeryStrong"
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$",
+    "str": "weak"
+  },
+  {
+    "pattern": "^Bearer\\s+[A-Za-z0-9\\-._~+/]+=*$",
+    "str": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+  },
+  {
+    "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+    "str": "192.168.1.1"
+  },
+  {
+    "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+    "str": "999.999.999.999"
+  },
+  {
+    "pattern": "^(?:(?:[^\\n]*?/../)+|.*(?:.{2,}|/\\s*.{2}|\\%2e%2e)).*$",
+    "str": "../../../../etc/passwd"
+  },
+  {
+    "pattern": "^(?:(?:[^\\n]*?/\\.\\./)+|.*(?:\\.{2,}|/\\s*\\.{2}|\\%2e%2e)).*$",
+    "str": "safe/path/to/file.txt"
+  },
+  {
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "str": "123e4567-e89b-12d3-a456-426614174000"
+  },
+  {
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "str": "invalid-guid-format"
+  },
+  {
+    "pattern": "^\\$2[ayb]\\$\\d{2}\\$[A-Za-z0-9./]{53}$",
+    "str": "\\$2b\\$12\\$KIXjOh6HXsY.gMzXIgkCCeW3PnS7.bVbq321t1234567890123456"
+  },
+  {
+    "pattern": "^\\$2[ayb]\\$\\d{2}\\$[A-Za-z0-9./]{53}$",
+    "str": "\\$2a\\$10\\$randomstringtoolongtofitthehashformatexactlybydesign"
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$",
+    "str": "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$",
+    "str": "2001::1"
+  },
+  {
+    "pattern": "(?i)(union|select|insert|update|delete|drop|exec|or 1=1|--|;|')",
+    "str": "admin' OR '1'='1"
+  },
+  {
+    "pattern": "(?i)(union|select|insert|update|delete|drop|exec|or 1=1|--|;|')",
+    "str": "normal-user-input-123"
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9._-]{2,}[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9].[a-zA-Z]{2,}$",
+    "str": "a.b-c_d@sub.domain.example.co.uk"
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([_\\-\\.])?([a-zA-Z0-9]))*(@){1}[a-zA-Z0-9]+[\\.]{1}(([a-zA-Z]{2,63})|([a-zA-Z]{2,63}\\.[a-zA-Z]{2,63}))$",
+    "str": "test_email-sub.domain@very.long.subdomain.example.com"
+  },
+  {
+    "pattern": "^https?:\\/\\/[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}(/[a-zA-Z0-9._~/-]*)*(\\?[;&a-zA-Z0-9=%_-]*)?(#[a-zA-Z0-9_-]*)?$",
+    "str": "https://login.example.com/auth?redirect=https://dashboard.example.com&amp;state=abc123#token"
+  },
+  {
+    "pattern": "^https?:\\/\\/[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}(/[a-zA-Z0-9._~/-]*)*(\\?[;&a-zA-Z0-9=%_-]*)?(#[a-zA-Z0-9_-]*)?$",
+    "str": "http://xn--fsqu00a.xn--0zwm56d/%20%20/%2E%2E/secret"
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]+={0,2}$",
+    "str": "SGVsbG8gd29ybGQh"
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]+={0,2}$",
+    "str": "NotBase64!!@"
+  },
+  {
+    "pattern": "^[0-9]{1,3}\\b",
+    "str": "0"
+  },
+  {
+    "pattern": "^[0-9]{1,3}\\b",
+    "str": "999"
+  },
+  {
+    "pattern": "^[0-9]{1,3}\\b",
+    "str": "1000"
+  },
+  {
+    "pattern": "^({)?[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}(})?$",
+    "str": "{12345678-1234-1234-1234-123456789012}"
+  },
+  {
+    "pattern": "^(X-)?[A-Za-z-]+:\\s*.*$",
+    "str": "X-Forwarded-For: 203.0.113.195"
+  },
+  {
+    "pattern": "^(X-)?[A-Za-z-]+:\\s*.*$",
+    "str": "Authorization: Bearer abc123.def456.ghi789"
+  },
+  {
+    "pattern": "^(/[a-zA-Z0-9._~-]+)+/?(\\?.*)?(#.*)?$",
+    "str": "/api/v1/users/me?include=profile#settings"
+  },
+  {
+    "pattern": "^(/[a-zA-Z0-9._~-]+)+/?(\\?.*)?(#.*)?$",
+    "str": "//etc/passwd"
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+    "str": "2025-04-05T14:30:00Z"
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+    "str": "2025-04-05 14:30:00"
+  },
+  {
+    "pattern": "^\\$pbkdf2-(sha(1|256|512))\\$\\d+\\$[a-zA-Z0-9./]+\\$[a-zA-Z0-9./]+$",
+    "str": "\\$pbkdf2-sha256\\$50000\\$saltsalt\\$abcd1234efgh5678"
+  },
+  {
+    "pattern": "^$$?(?:[0-9a-fA-F]{1,4}:){6}(?:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})$$?$",
+    "str": "[2001:db8:85a3:8d3:1319:8a2e:370:7348]"
+  },
+  {
+    "pattern": "^(.+?)(?:@(.*))?$",
+    "str": "user@host.com"
+  },
+  {
+    "pattern": "^(.+?)(?:@(.*))?$",
+    "str": "nouseronlyhost"
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]*(?:[._-][a-zA-Z0-9]+)*$",
+    "str": "valid_user_name_v1"
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]*(?:[._-][a-zA-Z0-9]+)*$",
+    "str": "_invalid_start"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$",
+    "str": "12345678123456781234567812345678"
+  },
+  {
+    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "aGVscCBtZQ=="
+  },
+  {
+    "pattern": "^(?!(?:10|172.(1[6-9]|2[0-9]|3[01])|192.168).)((25[0-5]|2[0-4]\\d|[01]?\\d\\d?).){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$",
+    "str": "8.8.8.8"
+  },
+  {
+    "pattern": "^(?!(?:10|172\\.(1[6-9]|2[0-9]|3[01])|192\\.168)\\.)((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$",
+    "str": "192.168.1.1"
+  },
+  {
+    "pattern": "^[a-zA-Z]+://[^\\s:/]+(\\:[0-9]+)?/.+$",
+    "str": "https://api.service.com/v1/login"
+  },
+  {
+    "pattern": "^[a-zA-Z]+://[^\\s:/]+(\\:[0-9]+)?/.+$",
+    "str": "ftp://localhost:21/upload/file.txt"
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}$",
+    "str": "user+tag@example-domain.site"
+  },
+  {
+    "pattern": "^\\$2[ay]\\$\\d{2}\\$[A-Za-z0-9./]{53}$",
+    "str": "\\$2a\\$10\\$Yg9HxKkH7d8f6h5G4j3k2i1u9t8s7r6q5p4o3n2m1l0k9j8h7g6f5e4d3c2"
+  },
+  {
+    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d@$!%*#?&]{8,}$",
+    "str": "GoodPass1!"
+  },
+  {
+    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d@$!%*#?&]{8,}$",
+    "str": "nouppercase1"
+  },
+  {
+    "pattern": "^([0-9a-f]{12}|[0-9a-f]{16})$",
+    "str": "a1b2c3d4e5f6"
+  },
+  {
+    "pattern": "^([0-9a-f]{12}|[0-9a-f]{16})$",
+    "str": "gibberish!"
+  },
+  {
+    "pattern": "^https://[a-zA-Z0-9.-]+.googleapis.com/auth/[^\\s]+$",
+    "str": "https://www.googleapis.com/auth/userinfo.email"
+  },
+  {
+    "pattern": "^https://[a-zA-Z0-9.-]+\\.googleapis\\.com/auth/[^\\s]+$",
+    "str": "http://malicious.com/auth"
+  },
+  {
+    "pattern": "^ey[A-Za-z0-9+/=]+\\.[ey][A-Za-z0-9+/=]+\\.[A-Za-z0-9+/=]*$",
+    "str": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+  },
+  {
+    "pattern": "^ey[A-Za-z0-9+/=]+\\.[ey][A-Za-z0-9+/=]+\\.[A-Za-z0-9+/=]*$",
+    "str": "not.a.jwt.token"
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])(.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}$",
+    "str": "255.255.255.255"
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}$",
+    "str": "256.256.256.256"
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]*(?:[._][a-zA-Z0-9]+)*@[a-zA-Z0-9][a-zA-Z0-9.-]*.[a-zA-Z]{2,}$",
+    "str": "test.user_name@valid-site.example.org"
+  },
+  {
+    "pattern": "^(?:{)?[0-9a-fA-F]{32}(?:})?$",
+    "str": "{a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5}"
+  },
+  {
+    "pattern": "^(?:\\{)?[0-9a-fA-F]{32}(?:\\})?$",
+    "str": "g0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5"
+  },
+  {
+    "pattern": "^\\d{3}-\\d{2}-\\d{4}$",
+    "str": "123-45-6789"
+  },
+  {
+    "pattern": "^\\d{3}-\\d{2}-\\d{4}$",
+    "str": "123456789"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,6}$",
+    "str": "test+label@sub.domain.example.museum"
+  },
+  {
+    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "QUJDREVGR0g="
+  },
+  {
+    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "NOTBASE64%"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{40}$",
+    "str": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{40}$",
+    "str": "too_short"
+  },
+  {
+    "pattern": "^\\$argon2(i|id)?\\$v=\\d+\\$m=\\d+,t=\\d+,p=\\d+\\$[a-zA-Z0-9+/]+\\$[a-zA-Z0-9+/]+$",
+    "str": "\\$argon2id\\$v=19\\$m=65536,t=3,p=4\\$c2FsdHNhbHRzYWx0\\$RdescudvJCsgt3ub+b+dPA"
+  },
+  {
+    "pattern": "^$$(?:[0-9a-fA-F]{1,4}:){5}(?:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})$$$",
+    "str": "[2001:db8:85a3:0:0:8a2e:370:7334]"
+  },
+  {
+    "pattern": "^User-Agent:\\s.+$.*[Mm]obile.*$.*$",
+    "str": "User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15"
+  },
+  {
+    "pattern": "^User-Agent:\\s.+$.*[Mm]obile.*$.*$",
+    "str": "User-Agent: curl/7.68.0"
+  },
+  {
+    "pattern": "^[0-9]+ [A-Za-z]{3} [0-9]{4} [0-9:]{8}$",
+    "str": "05 Apr 2025 14:23:01"
+  },
+  {
+    "pattern": "^X-API-Key\\s*:\\s*[a-zA-Z0-9\\-_=]{32,}$",
+    "str": "X-API-Key: abcdefghijklmnopqrstuvwxyz1234567890-_="
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "str": "SSBhbSBub3QgYSBqdXdAdA=="
+  },
+  {
+    "pattern": "^\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}$",
+    "str": "192 168 1 1"
+  },
+  {
+    "pattern": "^\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}$",
+    "str": "1.2.3.4"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{12,32}$",
+    "str": "session123456789"
+  },
+  {
+    "pattern": "^Content-Type:\\s*(application/json|text/plain|multipart/form-data)$",
+    "str": "Content-Type: application/json"
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$",
+    "str": "00:1A:2B:3C:4D:5E"
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$",
+    "str": "ZZ:ZZ:ZZ:ZZ:ZZ:ZZ"
+  },
+  {
+    "pattern": "^/oauth/(authorize|token|revoke)$",
+    "str": "/oauth/authorize"
+  },
+  {
+    "pattern": "^/oauth/(authorize|token|revoke)$",
+    "str": "/admin/delete"
+  },
+  {
+    "pattern": "^([0-9]+.)+[0-9]+$",
+    "str": "1.2.3.4.5"
+  },
+  {
+    "pattern": "^([0-9]+\\.)+[0-9]+$",
+    "str": "v1.2.3"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9][a-zA-Z0-9-]*(?:.[a-zA-Z0-9][a-zA-Z0-9-]*)*.[a-zA-Z]{2,}$",
+    "str": "test@dev.example-internal.co.uk"
+  },
+  {
+    "pattern": "^(?:[A-Z][a-z]*.?\\s*)+$",
+    "str": "John A. Smith Jr."
+  },
+  {
+    "pattern": "^(?:[A-Z][a-z]*\\.?\\s*)+$",
+    "str": "mr. john doe"
+  },
+  {
+    "pattern": "^\\d{1,2}/\\d{1,2}/\\d{4}$",
+    "str": "12/31/2025"
+  },
+  {
+    "pattern": "^\\d{1,2}/\\d{1,2}/\\d{4}$",
+    "str": "30/02/2025"
+  },
+  {
+    "pattern": "^\\$6\\$[a-zA-Z0-9./]{8,16}\\$[a-zA-Z0-9./]{86}$",
+    "str": "\\$6\\$saltsalt\\$abcd1234efgh5678ijkl90mn...longhash..."
+  },
+  {
+    "pattern": "^\\d{5}(?:-\\d{4})?$",
+    "str": "90210-1234"
+  },
+  {
+    "pattern": "^\\+[1-9]\\d{1,14}$",
+    "str": "+123456789012"
+  },
+  {
+    "pattern": "^\\+[1-9]\\d{1,14}$",
+    "str": "12345"
+  },
+  {
+    "pattern": "^\\d{1,3}.\\d{1,3}.\\d{1,3}.\\d{1,3}/\\d{1,2}$",
+    "str": "192.168.1.0/24"
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{0,4}$",
+    "str": "2001:db8::1"
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{0,4}$",
+    "str": "invalid:::address::"
+  },
+  {
+    "pattern": "^([^-][a-zA-Z0-9-]{0,62}[^-].)+[a-zA-Z]{2,}$",
+    "str": "sub.domain.example.com"
+  },
+  {
+    "pattern": "^([^-][a-zA-Z0-9-]{0,62}[^-]\\.)+[a-zA-Z]{2,}$",
+    "str": "-invalid.start.com"
+  },
+  {
+    "pattern": "^\\d{15,18}$",
+    "str": "4532123456789012"
+  },
+  {
+    "pattern": "^\\d{15,18}$",
+    "str": "1234"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}(:\\d+)?$",
+    "str": "user@localhost.local:8080"
+  },
+  {
+    "pattern": "^https?://[^/]+/api/[vV]\\d+/.+$",
+    "str": "https://api.example.com/v2/users"
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]{32}-[A-Za-z0-9+/]{8}-[A-Za-z0-9+/]{20}$",
+    "str": "QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaA==-YWJjZA==-YWJjZGVmZ2hpamtsbW5vcA=="
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]{32}-[A-Za-z0-9+/]{8}-[A-Za-z0-9+/]{20}$",
+    "str": "invalid-format-now"
+  },
+  {
+    "pattern": "^(?:[0-9]{1,3}.){3}[0-9]{1,3}(?:\\s+(?:[0-9]{1,3}.){3}[0-9]{1,3})*$",
+    "str": "192.168.1.1 10.0.0.1 172.16.0.1"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._-]+@([a-zA-Z0-9-]+.)+[a-zA-Z]{2,}$",
+    "str": "test@company.corporate-domain.global"
+  },
+  {
+    "pattern": "^{{[^{}]*}}$",
+    "str": "{{USER_ID}}"
+  },
+  {
+    "pattern": "^\\{\\{[^{}]*\\}\\}$",
+    "str": "{{NESTED{{INVALID}}}}"
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "PD94bWwgdmVyc2lvbj0iMS4wIj8+DQo8cm9vdD5IZWxsbyB3b3JsZCE8L3Jvb3Q+"
+  },
+  {
+    "pattern": "^https?://[^/]+/login\\?[\\w&=%.-]*$",
+    "str": "https://example.com/login?next=%2Fdashboard&amp;token=abc123"
+  },
+  {
+    "pattern": "^[a-fA-F0-9]{64}$",
+    "str": "da96a6f8d1ceec5d34f5bf0f79d1c3a4693b1b2e47345c3b6e3e8a3d4f6b2c7a"
+  },
+  {
+    "pattern": "^[a-fA-F0-9]{64}$",
+    "str": "short"
+  },
+  {
+    "pattern": "^\\d{4} \\d{4} \\d{4} \\d{4}$",
+    "str": "1234 5678 9012 3456"
+  },
+  {
+    "pattern": "^\\d{4} \\d{4} \\d{4} \\d{4}$",
+    "str": "1234-5678-9012-3456"
+  },
+  {
+    "pattern": "^X-(?:Forwarded|Real)-IP:\\s+\\d{1,3}(?:.\\d{1,3}){3}$",
+    "str": "X-Forwarded-IP: 198.51.100.1"
+  },
+  {
+    "pattern": "^Authorization:\\s+(Basic|Bearer|Digest)\\s+[A-Za-z0-9./+=]+$",
+    "str": "Authorization: Bearer abcdefghijklmnopqrstuvwxyz1234567890"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+.)+[a-zA-Z]{2,63}$",
+    "str": "user@verylongtopleveldomainnameexample.info"
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$",
+    "str": "MyPass1234"
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$",
+    "str": "weakpass"
+  },
+  {
+    "pattern": "^([a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*.)?[a-zA-Z0-9-]+.[a-zA-Z]{2,}$",
+    "str": "www.sub.domain.example.org"
+  },
+  {
+    "pattern": "^([a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*\\.)?[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}$",
+    "str": "invalid..domain"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9+/]{64}$",
+    "str": "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5eg=="
+  },
+  {
+    "pattern": "^[a-zA-Z0-9+/]{64}$",
+    "str": "too short base64"
+  },
+  {
+    "pattern": "^\\d{9}[\\dX]$",
+    "str": "012345678X"
+  },
+  {
+    "pattern": "^\\d{9}[\\dX]$",
+    "str": "1234567890"
+  },
+  {
+    "pattern": "^[A-Za-z0-9]{10}-[A-Za-z0-9]{5}-[A-Za-z0-9]{15}$",
+    "str": "ABC123XYZ9-PQ5R8-MN9OL1234PQR5678"
+  },
+  {
+    "pattern": "^\\$scrypt\\$[0-9]+,[0-9]+,[0-9]+\\$[a-zA-Z0-9+/=]+\\$[a-zA-Z0-9+/=]+$",
+    "str": "\\$scrypt\\$16384,8,1\\$saltstring\\$derivedkeyinbase64"
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}-){5}[0-9a-fA-F]{2}$",
+    "str": "00-1A-2B-3C-4D-5E"
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}-){5}[0-9a-fA-F]{2}$",
+    "str": "00:1A:2B:3C:4D:5E"
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@([a-zA-Z0-9])(([a-zA-Z0-9-])*[a-zA-Z0-9])?\\.([a-zA-Z0-9]{2,})$",
+    "str": "user+filter@domain.co.uk"
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@([a-zA-Z0-9])(([a-zA-Z0-9-])*[a-zA-Z0-9])?\\.([a-zA-Z0-9]{2,})$",
+    "str": "user@@example.com"
+  },
+  {
+    "pattern": "^\\d{1,3}(?:,\\d{3})*(?:.\\d+)?$",
+    "str": "1,234,567.89"
+  },
+  {
+    "pattern": "^\\d{1,3}(?:,\\d{3})*(?:\\.\\d+)?$",
+    "str": "1234.56"
+  },
+  {
+    "pattern": "^\\*(?:.[a-zA-Z0-9-]+)+$",
+    "str": "*.example.com"
+  },
+  {
+    "pattern": "^\\*(?:\\.[a-zA-Z0-9-]+)+$",
+    "str": "sub.example.com"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{8}_[a-zA-Z0-9]{8}_[a-zA-Z0-9]{8}$",
+    "str": "a1b2c3d4_e5f6g7h8_i9j0k1l2"
+  },
+  {
+    "pattern": "^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(.[0-9]+)?(Z|([+-][0-9]{2}):([0-9]{2}))$",
+    "str": "2025-04-05T10:15:30.123+05:30"
+  },
+  {
+    "pattern": "^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(\\.[0-9]+)?(Z|([+-][0-9]{2}):([0-9]{2}))$",
+    "str": "2025-04-05 10:15:30"
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]{2,15}$",
+    "str": "userName123"
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]{2,15}$",
+    "str": "ab"
+  },
+  {
+    "pattern": "^\\$s2k2\\$[a-zA-Z0-9+/=]+\\$[a-zA-Z0-9+/=]+$",
+    "str": "\\$s2k2\\$YWJjZGVmZ2g=\\$aGVsbG93b3JsZA=="
+  },
+  {
+    "pattern": "^(?:[a-zA-Z0-9+/]{4})*(?:[a-zA-Z0-9+/]{2}==|[a-zA-Z0-9+/]{3}=)?(?:\\s*[a-zA-Z0-9+/]{4})*$",
+    "str": "SGVsbG8gd29ybGQhIFRo\n    pcyBpcyBiYXNlNjQK"
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+    "str": "127.0.0.1"
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+    "str": "999.999.999.999"
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,30}$",
+    "str": "longemailaddresslabel@verylongdomainnameexamplefortestingpurposes.net"
+  },
+  {
+    "pattern": "^(([^<>()[$$\\\\.,;:\\s@\\\"]+(\\.[^<>()[$$\\\\.,;:\\s@\\\"]+)*)|(\".+\"))@(($$[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$$)|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$",
+    "str": "quoted\"user\"@example.com"
+  },
+  {
+    "pattern": "^\\$1\\$[a-zA-Z0-9./]{8}\\$[a-zA-Z0-9./]{22}$",
+    "str": "\\$1\\$salt1234\\$H/dI19u1bR8VfJ319s2vA0"
+  },
+  {
+    "pattern": "^([a-zA-Z0-9]|(?:%[0-9a-fA-F]{2}))+",
+    "str": "hello%20world%21"
+  },
+  {
+    "pattern": "^([a-zA-Z0-9]|(?:%[0-9a-fA-F]{2}))+",
+    "str": "normalstring"
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$",
+    "str": "01:02:03:04:05:06:07:08"
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$",
+    "str": "01-02-03-04-05-06-07-08"
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+    "str": "2025-04-05"
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+    "str": "2025/04/05"
+  },
+  {
+    "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?(.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$",
+    "str": "valid-host-name-label"
+  },
+  {
+    "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$",
+    "str": "-invalid-host"
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "str": "Tm8gc3BlY2lhbCBjaGFyYWN0ZXJzLCBidXQgc3RpbGwgYmFzZTY0Lg=="
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "str": "special chars! not base64"
+  }
+]

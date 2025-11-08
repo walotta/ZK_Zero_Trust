@@ -35,7 +35,6 @@ struct Response {
 #[derive(Deserialize)]
 struct JwtField {
     pub jwt_field: Vec<String>,
-    pub jwt: String,
 }
 
 fn find_key_value_quotes(json: &String, key: &str) -> Option<(usize, usize, usize, usize)> {

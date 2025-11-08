@@ -1,0 +1,16 @@
+[package]
+name = "compile_regex"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+# Build a Rust library for intra-crate linking and a cdylib if needed by FFI.
+crate-type = ["rlib", "cdylib"]
+
+[features]
+default = []
+python = ["dep:pyo3"]
+
+[dependencies]
+regex-automata = "0.4"
+pyo3 = { version = "0.21", features = ["extension-module"], optional = true }
