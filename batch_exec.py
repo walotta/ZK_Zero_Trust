@@ -25,7 +25,7 @@ os.makedirs(os.path.dirname(TARGET_LIB),  exist_ok=True)
 os.makedirs(os.path.dirname(TARGET_MAIN), exist_ok=True)
 
 # Prepare log file with timestamp
-timestamp = datetime.now().strftime("logs/jwt_batch_%m_%d_%H_%M.log")
+timestamp = datetime.now().strftime("logs/debug_batch_%m_%d_%H_%M.log")
 log_path = os.path.join(POLICY_PROJECT, timestamp)
 print(f"All cargo output will be redirected to {log_path}")
 
@@ -33,9 +33,8 @@ os.system(f"cp {os.path.join(SOURCE_BASE, POLICY_CODE_DIR)}/*.bin {GUEST_DIR}/."
 
 testcases_names = ['_'.join(f.split('.')[0].split('_')[1:]) for f in os.listdir(POLICY_CODE_DIR) if f.endswith(".rs")]
 testcases_names.sort()
-# testcases_names = ["IIC057"]
+testcases_names = ["IIC057"]
 testcases = dict()
-skip_cases = list()
 
 for tc in testcases_names:
     testcases[tc] = {
@@ -43,23 +42,18 @@ for tc in testcases_names:
         'response': os.path.join(RESPONSES_DIR, f"Policy_{tc}.json"),
         'input_definition': os.path.join(INPUT_DEF_DIR, f"Policy_{tc}.rs"),
         'policy_code': os.path.join(POLICY_CODE_DIR, f"Policy_{tc}.rs"),
-        'jwts': os.path.join(JWT_DIR, f"Policy_{tc}.json")
+        'jwt': os.path.join(JWT_DIR, f"Policy_{tc}.json")
     }
     for key, value in testcases[tc].items():
         if not os.path.exists(value):
-            print(f"Missing {key.replace('_', ' ')} for testcase {tc}: {value}")
-            skip_cases.append(tc)
-            break
-            # raise FileNotFoundError(f"Missing {key.replace('_', ' ')} for testcase {tc}: {value}")
-print(f"Get {len(testcases)-len(skip_cases)}/{len(testcases)} testcases ready for execution.")
+            raise FileNotFoundError(f"Missing {key.replace('_', ' ')} for testcase {tc}: {value}")
+print(f"Get {len(testcases)} testcases ready for execution.")
 
 # Open log file once for all runs
 with open(log_path, 'w') as log_file:
     # Iterate over all .rs files in input_definition
     fail_cnt = 0
     for key, value in testcases.items():
-        if key in skip_cases:
-            pass
 
         print(f'Processing policy: {key}')
         log_file.write(f"\n# ---------- {key} ----------\n")
@@ -75,7 +69,7 @@ with open(log_path, 'w') as log_file:
         print('Running: cargo run --release')
         try:
             subprocess.run(
-                ['cargo', 'run', '--release', '--', value['request'], value['response'], value['jwts']],
+                ['cargo', 'run', '--release', '--', value['request'], value['response'], value['jwt']],
                 cwd=POLICY_PROJECT,
                 stdout=log_file,
                 stderr=subprocess.STDOUT,

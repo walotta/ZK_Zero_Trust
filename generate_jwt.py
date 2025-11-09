@@ -185,10 +185,26 @@ def generate_rust_constants_include_bytes(jwk, key_id, jwt_token, private_key,
         f.write(e)
 
     secret_key_json = json.dumps(jwk, indent=2)
-    secret_key_rust = f'static SECRET_KEY: &str = r#"\\n{secret_key_json}\\n"#;'
+    secret_key_rust = f'static SECRET_KEY: &str = r#"\n{secret_key_json}\n"#;'
+
+    public_key_jwk = {
+        "alg": "RS256",
+        "e": base64url_encode(e),
+        "key_ops": ["verify"],
+        "kty": "RSA",
+        "n": base64url_encode(n),
+        "use": "sig",
+        "kid": key_id,
+    }
+    public_key_json = json.dumps(public_key_jwk, separators=(', ', ': '))
+    public_key_inner = public_key_json[1:-1]
+    public_key_json_formatted = f' {{ {public_key_inner} }} '
+    public_key_rust = f'static PUBLIC_KEY: &str = r#"{public_key_json_formatted}"#;'
 
     rust_code = f'''// Generated JWT constants (N/E via include_bytes!, no base64 at runtime)
 {secret_key_rust}
+
+{public_key_rust}
 
 pub const JWT: &str = "{jwt_token}";
 pub const KEY_ID: &str = "{key_id}";
@@ -229,4 +245,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

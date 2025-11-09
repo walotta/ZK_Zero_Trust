@@ -9,28 +9,6 @@ use rsa::{
 use sha2::Sha256;
 use signature::Verifier;
 
-use regex_automata::dfa::{dense::DFA, Automaton};
-use regex_automata::Input;
-
-fn eval_regex(regex_input: &str, regex_exp: &[u8]) -> bool {
-    match DFA::from_bytes(regex_exp) {
-        Ok((dfa, _)) => {
-            let input = Input::new(regex_input);
-            match dfa.try_search_fwd(&input) {
-                Ok(result) => result.is_some(),
-                Err(_) => false,
-            }
-        }
-        Err(_) => false,
-    }
-}
-
-static RE_E8667202B740D84E03552D30B7B93A62: &[u8] =
-    include_bytes!("RE_E8667202B740D84E03552D30B7B93A62.bin");
-
-static RE_9BAAFAEEB1212012972ABC54D5797FBD: &[u8] =
-    include_bytes!("RE_9BAAFAEEB1212012972ABC54D5797FBD.bin");
-
 fn jwt_field_check(inp: &Inputs, extracted_values: &[String]) -> bool {
     for (i, field) in JWT_FIELD.iter().enumerate() {
         match *field {
@@ -132,22 +110,18 @@ enum Result {
     NotApplicable,
 }
 
-fn evaluate_cond_policy_rule(inp: &Inputs) -> bool {
-    (eval_regex(
-        &inp.access_subject_subject_id,
-        &RE_E8667202B740D84E03552D30B7B93A62,
-    )) || (eval_regex(
-        &inp.access_subject_subject_id,
-        &RE_9BAAFAEEB1212012972ABC54D5797FBD,
-    ))
+fn evaluate_target_policy_rule(inp: &Inputs) -> bool {
+    (("Julius Hibbert" == inp.access_subject_subject_id)
+        && ("http://medico.com/record/patient/BartSimpson" == inp.resource_resource_id)
+        && (("read" == inp.action_action_id) || ("write" == inp.action_action_id)))
 }
 
 fn evaluate_rule_policy_rule(inp: &Inputs) -> Result {
-    if evaluate_cond_policy_rule(inp) {
-        return Result::Permit;
-    } else {
+    if !evaluate_target_policy_rule(inp) {
         return Result::NotApplicable;
     }
+
+    return Result::Permit;
 }
 
 fn evaluate_target_policy(inp: &Inputs) -> bool {

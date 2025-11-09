@@ -381,9 +381,9 @@ checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
 name = "cc"
-version = "1.2.43"
+version = "1.2.44"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "739eb0f94557554b3ca9a86d2d37bebd49c5e6d0c1d2bda35ba5bdac830befc2"
+checksum = "37521ac7aabe3d13122dc382493e20c9416f299d2ccd5b3a5340a2570cdeb0f3"
 dependencies = [
  "find-msvc-tools",
  "shlex",
@@ -885,11 +885,10 @@ dependencies = [
 
 [[package]]
 name = "num-bigint-dig"
-version = "0.8.4"
+version = "0.8.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc84195820f291c7697304f3cbdadd1cb7199c0efc917ff5eafd71225c136151"
+checksum = "82c79c15c05d4bf82b6f5ef163104cc81a760d8e874d38ac50ab67c8877b647b"
 dependencies = [
- "byteorder",
  "lazy_static",
  "libm",
  "num-integer",
@@ -1009,36 +1008,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "policy"
-version = "0.12.0"
-dependencies = [
- "base64",
- "chrono",
- "iso8601-duration",
- "policy-core",
- "regex",
- "regex-automata",
- "risc0-zkvm",
- "rsa",
- "serde",
- "serde_json",
- "sha2",
- "signature",
-]
-
-[[package]]
-name = "policy-core"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "iso8601-duration",
- "rand 0.8.5",
- "risc0-zkvm",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "postcard"
 version = "1.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1112,7 +1081,6 @@ version = "0.8.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "34af8d1a0e25924bc5b7c43c079c942339d8f0a8b57c39049bef581b46327404"
 dependencies = [
- "libc",
  "rand_chacha 0.3.1",
  "rand_core 0.6.4",
 ]
@@ -1420,6 +1388,23 @@ dependencies = [
  "spki",
  "subtle",
  "zeroize",
+]
+
+[[package]]
+name = "rsa_verify"
+version = "0.1.0"
+dependencies = [
+ "base64",
+ "chrono",
+ "iso8601-duration",
+ "regex",
+ "regex-automata",
+ "risc0-zkvm",
+ "rsa",
+ "serde",
+ "serde_json",
+ "sha2",
+ "signature",
 ]
 
 [[package]]

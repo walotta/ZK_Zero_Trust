@@ -34,8 +34,8 @@ struct Response {
 
 #[derive(Deserialize)]
 struct JwtField {
-    pub jwt_field: Vec<String>,
     pub jwt: String,
+    pub jwt_fields: Vec<String>,
 }
 
 fn find_key_value_quotes(json: &String, key: &str) -> Option<(usize, usize, usize, usize)> {
@@ -126,14 +126,15 @@ fn main() {
         }
     };
 
-    let init_inp: Inputs = match serde_json::from_str(&json_content) {
+    let init_inp: Option<Inputs> = match serde_json::from_str(&json_content) {
         Ok(inputs) => inputs,
-        Err(e) => {
-            eprintln!(
-                "Error parsing JSON from request file '{}': {}",
-                request_file, e
-            );
-            process::exit(1);
+        Err(_e) => {
+            // eprintln!(
+            //     "Error parsing JSON from request file '{}': {}",
+            //     request_file, e
+            // );
+            println!("Request json format not correct");
+            None
         }
     };
 
@@ -153,7 +154,7 @@ fn main() {
         }
     };
 
-    let mut jwtparts = init_inp.jwt.split('.');
+    let mut jwtparts = jwtfield.jwt.split('.');
     let _header = jwtparts.next().ok_or("missing header in jwt");
     let payload_str = String::from_utf8(
         general_purpose::URL_SAFE_NO_PAD
@@ -162,7 +163,7 @@ fn main() {
     )
     .unwrap();
     let mut positions = Vec::new();
-    for key in &jwtfield.jwt_field {
+    for key in &jwtfield.jwt_fields {
         let key_pos = find_key_value_quotes(&payload_str, key).unwrap();
         positions.extend_from_slice(&[key_pos.0, key_pos.1, key_pos.2, key_pos.3]);
     }
@@ -192,8 +193,11 @@ fn main() {
         "Deny".to_string()
     };
 
-    println!("Parsed inputs: {:?}", init_inp);
-    let permit = policy_verify(init_inp.clone(), &positions);
+    let mut permit: String = "Deny".to_string();
+    if init_inp.is_some() {
+        println!("Parsed inputs: {:?}", init_inp);
+        permit = policy_verify(init_inp.unwrap(), &jwtfield.jwt, &positions);
+    }
     println!("Permit decision: {}/{}", permit, decision);
     if permit != decision {
         println!("Permit does not match the decision in the responses file.");
@@ -201,10 +205,12 @@ fn main() {
     }
 }
 
-fn policy_verify(inp: Inputs, jwt_positions: &Vec<usize>) -> String {
+fn policy_verify(inp: Inputs, jwt: &String,jwt_positions: &Vec<usize>) -> String {
     // println!("policy verify for subject_id: {}, resource_id: {},action_id: {}", inp.subject_id, inp.resource_id, inp.action_id);
     let env = ExecutorEnv::builder()
         .write(&inp)
+        .unwrap()
+        .write(&jwt)
         .unwrap()
         .write(&jwt_positions)
         .unwrap()
