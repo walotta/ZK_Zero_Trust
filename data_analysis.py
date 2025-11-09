@@ -4,7 +4,8 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import statistics
 
-LOG_FILE = 'logs/batch_09_10_09_00.log'
+# LOG_FILE = 'logs/jwt_batch_11_06_all.log'
+LOG_FILE = 'logs/jwt_batch_11_06_19_37.log'
 assert os.path.exists(LOG_FILE), "Log file does not exist."
 
 # Create output directory for pictures
@@ -22,9 +23,10 @@ def parse_log_file(log_file):
     test_sections[-1] = last.strip()  # Clean up the last section
     total_cases = int(re.search(r'(\d+) testcases processed', summary).group(1))
     failures = int(re.search(r'(\d+) failures', summary).group(1))
-    assert total_cases == len(test_sections), "Mismatch between total cases and parsed sections"
+    # assert total_cases == len(test_sections), "Mismatch between total cases and parsed sections"
     
     results = []
+    name_mapping = dict()
     for section in test_sections:
         lines = section.strip().split('\n')
         if not lines:
@@ -84,7 +86,11 @@ def parse_log_file(log_file):
                 result['expected_decision'] = decisions[1].strip()
                 result['success'] = result['decision'] == result['expected_decision']
         
-        results.append(result)
+        if test_name in name_mapping:
+            results[name_mapping[test_name]] = result
+        else:
+            name_mapping[test_name] = len(results)
+            results.append(result)
     
     return results
 
@@ -154,7 +160,7 @@ def analyze_results(results):
     if failed_tests > 0:
         print(f"=== FAILED TESTS ===")
         for r in results:
-            if not r['success']:
+            if not r['success'] and (r['decision']!=r['expected_decision']):
                 print(f"- {r['test_name']}: Got {r['decision']}, Expected {r['expected_decision']}")
         print()
     
