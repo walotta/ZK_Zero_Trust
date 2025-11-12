@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Performance comparison between the Reef baseline and the zkVM implementation.
+Performance comparison between the Reef baseline, the zkVM implementation, and the RustStd reference.
 
 The script ingests JSON dumps for each dataset/framework pair, computes error
 rates plus average proof/verify times (successful cases only), prints summaries,
@@ -11,8 +11,8 @@ and produces four PNG visualizations:
   3. <dataset>_proof_time_line.png  – per-case proof seconds (line chart)
   4. <dataset>_verify_time_line.png – per-case verify seconds (line chart)
 
-Line charts place case IDs on the x-axis so cross-case differences between Reef
-and zkVM are easy to inspect. Rendering uses Pillow so no external charting
+Line charts place case IDs on the x-axis so cross-case differences between the
+frameworks are easy to inspect. Rendering uses Pillow so no external charting
 packages are required.
 
 Usage examples (run from the directory containing the JSON files):
@@ -34,9 +34,29 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 DATASET_CHOICES = ("opus4", "qwen3")
-FRAMEWORK_LABELS = ("Reef (baseline)", "zkVM")
-FRAMEWORK_FILE_PREFIXES = ("reef", "zkvm")
-FRAMEWORK_COLORS = {"Reef (baseline)": "#1f77b4", "zkVM": "#ff7f0e"}
+
+
+@dataclass(frozen=True)
+class FrameworkConfig:
+    label: str
+    file_prefix: str
+    color: str
+
+
+FRAMEWORKS: Tuple[FrameworkConfig, ...] = (
+    FrameworkConfig("Reef (baseline)", "reef", "#1f77b4"),
+    FrameworkConfig("zkVM", "zkvm", "#ff7f0e"),
+    FrameworkConfig("RustStd", "ruststd", "#2ca02c"),
+)
+
+FRAMEWORK_LABELS = tuple(cfg.label for cfg in FRAMEWORKS)
+FRAMEWORK_CONFIG_MAP = {cfg.label: cfg for cfg in FRAMEWORKS}
+FRAMEWORK_COLORS = {cfg.label: cfg.color for cfg in FRAMEWORKS}
+
+METRIC_EXPORTS = {
+    "proof_seconds": "proof_time",
+    "verify_seconds": "verify_time",
+}
 
 
 def _load_font(size: int) -> ImageFont.ImageFont:
@@ -60,6 +80,17 @@ FONT_MED = _load_font(16)
 FONT_LARGE = _load_font(20)
 
 
+def _fmt_seconds(value: Optional[float]) -> str:
+    return "N/A" if value is None or math.isnan(value) else f"{value:.3f}s"
+
+
+def describe_metric(avg: Optional[float], std: Optional[float], min_val: Optional[float], max_val: Optional[float]) -> str:
+    return (
+        f"avg {_fmt_seconds(avg)} "
+        f"(std {_fmt_seconds(std)}, min {_fmt_seconds(min_val)}, max {_fmt_seconds(max_val)})"
+    )
+
+
 def draw_text_center(draw: ImageDraw.ImageDraw, x: float, y: float, text: str, font: ImageFont.ImageFont, fill: str) -> None:
     bbox = draw.textbbox((0, 0), text, font=font)
     width = bbox[2] - bbox[0]
@@ -81,8 +112,12 @@ class FrameworkSummary:
     error_cases: int
     proof_avg: Optional[float]
     proof_std: Optional[float]
+    proof_min: Optional[float]
+    proof_max: Optional[float]
     verify_avg: Optional[float]
     verify_std: Optional[float]
+    verify_min: Optional[float]
+    verify_max: Optional[float]
 
     @property
     def error_rate(self) -> float:
@@ -99,10 +134,8 @@ class DatasetSummary:
 class CaseSeriesEntry:
     case_id: int
     description: str
-    reef_proof: Optional[float]
-    reef_verify: Optional[float]
-    zkvm_proof: Optional[float]
-    zkvm_verify: Optional[float]
+    proof_seconds: Dict[str, Optional[float]]
+    verify_seconds: Dict[str, Optional[float]]
 
 
 @dataclass
@@ -113,7 +146,7 @@ class DatasetDetail:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Compare Reef and zkVM performance for the specified datasets."
+        description="Compare Reef, zkVM, and RustStd performance for the specified datasets."
     )
     parser.add_argument(
         "datasets",
@@ -151,79 +184,135 @@ def entry_has_error(entry: dict) -> bool:
     return False
 
 
-def average_time(entries: Iterable[dict], key: str) -> Tuple[Optional[float], Optional[float]]:
+def summarize_time(entries: Iterable[dict], key: str) -> Tuple[Optional[float], Optional[float], Optional[float], Optional[float]]:
     values = [entry[key] for entry in entries if isinstance(entry.get(key), (int, float))]
     if not values:
-        return None, None
+        return None, None, None, None
     avg = sum(values) / len(values)
     variance = sum((value - avg) ** 2 for value in values) / len(values)
     std_dev = math.sqrt(variance)
-    return avg, std_dev
+    return avg, std_dev, min(values), max(values)
 
 
 def summarize_records(name: str, records: Sequence[dict]) -> FrameworkSummary:
     error_count = sum(1 for entry in records if entry_has_error(entry))
     successes = [entry for entry in records if not entry_has_error(entry)]
-    proof_avg, proof_std = average_time(successes, "proof_seconds")
-    verify_avg, verify_std = average_time(successes, "verify_seconds")
+    proof_avg, proof_std, proof_min, proof_max = summarize_time(successes, "proof_seconds")
+    verify_avg, verify_std, verify_min, verify_max = summarize_time(successes, "verify_seconds")
     return FrameworkSummary(
         name=name,
         total_cases=len(records),
         error_cases=error_count,
         proof_avg=proof_avg,
         proof_std=proof_std,
+        proof_min=proof_min,
+        proof_max=proof_max,
         verify_avg=verify_avg,
         verify_std=verify_std,
+        verify_min=verify_min,
+        verify_max=verify_max,
     )
+
+
+def export_metric_series(records: Sequence[dict], metric_key: str, output_path: Path) -> None:
+    lines: List[str] = []
+    for entry in records:
+        if entry_has_error(entry):
+            continue
+        value = entry.get(metric_key)
+        if isinstance(value, (int, float)):
+            lines.append(f"{value}")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text("\n".join(lines), encoding="utf-8")
 
 
 def collect_dataset_details(
     base_dir: Path, datasets: Sequence[str]
 ) -> Tuple[List[DatasetDetail], Dict[str, List[dict]]]:
-    combined_records = {framework: [] for framework in FRAMEWORK_LABELS}
+    combined_records: Dict[str, List[dict]] = {cfg.label: [] for cfg in FRAMEWORKS}
     dataset_details: List[DatasetDetail] = []
     for dataset in datasets:
         dataset_summaries: Dict[str, FrameworkSummary] = {}
         loaded_records: Dict[str, List[dict]] = {}
-        for label, prefix in zip(FRAMEWORK_LABELS, FRAMEWORK_FILE_PREFIXES):
-            path = base_dir / f"{prefix}_{dataset}_performance.json"
+        for cfg in FRAMEWORKS:
+            primary = base_dir / f"{cfg.file_prefix}_{dataset}_performance.json"
+            fallback = base_dir / f"{dataset}_{cfg.file_prefix}_performance.json"
+            path = primary if primary.exists() else fallback
             if not path.exists():
-                raise FileNotFoundError(f"Missing {path}")
+                raise FileNotFoundError(
+                    "Missing performance JSON for "
+                    f"framework '{cfg.label}' and dataset '{dataset}'. "
+                    f"Checked {primary.name} and {fallback.name}."
+                )
             records = load_records(path)
-            combined_records[label].extend(records)
-            dataset_summaries[label] = summarize_records(label, records)
-            loaded_records[label] = records
+            combined_records[cfg.label].extend(records)
+            dataset_summaries[cfg.label] = summarize_records(cfg.label, records)
+            loaded_records[cfg.label] = records
 
-        cases = build_case_series(loaded_records[FRAMEWORK_LABELS[0]], loaded_records[FRAMEWORK_LABELS[1]])
+        cases = build_case_series(loaded_records)
         dataset_details.append(DatasetDetail(summary=DatasetSummary(dataset, dataset_summaries), cases=cases))
     return dataset_details, combined_records
 
 
-def build_case_series(reef_records: Sequence[dict], zkvm_records: Sequence[dict]) -> List[CaseSeriesEntry]:
-    if len(reef_records) != len(zkvm_records):
-        raise ValueError("The Reef and zkVM record lists must have the same length to align cases.")
+def build_case_series(framework_records: Dict[str, Sequence[dict]]) -> List[CaseSeriesEntry]:
+    record_lengths = {label: len(records) for label, records in framework_records.items()}
+    if not record_lengths:
+        return []
+
+    total_cases = max(record_lengths.values())
     cases: List[CaseSeriesEntry] = []
-    for idx, (reef_entry, zkvm_entry) in enumerate(zip(reef_records, zkvm_records), start=1):
-        case_id = idx
-        description = reef_entry.get("pattern") or reef_entry.get("pattern_original") or f"Case {case_id}"
-        if reef_entry.get("pattern") != zkvm_entry.get("pattern"):
+
+    for idx in range(total_cases):
+        pattern_candidates: List[str] = []
+        description = None
+
+        for records in framework_records.values():
+            if idx >= len(records):
+                continue
+            entry = records[idx]
+            pattern = entry.get("pattern")
+            if pattern:
+                pattern_candidates.append(pattern)
+                if description is None:
+                    description = pattern
+            elif description is None:
+                alt_pattern = entry.get("pattern_original")
+                if alt_pattern:
+                    description = alt_pattern
+
+        if description is None:
+            description = f"Case {idx + 1}"
+
+        unique_patterns = {pat for pat in pattern_candidates if pat}
+        if len(unique_patterns) > 1:
             description = f"{description} (pattern mismatch)"
+
+        proof_times: Dict[str, Optional[float]] = {}
+        verify_times: Dict[str, Optional[float]] = {}
+        for label, records in framework_records.items():
+            if idx >= len(records):
+                proof_times[label] = None
+                verify_times[label] = None
+                continue
+            entry = records[idx]
+            proof_times[label] = entry.get("proof_seconds") if not entry_has_error(entry) else None
+            verify_times[label] = entry.get("verify_seconds") if not entry_has_error(entry) else None
+
         cases.append(
             CaseSeriesEntry(
-                case_id=case_id,
+                case_id=idx + 1,
                 description=description,
-                reef_proof=reef_entry.get("proof_seconds") if not entry_has_error(reef_entry) else None,
-                reef_verify=reef_entry.get("verify_seconds") if not entry_has_error(reef_entry) else None,
-                zkvm_proof=zkvm_entry.get("proof_seconds") if not entry_has_error(zkvm_entry) else None,
-                zkvm_verify=zkvm_entry.get("verify_seconds") if not entry_has_error(zkvm_entry) else None,
+                proof_seconds=proof_times,
+                verify_seconds=verify_times,
             )
         )
+
     return cases
 
 
 def render_bar_chart(
     output_path: Path,
-    groups: Sequence[Tuple[str, Optional[float], Optional[float]]],
+    groups: Sequence[Tuple[str, Dict[str, Optional[float]]]],
     title: str,
     y_label: str,
 ) -> None:
@@ -244,8 +333,8 @@ def render_bar_chart(
 
     valid_values = [
         value
-        for _, reef_val, zkvm_val in groups
-        for value in (reef_val, zkvm_val)
+        for _, framework_values in groups
+        for value in framework_values.values()
         if value is not None and not math.isnan(value)
     ]
     max_value = max(valid_values) if valid_values else 1.0
@@ -258,9 +347,11 @@ def render_bar_chart(
         return
 
     group_spacing = chart_width / group_count
-    bar_group_width = group_spacing * 0.5
-    bar_gap = bar_group_width * 0.12
-    single_bar_width = (bar_group_width - bar_gap) / 2
+    bar_group_width = group_spacing * 0.6
+    inner_gap = bar_group_width * 0.12
+    usable_width = max(bar_group_width - inner_gap, 1)
+    framework_count = len(FRAMEWORK_LABELS)
+    single_bar_width = usable_width / framework_count
 
     def value_to_y(val: float) -> float:
         return height - margin_bottom - (val / max_value) * chart_height
@@ -277,14 +368,12 @@ def render_bar_chart(
         draw.line([(margin_left, y), (width - margin_right, y)], fill="#e0e0e0", width=1)
         draw_text_right(draw, margin_left - 12, y, f"{val:.2f}", FONT_SMALL, "#444444")
 
-    for idx, (label, reef_val, zkvm_val) in enumerate(groups):
+    for idx, (label, framework_values) in enumerate(groups):
         group_center = margin_left + group_spacing * (idx + 0.5)
-        x_reef = group_center - (bar_gap / 2 + single_bar_width)
-        x_zkvm = group_center + bar_gap / 2
-        for framework_label, x_pos, val in (
-            (FRAMEWORK_LABELS[0], x_reef, reef_val),
-            (FRAMEWORK_LABELS[1], x_zkvm, zkvm_val),
-        ):
+        start_x = group_center - usable_width / 2
+        for framework_index, framework_label in enumerate(FRAMEWORK_LABELS):
+            x_pos = start_x + framework_index * single_bar_width
+            val = framework_values.get(framework_label)
             color = FRAMEWORK_COLORS[framework_label]
             if val is None or math.isnan(val):
                 draw.rectangle(
@@ -474,31 +563,32 @@ def print_dataset_report(dataset_summary: DatasetSummary) -> None:
     for label in FRAMEWORK_LABELS:
         summary = dataset_summary.summaries[label]
         err_pct = summary.error_rate * 100 if not math.isnan(summary.error_rate) else float("nan")
-        proof = "N/A" if summary.proof_avg is None else f"{summary.proof_avg:.3f}s"
-        proof_std = "N/A" if summary.proof_std is None else f"{summary.proof_std:.3f}s"
-        verify = "N/A" if summary.verify_avg is None else f"{summary.verify_avg:.3f}s"
-        verify_std = "N/A" if summary.verify_std is None else f"{summary.verify_std:.3f}s"
         print(
             f"  {summary.name}: {summary.error_cases}/{summary.total_cases} errors "
-            f"({err_pct:.2f}%), avg proof {proof} (std {proof_std}), avg verify {verify} (std {verify_std})"
+            f"({err_pct:.2f}%), proof {describe_metric(summary.proof_avg, summary.proof_std, summary.proof_min, summary.proof_max)}, "
+            f"verify {describe_metric(summary.verify_avg, summary.verify_std, summary.verify_min, summary.verify_max)}"
         )
     print()
 
 
 def build_groups(
     dataset_details: Sequence[DatasetDetail], metric: str, combined_summary: Dict[str, FrameworkSummary]
-) -> List[Tuple[str, Optional[float], Optional[float]]]:
-    groups: List[Tuple[str, Optional[float], Optional[float]]] = []
+) -> List[Tuple[str, Dict[str, Optional[float]]]]:
+    groups: List[Tuple[str, Dict[str, Optional[float]]]] = []
     for detail in dataset_details:
         label = detail.summary.dataset.upper()
-        reef_val = getattr(detail.summary.summaries[FRAMEWORK_LABELS[0]], metric)
-        zkvm_val = getattr(detail.summary.summaries[FRAMEWORK_LABELS[1]], metric)
-        groups.append((label, reef_val, zkvm_val))
+        framework_values = {
+            framework_label: getattr(detail.summary.summaries[framework_label], metric)
+            for framework_label in FRAMEWORK_LABELS
+        }
+        groups.append((label, framework_values))
     groups.append(
         (
             "Combined",
-            getattr(combined_summary[FRAMEWORK_LABELS[0]], metric),
-            getattr(combined_summary[FRAMEWORK_LABELS[1]], metric),
+            {
+                framework_label: getattr(combined_summary[framework_label], metric)
+                for framework_label in FRAMEWORK_LABELS
+            },
         )
     )
     return groups
@@ -516,17 +606,18 @@ def main() -> None:
         framework: summarize_records(framework, combined_records[framework])
         for framework in FRAMEWORK_LABELS
     }
+    for framework_label, records in combined_records.items():
+        cfg = FRAMEWORK_CONFIG_MAP[framework_label]
+        for metric_key, suffix in METRIC_EXPORTS.items():
+            export_metric_series(records, metric_key, args.output_dir / f"{cfg.file_prefix}_{suffix}.txt")
     print("Combined view")
     for framework in FRAMEWORK_LABELS:
         summary = combined_summary[framework]
         err_pct = summary.error_rate * 100 if not math.isnan(summary.error_rate) else float("nan")
-        proof = "N/A" if summary.proof_avg is None else f"{summary.proof_avg:.3f}s"
-        proof_std = "N/A" if summary.proof_std is None else f"{summary.proof_std:.3f}s"
-        verify = "N/A" if summary.verify_avg is None else f"{summary.verify_avg:.3f}s"
-        verify_std = "N/A" if summary.verify_std is None else f"{summary.verify_std:.3f}s"
         print(
             f"  {summary.name}: {summary.error_cases}/{summary.total_cases} errors "
-            f"({err_pct:.2f}%), avg proof {proof} (std {proof_std}), avg verify {verify} (std {verify_std})"
+            f"({err_pct:.2f}%), proof {describe_metric(summary.proof_avg, summary.proof_std, summary.proof_min, summary.proof_max)}, "
+            f"verify {describe_metric(summary.verify_avg, summary.verify_std, summary.verify_min, summary.verify_max)}"
         )
     print()
 
@@ -552,12 +643,12 @@ def main() -> None:
     for detail in dataset_details:
         dataset = detail.summary.dataset
         accessor_proof = {
-            FRAMEWORK_LABELS[0]: lambda case, attr="reef_proof": getattr(case, attr),
-            FRAMEWORK_LABELS[1]: lambda case, attr="zkvm_proof": getattr(case, attr),
+            label: (lambda case, lbl=label: case.proof_seconds.get(lbl))
+            for label in FRAMEWORK_LABELS
         }
         accessor_verify = {
-            FRAMEWORK_LABELS[0]: lambda case, attr="reef_verify": getattr(case, attr),
-            FRAMEWORK_LABELS[1]: lambda case, attr="zkvm_verify": getattr(case, attr),
+            label: (lambda case, lbl=label: case.verify_seconds.get(lbl))
+            for label in FRAMEWORK_LABELS
         }
         proof_line_path = args.output_dir / f"{dataset}_proof_time_line.png"
         verify_line_path = args.output_dir / f"{dataset}_verify_time_line.png"
