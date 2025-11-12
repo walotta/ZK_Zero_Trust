@@ -154,20 +154,6 @@ fn main() {
         }
     };
 
-    let mut jwtparts = jwtfield.jwt.split('.');
-    let _header = jwtparts.next().ok_or("missing header in jwt");
-    let payload_str = String::from_utf8(
-        general_purpose::URL_SAFE_NO_PAD
-            .decode(jwtparts.next().ok_or("missing body in jwt").unwrap())
-            .unwrap(),
-    )
-    .unwrap();
-    let mut positions = Vec::new();
-    for key in &jwtfield.jwt_fields {
-        let key_pos = find_key_value_quotes(&payload_str, key).unwrap();
-        positions.extend_from_slice(&[key_pos.0, key_pos.1, key_pos.2, key_pos.3]);
-    }
-
     let responses_content = match fs::read_to_string(responses_file) {
         Ok(content) => content,
         Err(e) => {
@@ -195,6 +181,19 @@ fn main() {
 
     let mut permit: String = "Deny".to_string();
     if init_inp.is_some() {
+        let mut jwtparts = jwtfield.jwt.split('.');
+        let _header = jwtparts.next().ok_or("missing header in jwt");
+        let payload_str = String::from_utf8(
+            general_purpose::URL_SAFE_NO_PAD
+                .decode(jwtparts.next().ok_or("missing body in jwt").unwrap())
+                .unwrap(),
+        )
+        .unwrap();
+        let mut positions = Vec::new();
+        for key in &jwtfield.jwt_fields {
+            let key_pos = find_key_value_quotes(&payload_str, key).unwrap();
+            positions.extend_from_slice(&[key_pos.0, key_pos.1, key_pos.2, key_pos.3]);
+        }
         println!("Parsed inputs: {:?}", init_inp);
         permit = policy_verify(init_inp.unwrap(), &jwtfield.jwt, &positions);
     }
@@ -235,7 +234,7 @@ fn policy_verify(inp: Inputs, jwt: &String,jwt_positions: &Vec<usize>) -> String
     println!("User cycles: {}", prove_info.stats.user_cycles);
     println!(
         "Proof size: {} bytes",
-        prove_info.receipt.inner.composite().unwrap().seal_size()
+        prove_info.receipt.inner.seal_size()
     );
     println!(
         "Gen time elapsed: {:?}",

@@ -25,7 +25,7 @@ os.makedirs(os.path.dirname(TARGET_LIB),  exist_ok=True)
 os.makedirs(os.path.dirname(TARGET_MAIN), exist_ok=True)
 
 # Prepare log file with timestamp
-timestamp = datetime.now().strftime("logs/debug_batch_%m_%d_%H_%M.log")
+timestamp = datetime.now().strftime("logs/no_rsa_batch_%m_%d_%H_%M.log")
 log_path = os.path.join(POLICY_PROJECT, timestamp)
 print(f"All cargo output will be redirected to {log_path}")
 
@@ -33,8 +33,10 @@ os.system(f"cp {os.path.join(SOURCE_BASE, POLICY_CODE_DIR)}/*.bin {GUEST_DIR}/."
 
 testcases_names = ['_'.join(f.split('.')[0].split('_')[1:]) for f in os.listdir(POLICY_CODE_DIR) if f.endswith(".rs")]
 testcases_names.sort()
-testcases_names = ["IIC057"]
+# testcases_names = ["IIC140"]
+testcases_names = ['IIC057']
 testcases = dict()
+skip_cases = list()
 
 for tc in testcases_names:
     testcases[tc] = {
@@ -46,8 +48,10 @@ for tc in testcases_names:
     }
     for key, value in testcases[tc].items():
         if not os.path.exists(value):
-            raise FileNotFoundError(f"Missing {key.replace('_', ' ')} for testcase {tc}: {value}")
-print(f"Get {len(testcases)} testcases ready for execution.")
+            skip_cases.append(tc)
+            break
+            # raise FileNotFoundError(f"Missing {key.replace('_', ' ')} for testcase {tc}: {value}")
+print(f"Get {len(testcases)-len(skip_cases)} testcases ready for execution.")
 
 # Open log file once for all runs
 with open(log_path, 'w') as log_file:
@@ -58,6 +62,11 @@ with open(log_path, 'w') as log_file:
         print(f'Processing policy: {key}')
         log_file.write(f"\n# ---------- {key} ----------\n")
         log_file.flush()
+
+        if key in skip_cases:
+            log_file.write("Missing files, skip")    
+            fail_cnt += 1
+            continue
 
         # Copy input definition to core/src/lib.rs
         os.system(f"cp {value['input_definition']} {TARGET_LIB}")
