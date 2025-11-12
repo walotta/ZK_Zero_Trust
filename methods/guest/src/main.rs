@@ -1,13 +1,16 @@
-use policy_core::Inputs;
-use regex_automata::dfa::{dense::DFA, Automaton};
-use regex_automata::Input;
-use risc0_zkvm::guest::env;
 use base64::engine::general_purpose::URL_SAFE_NO_PAD;
 use base64::Engine;
-use rsa::{pkcs1v15::{Signature, VerifyingKey}, BigUint, RsaPublicKey};
+use policy_core::Inputs;
+use risc0_zkvm::guest::env;
+use rsa::{
+    pkcs1v15::{Signature, VerifyingKey},
+    BigUint, RsaPublicKey,
+};
 use sha2::Sha256;
 use signature::Verifier;
-use regex::Regex;
+
+use regex_automata::dfa::{dense::DFA, Automaton};
+use regex_automata::Input;
 
 fn eval_regex(regex_input: &str, regex_exp: &[u8]) -> bool {
     match DFA::from_bytes(regex_exp) {
@@ -22,13 +25,30 @@ fn eval_regex(regex_input: &str, regex_exp: &[u8]) -> bool {
     }
 }
 
-// const MODULUS_B64: &str = "6scD7VyKosMBqvDwZZDIGmjGAzn6nUK83PsaVwtOBqrJBDqOGcqqFpiKdqV9N_SjZVEslzo8_0gq5MYqNp3fzkHBIUr_7oTgVlfpXGJOspV4abPTeoXQYYVSJT_RyPQLTPZ17O_D-cvGEC0bjFN--Aa8iPnz4lU8sD-oeCqEuZDHTHQgmZhM-_kVIiysfDz968R5rXUi_G44arVbXIwRZUC0SCZq96syQIxedGUkWRvQyehHnxuBS69xCSDBqxK66c3DXy0aWpVvW1Q0oaMcnzUPFl-g-LqULt5L1BFfDYVcICXms12HQFola2rho-I67-UnFecVsWTTQ8LgBQV0GQ";
-// const EXPONENT_B64: &str = "AQAB";
+static RE_E8667202B740D84E03552D30B7B93A62: &[u8] =
+    include_bytes!("RE_E8667202B740D84E03552D30B7B93A62.bin");
+
+static RE_9BAAFAEEB1212012972ABC54D5797FBD: &[u8] =
+    include_bytes!("RE_9BAAFAEEB1212012972ABC54D5797FBD.bin");
+
+fn jwt_field_check(inp: &Inputs, extracted_values: &[String]) -> bool {
+    for (i, field) in JWT_FIELD.iter().enumerate() {
+        match *field {
+            "sub" => {
+                if extracted_values[i] != inp.access_subject_subject_id {
+                    return false;
+                }
+            }
+            _ => unreachable!("Unknown field — should be impossible due to codegen"),
+        }
+    }
+    true
+}
 static MODULUS: &[u8] = include_bytes!("modulus.bin");
 static EXPONENT: &[u8] = include_bytes!("exponent.bin");
-const JWT_FIELD: &[&str] = &["subject_id"];
+const JWT_FIELD: &[&str] = &["sub"];
 
-fn extract_jwt(token: &str, positions: &Vec<usize>) -> Vec<String> {
+fn extract_jwt(token: &str, positions: &Vec<usize>, inp: &Inputs) -> bool {
     let mut parts = token.split('.');
     let header_b64 = parts.next().expect("jwt header");
     let payload_b64 = parts.next().expect("jwt payload");
@@ -107,70 +127,6 @@ fn extract_jwt(token: &str, positions: &Vec<usize>) -> Vec<String> {
     // return jwt_field_check(&inp, &extracted_values);
 }
 
-
-// static PUBLIC_KEY: &str = r#" { "alg": "RS256", "e": "AQAB", "key_ops": ["verify"], "kty": "RSA", "n": "6scD7VyKosMBqvDwZZDIGmjGAzn6nUK83PsaVwtOBqrJBDqOGcqqFpiKdqV9N_SjZVEslzo8_0gq5MYqNp3fzkHBIUr_7oTgVlfpXGJOspV4abPTeoXQYYVSJT_RyPQLTPZ17O_D-cvGEC0bjFN--Aa8iPnz4lU8sD-oeCqEuZDHTHQgmZhM-_kVIiysfDz968R5rXUi_G44arVbXIwRZUC0SCZq96syQIxedGUkWRvQyehHnxuBS69xCSDBqxK66c3DXy0aWpVvW1Q0oaMcnzUPFl-g-LqULt5L1BFfDYVcICXms12HQFola2rho-I67-UnFecVsWTTQ8LgBQV0GQ", "use": "sig", "kid": "0c194722699344da9b7a0474a52eb342" } "#;
-
-// fn load_jwt(token: &str) -> Vec<String> {
-//     // let jwk: serde_json::Value = serde_json::from_str(PUBLIC_KEY).expect("invalid JWK JSON");
-//     // let n_b64 = jwk.get("n").and_then(|x| x.as_str()).expect("missing n");
-//     // let e_b64 = jwk.get("e").and_then(|x| x.as_str()).expect("missing e");
-//     // let n = rsa::BigUint::from_bytes_be(
-//     //     &base64::engine::general_purpose::URL_SAFE_NO_PAD
-//     //         .decode(n_b64.as_bytes())
-//     //         .expect("invalid n base64url"),
-//     // );
-//     // let e = rsa::BigUint::from_bytes_be(
-//     //     &base64::engine::general_purpose::URL_SAFE_NO_PAD
-//     //         .decode(e_b64.as_bytes())
-//     //         .expect("invalid e base64url"),
-//     // );
-//     // let pubkey = rsa::RsaPublicKey::new(n, e).expect("invalid RSA public key");
-//     let n = BigUint::from_bytes_be(MODULUS);
-//     let e = BigUint::from_bytes_be(EXPONENT);
-//     let pubkey = RsaPublicKey::new(n, e).expect("valid RSA public key");
-//
-//
-//     let parts: Vec<&str> = token.split('.').collect();
-//     assert!(parts.len() == 3, "invalid JWT format");
-//     let header_b64 = parts[0];
-//     let payload_b64 = parts[1];
-//     let sig_b64 = parts[2];
-//
-//     let signing_input = [header_b64, payload_b64].join(".");
-//     let sig_bytes = base64::engine::general_purpose::URL_SAFE_NO_PAD
-//         .decode(sig_b64.as_bytes())
-//         .expect("signature base64url decode failed");
-//     let sig = rsa::pkcs1v15::Signature::try_from(sig_bytes.as_slice()).expect("invalid signature");
-//     let vk = rsa::pkcs1v15::VerifyingKey::<Sha256>::new(pubkey);
-//     signature::Verifier::verify(&vk, signing_input.as_bytes(), &sig).expect("signature verify failed");
-//
-//     let payload_bytes = base64::engine::general_purpose::URL_SAFE_NO_PAD
-//         .decode(payload_b64.as_bytes())
-//         .expect("payload base64url decode failed");
-//     let payload: serde_json::Value =
-//         serde_json::from_slice(&payload_bytes).expect("invalid payload JSON");
-//     let obj = payload.as_object().expect("payload must be a flat JSON object");
-//
-//     let mut out = Vec::with_capacity(JWT_FIELD.len());
-//     for &key in JWT_FIELD {
-//         let s = match obj.get(key) {
-//             Some(serde_json::Value::String(v)) => v.clone(),
-//             Some(other) => other.to_string(),
-//             None => String::new(),
-//         };
-//         out.push(s);
-//     }
-//     out
-// }
-
-// static RE_2648DA3939BEBE6640528CB1A7924ED9: &[u8] =
-//     include_bytes!("RE_2648DA3939BEBE6640528CB1A7924ED9.bin");
-
-// static RE_ADEA8ABAFA89413F0FAB690611A89A56: &[u8] =
-//     include_bytes!("RE_ADEA8ABAFA89413F0FAB690611A89A56.bin");
-static RE_ADEA8ABAFA89413F0FAB690611A89A56: &[u8] =
-    include_bytes!("test.bin");
-
 #[derive(Debug, PartialEq)]
 enum Result {
     Permit,
@@ -178,25 +134,34 @@ enum Result {
     NotApplicable,
 }
 
-fn evaluate_cond_policy_rule(inp: &Inputs, jwt_dict: &Vec<String>) -> bool {
-    return eval_regex(
-        &jwt_dict[0],
-        &RE_ADEA8ABAFA89413F0FAB690611A89A56);
-    // return Regex::new(r"B.* O.* Simpson")
-    //     .unwrap()
-    //     .is_match(&jwt_dict[0]);
+fn evaluate_cond_policy_rule(inp: &Inputs) -> bool {
+    (eval_regex(
+        &inp.access_subject_subject_id,
+        &RE_E8667202B740D84E03552D30B7B93A62,
+    )) || (eval_regex(
+        &inp.access_subject_subject_id,
+        &RE_9BAAFAEEB1212012972ABC54D5797FBD,
+    ))
 }
 
-fn evaluate_rule_policy_rule(inp: &Inputs, jwt_dict: &Vec<String>) -> Result {
-    if evaluate_cond_policy_rule(inp, jwt_dict) {
+fn evaluate_rule_policy_rule(inp: &Inputs) -> Result {
+    if evaluate_cond_policy_rule(inp) {
         return Result::Permit;
     } else {
         return Result::NotApplicable;
     }
 }
 
-fn evaluate_policy_policy(inp: &Inputs, jwt_dict: &Vec<String>) -> Result {
-    let results = vec![evaluate_rule_policy_rule(inp, jwt_dict)];
+fn evaluate_target_policy(inp: &Inputs) -> bool {
+    true
+}
+
+fn evaluate_policy_policy(inp: &Inputs) -> Result {
+    if !evaluate_target_policy(inp) {
+        return Result::NotApplicable;
+    }
+
+    let results = vec![evaluate_rule_policy_rule(inp)];
 
     //deny-overrides
     let mut atleast_one_permit = false;
@@ -215,9 +180,6 @@ fn evaluate_policy_policy(inp: &Inputs, jwt_dict: &Vec<String>) -> Result {
 
 fn main() {
     let inp: Inputs = env::read();
-    let jwt_positions: Vec<usize> = env::read();
-    let jwt_dict: Vec<String> = extract_jwt(&inp.jwt, &jwt_positions);  // if no jwt field used, put this None
-    // let jwt_dict: Vec<String> = load_jwt(&inp.jwt);
 
     // let mut decision = match evaluate_policy_policy(&inp) {
     //     Result::Permit => true,
@@ -226,5 +188,13 @@ fn main() {
     let mut decision = false;
     // evaluate_cond_policy_rule(&inp);
 
+    let jwt: String = env::read();
+    let jwt_positions: Vec<usize> = env::read();
+    if !extract_jwt(&jwt, &jwt_positions, &inp) {
+        decision = false;
+    }
+
     env::commit(&decision);
+    env::commit(&inp);
 }
+
