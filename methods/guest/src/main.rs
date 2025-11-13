@@ -9,44 +9,9 @@ use rsa::{
 use sha2::Sha256;
 use signature::Verifier;
 
-use regex_automata::dfa::{dense::DFA, Automaton};
-use regex_automata::Input;
-
-fn eval_regex(regex_input: &str, regex_exp: &[u8]) -> bool {
-    match DFA::from_bytes(regex_exp) {
-        Ok((dfa, _)) => {
-            let input = Input::new(regex_input);
-            match dfa.try_search_fwd(&input) {
-                Ok(result) => result.is_some(),
-                Err(_) => false,
-            }
-        }
-        Err(_) => false,
-    }
-}
-
-static RE_E8667202B740D84E03552D30B7B93A62: &[u8] =
-    include_bytes!("RE_E8667202B740D84E03552D30B7B93A62.bin");
-
-static RE_9BAAFAEEB1212012972ABC54D5797FBD: &[u8] =
-    include_bytes!("RE_9BAAFAEEB1212012972ABC54D5797FBD.bin");
-
-fn jwt_field_check(inp: &Inputs, extracted_values: &[String]) -> bool {
-    for (i, field) in JWT_FIELD.iter().enumerate() {
-        match *field {
-            "sub" => {
-                if extracted_values[i] != inp.access_subject_subject_id {
-                    return false;
-                }
-            }
-            _ => unreachable!("Unknown field — should be impossible due to codegen"),
-        }
-    }
-    true
-}
 static MODULUS: &[u8] = include_bytes!("modulus.bin");
 static EXPONENT: &[u8] = include_bytes!("exponent.bin");
-const JWT_FIELD: &[&str] = &["sub"];
+const JWT_FIELD: &[&str] = &[];
 
 fn extract_jwt(token: &str, positions: &Vec<usize>, inp: &Inputs) -> bool {
     let mut parts = token.split('.');
@@ -64,65 +29,21 @@ fn extract_jwt(token: &str, positions: &Vec<usize>, inp: &Inputs) -> bool {
     // let e_bytes = engine.decode(EXPONENT_B64).expect("exponent base64");
     // let n = BigUint::from_bytes_be(&n_bytes);
     // let e = BigUint::from_bytes_be(&e_bytes);
-    let n = BigUint::from_bytes_be(MODULUS);
-    let e = BigUint::from_bytes_be(EXPONENT);
-    let public_key = RsaPublicKey::new(n, e).expect("valid RSA public key");
-    let verifying_key = VerifyingKey::<Sha256>::new(public_key);
-    let signature = Signature::try_from(signature_bytes.as_slice()).expect("signature format");
 
-    let signed_data = format!("{}.{}", header_b64, payload_b64);
-    verifying_key
-        .verify(signed_data.as_bytes(), &signature)
-        .expect("RSA signature check");
+    // let n = BigUint::from_bytes_be(MODULUS);
+    // let e = BigUint::from_bytes_be(EXPONENT);
+    // let public_key = RsaPublicKey::new(n, e).expect("valid RSA public key");
+    // let verifying_key = VerifyingKey::<Sha256>::new(public_key);
+    // let signature = Signature::try_from(signature_bytes.as_slice()).expect("signature format");
+
+    // let signed_data = format!("{}.{}", header_b64, payload_b64);
+    // verifying_key
+    //    .verify(signed_data.as_bytes(), &signature)
+    //    .expect("RSA signature check");
 
     let payload_str = String::from_utf8(payload).expect("payload utf8");
 
-    // Verify quote positions and extract values
-
-    // this is the case where a policy expects a subject, role, or age field, but the request was missing the required field
-    if positions.is_empty() {
-        return true;
-    }
-
-    let mut extracted_values = Vec::new();
-    for (i, key) in JWT_FIELD.iter().enumerate() {
-        let key_start = positions[i * 4];
-        let key_end = positions[i * 4 + 1];
-        let value_start = positions[i * 4 + 2];
-        let value_end = positions[i * 4 + 3];
-
-        // Verify the positions correspond to the expected key-value pair
-        let key_part = &payload_str[key_start..=key_end];
-        let expected_key = format!("\"{}\"", key);
-        assert_eq!(key_part, expected_key, "Key position verification failed");
-
-        // Verify the separator between key and value (should only contain spaces and colon)
-        let separator = &payload_str[key_end + 1..value_start];
-        assert!(
-            separator.chars().all(|c| c == ' ' || c == ':'),
-            "Separator should only contain spaces and colon"
-        );
-        let colon_count = separator.chars().filter(|&c| c == ':').count();
-        assert_eq!(colon_count, 1, "Separator must contain exactly one colon");
-
-        // Verify value quotes are correct
-        assert_eq!(
-            &payload_str[value_start..value_start + 1],
-            "\"",
-            "Value should start with quote"
-        );
-        assert_eq!(
-            &payload_str[value_end..value_end + 1],
-            "\"",
-            "Value should end with quote"
-        );
-
-        // Extract the value (without quotes)
-        let value = &payload_str[value_start + 1..value_end];
-        extracted_values.push(value.to_string());
-    }
-
-    return jwt_field_check(&inp, &extracted_values);
+    return true;
 }
 
 #[derive(Debug, PartialEq)]
@@ -132,22 +53,18 @@ enum Result {
     NotApplicable,
 }
 
-fn evaluate_cond_policy_rule(inp: &Inputs) -> bool {
-    (eval_regex(
-        &inp.access_subject_subject_id,
-        &RE_E8667202B740D84E03552D30B7B93A62,
-    )) || (eval_regex(
-        &inp.access_subject_subject_id,
-        &RE_9BAAFAEEB1212012972ABC54D5797FBD,
-    ))
+fn evaluate_target_policy_rule(inp: &Inputs) -> bool {
+    (("Physician" == inp.access_subject_bogus)
+        && ("http://medico.com/record/patient/BartSimpson" == inp.resource_resource_id)
+        && (("read" == inp.action_action_id) || ("write" == inp.action_action_id)))
 }
 
 fn evaluate_rule_policy_rule(inp: &Inputs) -> Result {
-    if evaluate_cond_policy_rule(inp) {
-        return Result::Permit;
-    } else {
+    if !evaluate_target_policy_rule(inp) {
         return Result::NotApplicable;
     }
+
+    return Result::Permit;
 }
 
 fn evaluate_target_policy(inp: &Inputs) -> bool {
