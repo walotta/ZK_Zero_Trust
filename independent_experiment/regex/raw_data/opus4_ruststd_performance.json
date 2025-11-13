@@ -1488,5 +1488,555 @@
     "user_cycles": null,
     "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 12.16s\n     Running `target/release/jwt-rsa-verify USA123456789`\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: rx len failed\n\nCaused by:\n    failed to fill whole buffer\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
     "python_match": true
+  },
+  {
+    "pattern": "^[a-f0-9]{32}:[a-f0-9]{32}$",
+    "str": "5d41402abc4b2a76b9719d911017c592:098f6bcd4621d373cade4e832627b4f6",
+    "proof_seconds": 125.880037686,
+    "verify_seconds": 0.017988678,
+    "total_cycles": 1048576,
+    "user_cycles": 500609,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$",
+    "str": "user.test-123@subdomain.example.org",
+    "proof_seconds": 126.037711226,
+    "verify_seconds": 0.018044792,
+    "total_cycles": 1048576,
+    "user_cycles": 834331,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\\.|$)){4}\\b$",
+    "str": "172.16.0.1",
+    "proof_seconds": 127.202939495,
+    "verify_seconds": 0.018241644,
+    "total_cycles": 1048576,
+    "user_cycles": 548955,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9_]{1,30}$",
+    "str": "username_test_2023",
+    "proof_seconds": 61.065420457,
+    "verify_seconds": 0.017068456000000003,
+    "total_cycles": 524288,
+    "user_cycles": 308784,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{14,}$",
+    "str": "SuperSecure@Pass2023!",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.72s\n     Running `target/release/jwt-rsa-verify 'SuperSecure@Pass2023'\\!''`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{14,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{14,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^[0-9a-fA-F]{1,8}$",
+    "str": "1A2B3C",
+    "proof_seconds": 127.123892584,
+    "verify_seconds": 0.01802718,
+    "total_cycles": 1048576,
+    "user_cycles": 466737,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9-_\\.]{2,20}$",
+    "str": "username.test-123",
+    "proof_seconds": 61.253160578,
+    "verify_seconds": 0.016901278999999998,
+    "total_cycles": 524288,
+    "user_cycles": 299173,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/=]{44}$",
+    "str": "dGhpcyBpcyBhIGJhc2U2NCBlbmNvZGVkIHN0cmluZw==",
+    "proof_seconds": 127.041295673,
+    "verify_seconds": 0.01813547,
+    "total_cycles": 1048576,
+    "user_cycles": 409473,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+    "str": "my-service-name-123",
+    "proof_seconds": 62.983264355,
+    "verify_seconds": 0.017018115,
+    "total_cycles": 524288,
+    "user_cycles": 336820,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{8,100}$",
+    "str": "ThisIsAVeryLongP@ssw0rdForTestingPurposes2023!",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.71s\n     Running `target/release/jwt-rsa-verify 'ThisIsAVeryLongP@ssw0rdForTestingPurposes2023'\\!''`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{8,100}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{8,100}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,62}$",
+    "str": "resource-name-123",
+    "proof_seconds": 126.810427315,
+    "verify_seconds": 0.01815987,
+    "total_cycles": 1048576,
+    "user_cycles": 427330,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\d{10,15}$",
+    "str": "12345678901234",
+    "proof_seconds": 539.327693627,
+    "verify_seconds": 0.08632237499999999,
+    "total_cycles": 4456448,
+    "user_cycles": 3380022,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}$",
+    "str": "ABCDE-12345-FGHIJ",
+    "proof_seconds": 125.984332726,
+    "verify_seconds": 0.018041869,
+    "total_cycles": 1048576,
+    "user_cycles": 668149,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-z0-9]+\\.[a-z0-9]+@[a-z0-9]+\\.[a-z]{2,}$",
+    "str": "first.last@example.com",
+    "proof_seconds": 125.615675108,
+    "verify_seconds": 0.018181209,
+    "total_cycles": 1048576,
+    "user_cycles": 528225,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&amp;*(),.?\":{}|&lt;&gt;])[A-Za-z\\d!@#$%^&amp;*(),.?\":{}|&lt;&gt;]{8,}$",
+    "str": "Complex@Pass123&lt;&gt;",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.72s\n     Running `target/release/jwt-rsa-verify 'Complex@Pass123&lt;&gt;'`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&amp;*(),.?\":{}|&lt;&gt;])[A-Za-z\\d!@#$%^&amp;*(),.?\":{}|&lt;&gt;]{8,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&amp;*(),.?\":{}|&lt;&gt;])[A-Za-z\\d!@#$%^&amp;*(),.?\":{}|&lt;&gt;]{8,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^[0-9a-f]{8}[0-9a-f]{4}[0-9a-f]{4}[0-9a-f]{4}[0-9a-f]{12}$",
+    "str": "550e8400e29b41d4a716446655440000",
+    "proof_seconds": 125.346510183,
+    "verify_seconds": 0.018092957,
+    "total_cycles": 1048576,
+    "user_cycles": 363012,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Za-z0-9_-]+$",
+    "str": "User_Name-123",
+    "proof_seconds": 61.519853609,
+    "verify_seconds": 0.017027509,
+    "total_cycles": 524288,
+    "user_cycles": 306319,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}$",
+    "str": "email@sub-domain.example.org",
+    "proof_seconds": 127.393399231,
+    "verify_seconds": 0.018071501,
+    "total_cycles": 1048576,
+    "user_cycles": 667951,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\\.(?!$)|$)){4}$",
+    "str": "203.0.113.0",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.72s\n     Running `target/release/jwt-rsa-verify 203.0.113.0`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\\.(?!$)|$)){4}$\n                                              ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\\.(?!$)|$)){4}$\n                                              ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{4,20}$",
+    "str": "User1234",
+    "proof_seconds": 61.470507473,
+    "verify_seconds": 0.016943470000000002,
+    "total_cycles": 524288,
+    "user_cycles": 226305,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{16,}$",
+    "str": "ExtraSecureP@ssw0rd2023!",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.73s\n     Running `target/release/jwt-rsa-verify 'ExtraSecureP@ssw0rd2023'\\!''`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{16,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{16,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Z0-9]{8}$",
+    "str": "ABCD1234",
+    "proof_seconds": 126.322817675,
+    "verify_seconds": 0.018188547,
+    "total_cycles": 1048576,
+    "user_cycles": 368310,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[0-9]{4}:[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{2}$",
+    "str": "2023:12:15:14:30:45",
+    "proof_seconds": 126.397076217,
+    "verify_seconds": 0.018096918,
+    "total_cycles": 1048576,
+    "user_cycles": 576539,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$",
+    "str": "kubernetes.pod.name-123",
+    "proof_seconds": 128.334408141,
+    "verify_seconds": 0.0182857,
+    "total_cycles": 1048576,
+    "user_cycles": 521960,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]+:[a-zA-Z0-9]+$",
+    "str": "username:password123",
+    "proof_seconds": 62.130064858,
+    "verify_seconds": 0.016898240999999998,
+    "total_cycles": 524288,
+    "user_cycles": 343125,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{6,32}$",
+    "str": "Pass@1",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.76s\n     Running `target/release/jwt-rsa-verify 'Pass@1'`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{6,32}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{6,32}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-fA-F0-9]{24}$",
+    "str": "507f1f77bcf86cd799439011",
+    "proof_seconds": 127.408623242,
+    "verify_seconds": 0.017981012,
+    "total_cycles": 1048576,
+    "user_cycles": 816245,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,10}$",
+    "str": "long.email@subdomain.example.technology",
+    "proof_seconds": 190.99154222,
+    "verify_seconds": 0.034524535999999995,
+    "total_cycles": 1572864,
+    "user_cycles": 1162633,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$",
+    "str": "192.168.10.25",
+    "proof_seconds": 127.150300868,
+    "verify_seconds": 0.018059411999999997,
+    "total_cycles": 1048576,
+    "user_cycles": 518037,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9_]{3,50}$",
+    "str": "very_long_username_for_testing_123",
+    "proof_seconds": 128.108908212,
+    "verify_seconds": 0.018032759,
+    "total_cycles": 1048576,
+    "user_cycles": 440006,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Z]{1}[a-z]+[0-9]{2,4}$",
+    "str": "Username2023",
+    "proof_seconds": 125.554510304,
+    "verify_seconds": 0.018153628999999998,
+    "total_cycles": 1048576,
+    "user_cycles": 393945,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[0-9a-fA-F]{4}:[0-9a-fA-F]{4}:[0-9a-fA-F]{4}:[0-9a-fA-F]{4}$",
+    "str": "2001:0db8:85a3:0000",
+    "proof_seconds": 128.100487548,
+    "verify_seconds": 0.018131168,
+    "total_cycles": 1048576,
+    "user_cycles": 806774,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;_-])[A-Za-z\\d@$!%*?&amp;_-]{8,}$",
+    "str": "Secure-Pass_2023@",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.71s\n     Running `target/release/jwt-rsa-verify 'Secure-Pass_2023@'`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;_-])[A-Za-z\\d@$!%*?&amp;_-]{8,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;_-])[A-Za-z\\d@$!%*?&amp;_-]{8,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]+$",
+    "str": "AlphaNumeric123",
+    "proof_seconds": 61.991762443,
+    "verify_seconds": 0.016913336,
+    "total_cycles": 524288,
+    "user_cycles": 258352,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$",
+    "str": "abcdef12-3456-7890-abcd-ef1234567890",
+    "proof_seconds": 127.087073182,
+    "verify_seconds": 0.018247893999999997,
+    "total_cycles": 1048576,
+    "user_cycles": 385577,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+    "str": "user@multi.level.subdomain.example.com",
+    "proof_seconds": 125.411134738,
+    "verify_seconds": 0.018059560000000002,
+    "total_cycles": 1048576,
+    "user_cycles": 693411,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\+?\\d{1,4}?[-.\\s]?$?\\d{1,3}?$?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}$",
+    "str": "+1-555-123-4567",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "python re failed: nothing to repeat at position 20",
+    "python_match": null
+  },
+  {
+    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,31}$",
+    "str": "github-username-2023",
+    "proof_seconds": 61.57005945,
+    "verify_seconds": 0.016945332,
+    "total_cycles": 524288,
+    "user_cycles": 344948,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&amp;*()_+=-]).{8,128}$",
+    "str": "MyComplexP@ssw0rd!2023",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.72s\n     Running `target/release/jwt-rsa-verify 'MyComplexP@ssw0rd'\\!'2023'`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&amp;*()_+=-]).{8,128}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&amp;*()_+=-]).{8,128}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^[0-9a-f]{40}$",
+    "str": "356a192b7913b04c54574d18c28d46e6395428ab",
+    "proof_seconds": 61.194889169,
+    "verify_seconds": 0.017085131,
+    "total_cycles": 524288,
+    "user_cycles": 341812,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Za-z0-9]{16}$",
+    "str": "AbCdEfGh12345678",
+    "proof_seconds": 126.499230527,
+    "verify_seconds": 0.018058947,
+    "total_cycles": 1048576,
+    "user_cycles": 630929,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9.!#$%&amp;'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
+    "str": "very.complex+email@subdomain.example-domain.co.uk",
+    "proof_seconds": 154.373712574,
+    "verify_seconds": 0.033465717,
+    "total_cycles": 1310720,
+    "user_cycles": 875634,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:(?:https?:\\/\\/)?(?:www\\.)?)?[a-z0-9]+(?:[\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\\/.*)?$",
+    "str": "https://www.secure-auth.example.com:443/api/v2/login",
+    "proof_seconds": 126.744748745,
+    "verify_seconds": 0.018030968,
+    "total_cycles": 1048576,
+    "user_cycles": 651876,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9_\\-\\.]+@[a-zA-Z0-9_\\-\\.]+\\.[a-zA-Z]{2,5}$",
+    "str": "user_name.test-123@company.example.org",
+    "proof_seconds": 128.947488718,
+    "verify_seconds": 0.018158178,
+    "total_cycles": 1048576,
+    "user_cycles": 728470,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Za-z0-9]{20}$",
+    "str": "ABCDEFGHIJklmnopqrst",
+    "proof_seconds": 125.398645187,
+    "verify_seconds": 0.018125585,
+    "total_cycles": 1048576,
+    "user_cycles": 722909,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{15,}$",
+    "str": "UltraSecureP@ssw0rd2023!",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.73s\n     Running `target/release/jwt-rsa-verify 'UltraSecureP@ssw0rd2023'\\!''`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{15,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{15,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^[0-9]{1,3}(\\.[0-9]{1,3}){3}$",
+    "str": "10.0.0.255",
+    "proof_seconds": 62.435064332,
+    "verify_seconds": 0.016913791,
+    "total_cycles": 524288,
+    "user_cycles": 242050,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+    "str": "VariableName123",
+    "proof_seconds": 62.885489042,
+    "verify_seconds": 0.016908669,
+    "total_cycles": 524288,
+    "user_cycles": 313402,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-F0-9]{32}$",
+    "str": "0123456789ABCDEF0123456789ABCDEF",
+    "proof_seconds": 60.999637117,
+    "verify_seconds": 0.01699633,
+    "total_cycles": 524288,
+    "user_cycles": 309030,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-z0-9]+@[a-z0-9]+\\.[a-z0-9]+$",
+    "str": "simple@email.com",
+    "proof_seconds": 126.688594025,
+    "verify_seconds": 0.018114325,
+    "total_cycles": 1048576,
+    "user_cycles": 431794,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{18,}$",
+    "str": "MegaUltraSecureP@ssw0rd2023!",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.70s\n     Running `target/release/jwt-rsa-verify 'MegaUltraSecureP@ssw0rd2023'\\!''`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{18,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{18,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{1,256}$",
+    "str": "VeryLongUsernameForTestingPurposesWithManyCharacters123456789",
+    "proof_seconds": 185.753633989,
+    "verify_seconds": 0.034457957,
+    "total_cycles": 1572864,
+    "user_cycles": 1151305,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[0-9a-fA-F]{12}$",
+    "str": "1A2B3C4D5E6F",
+    "proof_seconds": 128.302388844,
+    "verify_seconds": 0.018162935999999998,
+    "total_cycles": 1048576,
+    "user_cycles": 536817,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+    "str": "service-name-123",
+    "proof_seconds": 61.317328884,
+    "verify_seconds": 0.016947979,
+    "total_cycles": 524288,
+    "user_cycles": 303779,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Za-z0-9]{64}$",
+    "str": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789AB",
+    "proof_seconds": 127.590130867,
+    "verify_seconds": 0.018067418,
+    "total_cycles": 1048576,
+    "user_cycles": 502021,
+    "error": null,
+    "python_match": true
   }
 ]
