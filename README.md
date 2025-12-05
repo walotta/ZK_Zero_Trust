@@ -20,3 +20,12 @@ The compiled example policies is already under this submodule, you could also re
 ```bash
 python batch_exec.py
 ```
+
+4. Analyze the results
+
+The running result will show as a log file under `logs` folder. You need to move the log file to `data/end2end` folder for analysis.
+
+```bash
+mv logs/<log_file_name> data/end2end/end2end.log
+python data/end2end/extract.py
+```
