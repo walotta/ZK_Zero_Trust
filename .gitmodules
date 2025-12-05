@@ -1,3 +1,0 @@
-[submodule "tools/xacml-to-rust"]
-	path = tools/xacml-to-rust
-	url = git@github.com:osaidameer/xacml-to-rust.git
