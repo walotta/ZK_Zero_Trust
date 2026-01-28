@@ -1,12 +1,7 @@
-use jwt_rsa_verify_methods::RSA_VERIFY_ID;
-
-// use base64::Engine as _;
-use jwt_rsa_verify_methods::RSA_VERIFY_ELF;
+use jwt_rsa_verify_methods::{RSA_VERIFY_ELF, RSA_VERIFY_ID};
 use regex::Regex;
 use risc0_zkvm::{default_prover, ExecutorEnv, Receipt};
-// use rsa::{BigUint, RsaPrivateKey};
-// use serde::{Deserialize, Serialize};
-use std::time::Instant;
+use std::{fs, path::Path, time::Instant};
 
 fn find_key_value_quotes(json: &str, key: &str) -> Option<(usize, usize, usize, usize)> {
     let pattern = format!(r#""{}"\s*:\s*"((?:\\.|[^"\\])*)""#, regex::escape(key));
@@ -26,22 +21,38 @@ fn find_key_value_quotes(json: &str, key: &str) -> Option<(usize, usize, usize, 
     None
 }
 
+fn load_payload_and_keys() -> (String, Vec<String>) {
+    let payload_path = Path::new("data/payload.json");
+    let payload_str =
+        fs::read_to_string(payload_path).expect("payload.json should be present and readable");
+
+    let keys_path = Path::new("data/fields.txt");
+    let keys_contents =
+        fs::read_to_string(keys_path).expect("fields.txt should be present and readable");
+    let keys: Vec<String> = keys_contents
+        .lines()
+        .map(str::trim)
+        .filter(|line| !line.is_empty())
+        .map(|line| line.to_string())
+        .collect();
+
+    (payload_str, keys)
+}
+
 pub fn prove_signature_verification() -> (Receipt, Vec<String>) {
-    let payload_str = "{\"iss\":\"https://login.example.com/\",\"subject_id\":\"Julius Hibbert\",\"aud\":\"api://payments-service\",\"exp\":1760485782,\"iat\":1760482182,\"auth_time\":1760482082,\"email\":\"user@example.com\",\"email_verified\":true,\"nonce\":\"3e4f0f67-bc5a-413d-b528-93fd1c71fd4e\",\"scope\":\"openid profile email offline_access\",\"roles\":\"admin\"}"; 
+    let (payload_str, keys) = load_payload_and_keys();
     // Pass as flat arrays for efficiency
-    let keys = vec!["subject_id", "iss"];
     let mut positions = Vec::new();
 
-    for key in &keys {
-        let key_pos = find_key_value_quotes(&payload_str, key).unwrap();
+    for key in keys.iter() {
+        let key_pos = find_key_value_quotes(&payload_str, key)
+            .unwrap_or_else(|| panic!("could not compute positions for key {key}"));
         positions.extend_from_slice(&[key_pos.0, key_pos.1, key_pos.2, key_pos.3]);
     }
 
     let env = ExecutorEnv::builder()
         .write(&payload_str)
         .expect("write jwt to env")
-        // .write(&keys)
-        // .expect("write keys to env")
         .write(&positions)
         .expect("write positions to env")
         .build()
