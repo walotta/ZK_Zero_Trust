@@ -1,5 +1,4 @@
 # Zero-Knowledge Zero Trust
-Updated on Sep 5, 2025
 
 # How to run
 
@@ -10,8 +9,23 @@ curl -L https://risczero.com/install | bash
 rzup install
 ```
 
-2. Running with batch
+2. Makesure `xacml-to-rust` installed under tools
+```bash
+git submodule update --init --recursive
+```
+The compiled example policies is already under this submodule, you could also re-compile following the readme of `xacml-to-rust`
+
+3. Running with batch
 
 ```bash
 python batch_exec.py
+```
+
+4. Analyze the results
+
+The running result will show as a log file under `logs` folder. You need to move the log file to `data/end2end` folder for analysis.
+
+```bash
+mv logs/<log_file_name> data/end2end/end2end.log
+python data/end2end/extract.py
 ```
