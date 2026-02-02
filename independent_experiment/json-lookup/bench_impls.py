@@ -33,14 +33,8 @@ NAMED_DATASETS = {
             ("roles", "admin"),
         ],
         "keys": [
-            "iss",
             "subject_id",
-            "aud",
-            "exp",
-            "iat",
-            "auth_time",
-            "email",
-            "roles",
+            "iss",
         ],
     },
     "JWT_ORI": {
@@ -58,17 +52,8 @@ NAMED_DATASETS = {
             ("roles", "admin"),
         ],
         "keys": [
-            "iss",
             "subject_id",
-            "aud",
-            "exp",
-            "iat",
-            "auth_time",
-            "email",
-            "email_verified",
-            "nonce",
-            "scope",
-            "roles",
+            "iss",
         ],
     },
     "JWT_MIN": {
@@ -93,17 +78,40 @@ NAMED_DATASETS = {
 }
 
 VARIANTS = {
-    "impl": ROOT / "methods/guest/src/main_old_long.rs",
-    "serde": ROOT / "methods/guest/src/main_positions.rs",
+    "impl": ROOT / "methods/guest/src/main_positions.rs",
+    "serde": ROOT / "methods/guest/src/main_serde.rs",
 }
 
 
 def write_key_table(keys: list[str]) -> None:
     lines = [
-        "pub const KEY_TABLE: &[&str] = &[",
-        *[f'    "{key}",' for key in keys],
-        "];",
+        "use serde::Deserialize;",
+        "",
+        "macro_rules! define_schema {",
+        "    ($($field:ident),* $(,)?) => {",
+        "        pub const KEY_TABLE: &[&str] = &[",
+        "            $(stringify!($field)),*",
+        "        ];",
+        "",
+        "        #[derive(Deserialize)]",
+        "        pub struct Outputs {",
+        "            $(pub $field: String,)*",
+        "        }",
+        "",
+        "        impl Outputs {",
+        "            pub fn into_vec(self) -> Vec<String> {",
+        "                vec![",
+        "                    $(self.$field),*",
+        "                ]",
+        "            }",
+        "        }",
+        "    };",
+        "}",
+        "",
+        "define_schema!(",
     ]
+    lines += [f"    {key}," for key in keys]
+    lines.append(");")
     KEY_TABLE_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -118,7 +126,8 @@ def write_dataset(payload_entries: list[tuple[str, str]], keys: list[str]) -> No
 def generate_entries_for_size(size: int) -> tuple[list[tuple[str, str]], list[str]]:
     fields = [f"field_{i:03d}" for i in range(1, size + 1)]
     entries = [(name, f"value_{i:03d}") for i, name in enumerate(fields, start=1)]
-    return entries, fields
+    keys = fields[: min(2, len(fields))]
+    return entries, keys
 
 
 def run_variant(label: str, source_path: Path) -> int:
@@ -190,10 +199,10 @@ def main() -> None:
             print(f"\n=== Benchmarking {label} ===")
             write_dataset(payload_entries, keys)
             row = {"size": label}
-            for label, source in VARIANTS.items():
+            for variant, source in VARIANTS.items():
                 if not source.exists():
                     raise FileNotFoundError(f"Variant source not found: {source}")
-                row[label] = run_variant(label, source)
+                row[variant] = run_variant(variant, source)
             all_rows.append(row)
     finally:
         GUEST_MAIN.write_text(original_guest, encoding="utf-8")
