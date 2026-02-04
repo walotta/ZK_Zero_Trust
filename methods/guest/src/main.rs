@@ -2,6 +2,9 @@ use base64::engine::general_purpose::URL_SAFE_NO_PAD;
 use base64::Engine;
 use policy_core::Inputs;
 use risc0_zkvm::guest::env;
+use regex::Regex;
+use regex_automata::dfa::{dense::DFA, Automaton};
+use regex_automata::Input;
 use rsa::{
     pkcs1v15::{Signature, VerifyingKey},
     BigUint, RsaPublicKey,
@@ -9,27 +12,51 @@ use rsa::{
 use sha2::Sha256;
 use signature::Verifier;
 
-use regex_automata::dfa::{dense::DFA, Automaton};
-use regex_automata::Input;
+// Flip this switch (set to `true`) to route regex matching through the std `regex` crate.
+const USE_STD_REGEX: bool = true;
+const BYPASS_REGEX: bool = false;
+const BYPASS_RSA: bool = true;
 
-fn eval_regex(regex_input: &str, regex_exp: &[u8]) -> bool {
-    match DFA::from_bytes(regex_exp) {
+macro_rules! bypass_or {
+    ($flag:expr, $expr:expr) => {{
+        if $flag {
+            false
+        } else {
+            $expr
+        }
+    }};
+}
+
+struct RegexDef {
+    dfa_bytes: &'static [u8],
+    source: &'static str,
+}
+
+static RE_E8667202B740D84E03552D30B7B93A62: RegexDef = RegexDef {
+    dfa_bytes: include_bytes!("RE_E8667202B740D84E03552D30B7B93A62.bin"),
+    source: r"J.* K.* Hibbert",
+};
+
+static RE_9BAAFAEEB1212012972ABC54D5797FBD: RegexDef = RegexDef {
+    dfa_bytes: include_bytes!("RE_9BAAFAEEB1212012972ABC54D5797FBD.bin"),
+    source: r"B.* O.* Simpson",
+};
+
+fn eval_regex(regex_input: &str, regex_def: &RegexDef) -> bool {
+    if USE_STD_REGEX {
+        return Regex::new(regex_def.source)
+            .map(|re| re.is_match(regex_input))
+            .unwrap_or(false);
+    }
+
+    match DFA::from_bytes(regex_def.dfa_bytes) {
         Ok((dfa, _)) => {
             let input = Input::new(regex_input);
-            match dfa.try_search_fwd(&input) {
-                Ok(result) => result.is_some(),
-                Err(_) => false,
-            }
+            dfa.try_search_fwd(&input).map(|res| res.is_some()).unwrap_or(false)
         }
         Err(_) => false,
     }
 }
-
-static RE_E8667202B740D84E03552D30B7B93A62: &[u8] =
-    include_bytes!("RE_E8667202B740D84E03552D30B7B93A62.bin");
-
-static RE_9BAAFAEEB1212012972ABC54D5797FBD: &[u8] =
-    include_bytes!("RE_9BAAFAEEB1212012972ABC54D5797FBD.bin");
 
 use serde::Deserialize;
 
@@ -67,35 +94,28 @@ fn extract_jwt(token: &str, inp: &Inputs) -> bool {
     let engine = URL_SAFE_NO_PAD;
     let _header = engine.decode(header_b64).expect("header base64");
     let payload = engine.decode(payload_b64).expect("payload base64");
-    let signature_bytes = engine.decode(signature_b64).expect("signature base64");
+    let signature_bytes = engine
+        .decode(signature_b64)
+        .expect("signature base64");
+    if !BYPASS_RSA {
+        let n = BigUint::from_bytes_be(MODULUS);
+        let e = BigUint::from_bytes_be(EXPONENT);
+        let public_key = RsaPublicKey::new(n, e).expect("valid RSA public key");
+        let verifying_key = VerifyingKey::<Sha256>::new(public_key);
+        let signature =
+            Signature::try_from(signature_bytes.as_slice()).expect("signature format");
 
-    // let n_bytes = engine.decode(MODULUS_B64).expect("modulus base64");
-    // let e_bytes = engine.decode(EXPONENT_B64).expect("exponent base64");
-    // let n = BigUint::from_bytes_be(&n_bytes);
-    // let e = BigUint::from_bytes_be(&e_bytes);
-
-    let n = BigUint::from_bytes_be(MODULUS);
-    let e = BigUint::from_bytes_be(EXPONENT);
-    let public_key = RsaPublicKey::new(n, e).expect("valid RSA public key");
-    let verifying_key = VerifyingKey::<Sha256>::new(public_key);
-    let signature = Signature::try_from(signature_bytes.as_slice()).expect("signature format");
-
-    let signed_data = format!("{}.{}", header_b64, payload_b64);
-    verifying_key
-        .verify(signed_data.as_bytes(), &signature)
-        .expect("RSA signature check");
+        let signed_data = format!("{}.{}", header_b64, payload_b64);
+        verifying_key
+            .verify(signed_data.as_bytes(), &signature)
+            .expect("RSA signature check");
+    }
 
     let payload_str = String::from_utf8(payload).expect("payload utf8");
+    let jwt_struct: JwtPayload =
+        serde_json::from_str(&payload_str).expect("invalid JWT JSON");
 
-    // Verify quote positions and extract values
-
-    // this is the case where a policy expects a subject, role, or age field, but the request was missing the required field
-    //if positions.is_empty() {
-    //    return true;
-    //}
-    let jwt_struct: JwtPayload = serde_json::from_str(&payload_str).expect("invalid JWT JSON");
-
-    return jwt_field_check(&inp, &jwt_struct);
+    bypass_or!(BYPASS_RSA, jwt_field_check(&inp, &jwt_struct))
 }
 
 #[derive(Debug, PartialEq)]
@@ -106,13 +126,18 @@ enum Result {
 }
 
 fn evaluate_cond_policy_rule(inp: &Inputs) -> bool {
-    (eval_regex(
-        &inp.access_subject_subject_id,
-        &RE_E8667202B740D84E03552D30B7B93A62,
-    )) || (eval_regex(
-        &inp.access_subject_subject_id,
-        &RE_9BAAFAEEB1212012972ABC54D5797FBD,
-    ))
+    bypass_or!(
+        BYPASS_REGEX,
+        {
+            (eval_regex(
+                &inp.access_subject_subject_id,
+                &RE_E8667202B740D84E03552D30B7B93A62,
+            )) || (eval_regex(
+                &inp.access_subject_subject_id,
+                &RE_9BAAFAEEB1212012972ABC54D5797FBD,
+            ))
+        }
+    )
 }
 
 fn evaluate_rule_policy_rule(inp: &Inputs) -> Result {
