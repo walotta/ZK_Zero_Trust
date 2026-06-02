@@ -1,0 +1,42 @@
+[
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$",
+    "str": "user@example.com",
+    "proof_seconds": 7.446590568,
+    "verify_seconds": 0.014403546,
+    "total_cycles": 65536,
+    "user_cycles": 21314,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+    "str": "very.unusual.@.unusual-example@domains.example.com",
+    "proof_seconds": 7.545119943,
+    "verify_seconds": 0.014353203,
+    "total_cycles": 65536,
+    "user_cycles": 16062,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$",
+    "str": "Passw0rd@2025VeryStrong",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: error parsing regex",
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$",
+    "str": "weak",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: error parsing regex",
+    "python_match": false
+  }
+]

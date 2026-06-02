@@ -1,0 +1,1572 @@
+[
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$",
+    "str": "user@example.com",
+    "proof_seconds": 314.972939763,
+    "verify_seconds": 0.052961308000000006,
+    "total_cycles": 2621440,
+    "user_cycles": 2069217,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+    "str": "very.unusual.@.unusual-example@domains.example.com",
+    "proof_seconds": 127.265346774,
+    "verify_seconds": 0.018627262000000002,
+    "total_cycles": 1048576,
+    "user_cycles": 687801,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$",
+    "str": "Passw0rd@2025VeryStrong",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: error parsing regex",
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$",
+    "str": "weak",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: error parsing regex",
+    "python_match": false
+  },
+  {
+    "pattern": "^Bearer\\s+[A-Za-z0-9\\-._~+/]+=*$",
+    "str": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+    "proof_seconds": 393.204824893,
+    "verify_seconds": 0.06968930500000001,
+    "total_cycles": 3276800,
+    "user_cycles": 2729976,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+    "str": "192.168.1.1",
+    "proof_seconds": 126.81863624,
+    "verify_seconds": 0.018418029,
+    "total_cycles": 1048576,
+    "user_cycles": 624795,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+    "str": "999.999.999.999",
+    "proof_seconds": 126.693345122,
+    "verify_seconds": 0.018684016,
+    "total_cycles": 1048576,
+    "user_cycles": 352017,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^(?:(?:[^\\n]*?/../)+|.*(?:.{2,}|/\\s*.{2}|\\%2e%2e)).*$",
+    "str": "../../../../etc/passwd",
+    "proof_seconds": 155.712495221,
+    "verify_seconds": 0.03432982,
+    "total_cycles": 1310720,
+    "user_cycles": 813386,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:(?:[^\\n]*?/\\.\\./)+|.*(?:\\.{2,}|/\\s*\\.{2}|\\%2e%2e)).*$",
+    "str": "safe/path/to/file.txt",
+    "proof_seconds": 126.969178125,
+    "verify_seconds": 0.018994327,
+    "total_cycles": 1048576,
+    "user_cycles": 509715,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "str": "123e4567-e89b-12d3-a456-426614174000",
+    "proof_seconds": 127.521695245,
+    "verify_seconds": 0.019001221000000002,
+    "total_cycles": 1048576,
+    "user_cycles": 420901,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "str": "invalid-guid-format",
+    "proof_seconds": 61.056071899,
+    "verify_seconds": 0.017553978,
+    "total_cycles": 524288,
+    "user_cycles": 339064,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\$2[ayb]\\$\\d{2}\\$[A-Za-z0-9./]{53}$",
+    "str": "\\$2b\\$12\\$KIXjOh6HXsY.gMzXIgkCCeW3PnS7.bVbq321t1234567890123456",
+    "proof_seconds": 155.370294201,
+    "verify_seconds": 0.034268520000000004,
+    "total_cycles": 1310720,
+    "user_cycles": 839133,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\$2[ayb]\\$\\d{2}\\$[A-Za-z0-9./]{53}$",
+    "str": "\\$2a\\$10\\$randomstringtoolongtofitthehashformatexactlybydesign",
+    "proof_seconds": 155.609358766,
+    "verify_seconds": 0.034327492,
+    "total_cycles": 1310720,
+    "user_cycles": 839128,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$",
+    "str": "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+    "proof_seconds": 126.638299,
+    "verify_seconds": 0.018633563,
+    "total_cycles": 1048576,
+    "user_cycles": 448832,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$",
+    "str": "2001::1",
+    "proof_seconds": 61.297367611,
+    "verify_seconds": 0.017483158,
+    "total_cycles": 524288,
+    "user_cycles": 323023,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "(?i)(union|select|insert|update|delete|drop|exec|or 1=1|--|;|')",
+    "str": "admin' OR '1'='1",
+    "proof_seconds": 253.200108117,
+    "verify_seconds": 0.036784285,
+    "total_cycles": 2097152,
+    "user_cycles": 1316262,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "(?i)(union|select|insert|update|delete|drop|exec|or 1=1|--|;|')",
+    "str": "normal-user-input-123",
+    "proof_seconds": 252.709367547,
+    "verify_seconds": 0.036978386999999995,
+    "total_cycles": 2097152,
+    "user_cycles": 1367724,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9._-]{2,}[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9].[a-zA-Z]{2,}$",
+    "str": "a.b-c_d@sub.domain.example.co.uk",
+    "proof_seconds": 392.80978008,
+    "verify_seconds": 0.070358397,
+    "total_cycles": 3276800,
+    "user_cycles": 2721166,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([_\\-\\.])?([a-zA-Z0-9]))*(@){1}[a-zA-Z0-9]+[\\.]{1}(([a-zA-Z]{2,63})|([a-zA-Z]{2,63}\\.[a-zA-Z]{2,63}))$",
+    "str": "test_email-sub.domain@very.long.subdomain.example.com",
+    "proof_seconds": 155.534665334,
+    "verify_seconds": 0.035093497,
+    "total_cycles": 1310720,
+    "user_cycles": 898628,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^https?:\\/\\/[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}(/[a-zA-Z0-9._~/-]*)*(\\?[;&a-zA-Z0-9=%_-]*)?(#[a-zA-Z0-9_-]*)?$",
+    "str": "https://login.example.com/auth?redirect=https://dashboard.example.com&amp;state=abc123#token",
+    "proof_seconds": 126.707298581,
+    "verify_seconds": 0.018563686,
+    "total_cycles": 1048576,
+    "user_cycles": 477670,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^https?:\\/\\/[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}(/[a-zA-Z0-9._~/-]*)*(\\?[;&a-zA-Z0-9=%_-]*)?(#[a-zA-Z0-9_-]*)?$",
+    "str": "http://xn--fsqu00a.xn--0zwm56d/%20%20/%2E%2E/secret",
+    "proof_seconds": 126.868130287,
+    "verify_seconds": 0.018415558999999998,
+    "total_cycles": 1048576,
+    "user_cycles": 430850,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]+={0,2}$",
+    "str": "SGVsbG8gd29ybGQh",
+    "proof_seconds": 126.617474427,
+    "verify_seconds": 0.019050682,
+    "total_cycles": 1048576,
+    "user_cycles": 384477,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]+={0,2}$",
+    "str": "NotBase64!!@",
+    "proof_seconds": 126.763641627,
+    "verify_seconds": 0.018570307,
+    "total_cycles": 1048576,
+    "user_cycles": 384506,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[0-9]{1,3}\\b",
+    "str": "0",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: unsupported regex feature for DFAs: cannot build DFAs for regexes with Unicode word boundaries; switch to ASCII word boundaries, or heuristically enable Unicode word boundaries or use a different regex engine",
+    "python_match": true
+  },
+  {
+    "pattern": "^[0-9]{1,3}\\b",
+    "str": "999",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: unsupported regex feature for DFAs: cannot build DFAs for regexes with Unicode word boundaries; switch to ASCII word boundaries, or heuristically enable Unicode word boundaries or use a different regex engine",
+    "python_match": true
+  },
+  {
+    "pattern": "^[0-9]{1,3}\\b",
+    "str": "1000",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: unsupported regex feature for DFAs: cannot build DFAs for regexes with Unicode word boundaries; switch to ASCII word boundaries, or heuristically enable Unicode word boundaries or use a different regex engine",
+    "python_match": false
+  },
+  {
+    "pattern": "^({)?[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}(})?$",
+    "str": "{12345678-1234-1234-1234-123456789012}",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: error parsing regex",
+    "python_match": true
+  },
+  {
+    "pattern": "^(X-)?[A-Za-z-]+:\\s*.*$",
+    "str": "X-Forwarded-For: 203.0.113.195",
+    "proof_seconds": 126.773674828,
+    "verify_seconds": 0.018681134,
+    "total_cycles": 1048576,
+    "user_cycles": 405973,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(X-)?[A-Za-z-]+:\\s*.*$",
+    "str": "Authorization: Bearer abc123.def456.ghi789",
+    "proof_seconds": 127.119065486,
+    "verify_seconds": 0.019149918,
+    "total_cycles": 1048576,
+    "user_cycles": 393354,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(/[a-zA-Z0-9._~-]+)+/?(\\?.*)?(#.*)?$",
+    "str": "/api/v1/users/me?include=profile#settings",
+    "proof_seconds": 126.850545833,
+    "verify_seconds": 0.018964415,
+    "total_cycles": 1048576,
+    "user_cycles": 459465,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(/[a-zA-Z0-9._~-]+)+/?(\\?.*)?(#.*)?$",
+    "str": "//etc/passwd",
+    "proof_seconds": 126.684834861,
+    "verify_seconds": 0.018708889,
+    "total_cycles": 1048576,
+    "user_cycles": 417234,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+    "str": "2025-04-05T14:30:00Z",
+    "proof_seconds": 886.949773493,
+    "verify_seconds": 0.12780867,
+    "total_cycles": 7340032,
+    "user_cycles": 5207174,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+    "str": "2025-04-05 14:30:00",
+    "proof_seconds": 1136.529400196,
+    "verify_seconds": 0.164937215,
+    "total_cycles": 9437184,
+    "user_cycles": 6306530,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\$pbkdf2-(sha(1|256|512))\\$\\d+\\$[a-zA-Z0-9./]+\\$[a-zA-Z0-9./]+$",
+    "str": "\\$pbkdf2-sha256\\$50000\\$saltsalt\\$abcd1234efgh5678",
+    "proof_seconds": 187.323961441,
+    "verify_seconds": 0.036659104,
+    "total_cycles": 1572864,
+    "user_cycles": 841738,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^$$?(?:[0-9a-fA-F]{1,4}:){6}(?:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})$$?$",
+    "str": "[2001:db8:85a3:8d3:1319:8a2e:370:7348]",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "python re failed: nothing to repeat at position 3",
+    "python_match": null
+  },
+  {
+    "pattern": "^(.+?)(?:@(.*))?$",
+    "str": "user@host.com",
+    "proof_seconds": 253.076196421,
+    "verify_seconds": 0.037306315,
+    "total_cycles": 2097152,
+    "user_cycles": 1325675,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(.+?)(?:@(.*))?$",
+    "str": "nouseronlyhost",
+    "proof_seconds": 253.049846008,
+    "verify_seconds": 0.036982922,
+    "total_cycles": 2097152,
+    "user_cycles": 1325671,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]*(?:[._-][a-zA-Z0-9]+)*$",
+    "str": "valid_user_name_v1",
+    "proof_seconds": 126.617937263,
+    "verify_seconds": 0.01870195,
+    "total_cycles": 1048576,
+    "user_cycles": 441874,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]*(?:[._-][a-zA-Z0-9]+)*$",
+    "str": "_invalid_start",
+    "proof_seconds": 126.810153253,
+    "verify_seconds": 0.018805323999999998,
+    "total_cycles": 1048576,
+    "user_cycles": 441605,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$",
+    "str": "12345678123456781234567812345678",
+    "proof_seconds": 61.239147136,
+    "verify_seconds": 0.017336347,
+    "total_cycles": 524288,
+    "user_cycles": 260337,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "aGVscCBtZQ==",
+    "proof_seconds": 126.931012886,
+    "verify_seconds": 0.019261315,
+    "total_cycles": 1048576,
+    "user_cycles": 631092,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?!(?:10|172.(1[6-9]|2[0-9]|3[01])|192.168).)((25[0-5]|2[0-4]\\d|[01]?\\d\\d?).){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$",
+    "str": "8.8.8.8",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: error parsing regex",
+    "python_match": true
+  },
+  {
+    "pattern": "^(?!(?:10|172\\.(1[6-9]|2[0-9]|3[01])|192\\.168)\\.)((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$",
+    "str": "192.168.1.1",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: error parsing regex",
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z]+://[^\\s:/]+(\\:[0-9]+)?/.+$",
+    "str": "https://api.service.com/v1/login",
+    "proof_seconds": 126.77313711,
+    "verify_seconds": 0.018585925,
+    "total_cycles": 1048576,
+    "user_cycles": 569162,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z]+://[^\\s:/]+(\\:[0-9]+)?/.+$",
+    "str": "ftp://localhost:21/upload/file.txt",
+    "proof_seconds": 126.844573456,
+    "verify_seconds": 0.019081643,
+    "total_cycles": 1048576,
+    "user_cycles": 574814,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}$",
+    "str": "user+tag@example-domain.site",
+    "proof_seconds": 126.681097566,
+    "verify_seconds": 0.018641577000000003,
+    "total_cycles": 1048576,
+    "user_cycles": 793582,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\$2[ay]\\$\\d{2}\\$[A-Za-z0-9./]{53}$",
+    "str": "\\$2a\\$10\\$Yg9HxKkH7d8f6h5G4j3k2i1u9t8s7r6q5p4o3n2m1l0k9j8h7g6f5e4d3c2",
+    "proof_seconds": 141.05566402,
+    "verify_seconds": 0.034201558,
+    "total_cycles": 1179648,
+    "user_cycles": 772921,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d@$!%*#?&]{8,}$",
+    "str": "GoodPass1!",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: error parsing regex",
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d@$!%*#?&]{8,}$",
+    "str": "nouppercase1",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: error parsing regex",
+    "python_match": false
+  },
+  {
+    "pattern": "^([0-9a-f]{12}|[0-9a-f]{16})$",
+    "str": "a1b2c3d4e5f6",
+    "proof_seconds": 61.075563669,
+    "verify_seconds": 0.017663233,
+    "total_cycles": 524288,
+    "user_cycles": 265628,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([0-9a-f]{12}|[0-9a-f]{16})$",
+    "str": "gibberish!",
+    "proof_seconds": 61.266901515,
+    "verify_seconds": 0.017531006999999998,
+    "total_cycles": 524288,
+    "user_cycles": 188486,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^https://[a-zA-Z0-9.-]+.googleapis.com/auth/[^\\s]+$",
+    "str": "https://www.googleapis.com/auth/userinfo.email",
+    "proof_seconds": 134.332745135,
+    "verify_seconds": 0.034425402,
+    "total_cycles": 1114112,
+    "user_cycles": 679166,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^https://[a-zA-Z0-9.-]+\\.googleapis\\.com/auth/[^\\s]+$",
+    "str": "http://malicious.com/auth",
+    "proof_seconds": 127.773009452,
+    "verify_seconds": 0.019290366,
+    "total_cycles": 1048576,
+    "user_cycles": 363677,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^ey[A-Za-z0-9+/=]+\\.[ey][A-Za-z0-9+/=]+\\.[A-Za-z0-9+/=]*$",
+    "str": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+    "proof_seconds": 127.973753029,
+    "verify_seconds": 0.019063284,
+    "total_cycles": 1048576,
+    "user_cycles": 772427,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^ey[A-Za-z0-9+/=]+\\.[ey][A-Za-z0-9+/=]+\\.[A-Za-z0-9+/=]*$",
+    "str": "not.a.jwt.token",
+    "proof_seconds": 129.747477055,
+    "verify_seconds": 0.019213211,
+    "total_cycles": 1048576,
+    "user_cycles": 771480,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])(.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}$",
+    "str": "255.255.255.255",
+    "proof_seconds": 127.44850591,
+    "verify_seconds": 0.01913664,
+    "total_cycles": 1048576,
+    "user_cycles": 647967,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}$",
+    "str": "256.256.256.256",
+    "proof_seconds": 127.347171029,
+    "verify_seconds": 0.018941048999999998,
+    "total_cycles": 1048576,
+    "user_cycles": 350867,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]*(?:[._][a-zA-Z0-9]+)*@[a-zA-Z0-9][a-zA-Z0-9.-]*.[a-zA-Z]{2,}$",
+    "str": "test.user_name@valid-site.example.org",
+    "proof_seconds": 380.654735512,
+    "verify_seconds": 0.055577554999999994,
+    "total_cycles": 3145728,
+    "user_cycles": 2180228,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:{)?[0-9a-fA-F]{32}(?:})?$",
+    "str": "{a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5}",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "compile/write failed: failed to build DFA: error parsing regex",
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:\\{)?[0-9a-fA-F]{32}(?:\\})?$",
+    "str": "g0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5",
+    "proof_seconds": 61.155328165,
+    "verify_seconds": 0.017670044,
+    "total_cycles": 524288,
+    "user_cycles": 231214,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\d{3}-\\d{2}-\\d{4}$",
+    "str": "123-45-6789",
+    "proof_seconds": 379.743543481,
+    "verify_seconds": 0.055977619,
+    "total_cycles": 3145728,
+    "user_cycles": 2147168,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\d{3}-\\d{2}-\\d{4}$",
+    "str": "123456789",
+    "proof_seconds": 334.306356343,
+    "verify_seconds": 0.04931500900000001,
+    "total_cycles": 3145728,
+    "user_cycles": 2033823,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,6}$",
+    "str": "test+label@sub.domain.example.museum",
+    "proof_seconds": 388.13404688,
+    "verify_seconds": 0.06472596900000001,
+    "total_cycles": 3670016,
+    "user_cycles": 2932723,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "QUJDREVGR0g=",
+    "proof_seconds": 111.825252211,
+    "verify_seconds": 0.016757126,
+    "total_cycles": 1048576,
+    "user_cycles": 630629,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "NOTBASE64%",
+    "proof_seconds": 111.604214761,
+    "verify_seconds": 0.016908169,
+    "total_cycles": 1048576,
+    "user_cycles": 630833,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{40}$",
+    "str": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "proof_seconds": 53.846949454,
+    "verify_seconds": 0.015684602,
+    "total_cycles": 524288,
+    "user_cycles": 355394,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{40}$",
+    "str": "too_short",
+    "proof_seconds": 53.99737576,
+    "verify_seconds": 0.015656145,
+    "total_cycles": 524288,
+    "user_cycles": 197636,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\$argon2(i|id)?\\$v=\\d+\\$m=\\d+,t=\\d+,p=\\d+\\$[a-zA-Z0-9+/]+\\$[a-zA-Z0-9+/]+$",
+    "str": "\\$argon2id\\$v=19\\$m=65536,t=3,p=4\\$c2FsdHNhbHRzYWx0\\$RdescudvJCsgt3ub+b+dPA",
+    "proof_seconds": 333.748814955,
+    "verify_seconds": 0.049379578,
+    "total_cycles": 3145728,
+    "user_cycles": 1848444,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^$$(?:[0-9a-fA-F]{1,4}:){5}(?:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})$$$",
+    "str": "[2001:db8:85a3:0:0:8a2e:370:7334]",
+    "proof_seconds": 445.29815237,
+    "verify_seconds": 0.06565588800000001,
+    "total_cycles": 4194304,
+    "user_cycles": 2879167,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^User-Agent:\\s.+$.*[Mm]obile.*$.*$",
+    "str": "User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15",
+    "proof_seconds": 111.752015754,
+    "verify_seconds": 0.016743136,
+    "total_cycles": 1048576,
+    "user_cycles": 599908,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^User-Agent:\\s.+$.*[Mm]obile.*$.*$",
+    "str": "User-Agent: curl/7.68.0",
+    "proof_seconds": 111.846758334,
+    "verify_seconds": 0.016752396,
+    "total_cycles": 1048576,
+    "user_cycles": 568972,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[0-9]+ [A-Za-z]{3} [0-9]{4} [0-9:]{8}$",
+    "str": "05 Apr 2025 14:23:01",
+    "proof_seconds": 117.646801821,
+    "verify_seconds": 0.029548572,
+    "total_cycles": 1114112,
+    "user_cycles": 867065,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^X-API-Key\\s*:\\s*[a-zA-Z0-9\\-_=]{32,}$",
+    "str": "X-API-Key: abcdefghijklmnopqrstuvwxyz1234567890-_=",
+    "proof_seconds": 111.778626418,
+    "verify_seconds": 0.016774973,
+    "total_cycles": 1048576,
+    "user_cycles": 628281,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "str": "SSBhbSBub3QgYSBqdXdAdA==",
+    "proof_seconds": 111.879519448,
+    "verify_seconds": 0.01674447,
+    "total_cycles": 1048576,
+    "user_cycles": 639685,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}$",
+    "str": "192 168 1 1",
+    "proof_seconds": 444.915414227,
+    "verify_seconds": 0.065614042,
+    "total_cycles": 4194304,
+    "user_cycles": 2847975,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}\\s+\\d{1,3}$",
+    "str": "1.2.3.4",
+    "proof_seconds": 444.632212843,
+    "verify_seconds": 0.065647361,
+    "total_cycles": 4194304,
+    "user_cycles": 2802743,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{12,32}$",
+    "str": "session123456789",
+    "proof_seconds": 54.174972612,
+    "verify_seconds": 0.015663406,
+    "total_cycles": 524288,
+    "user_cycles": 283452,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^Content-Type:\\s*(application/json|text/plain|multipart/form-data)$",
+    "str": "Content-Type: application/json",
+    "proof_seconds": 137.227135698,
+    "verify_seconds": 0.031085697,
+    "total_cycles": 1310720,
+    "user_cycles": 778250,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$",
+    "str": "00:1A:2B:3C:4D:5E",
+    "proof_seconds": 111.649819947,
+    "verify_seconds": 0.016786746,
+    "total_cycles": 1048576,
+    "user_cycles": 724706,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$",
+    "str": "ZZ:ZZ:ZZ:ZZ:ZZ:ZZ",
+    "proof_seconds": 111.67357691,
+    "verify_seconds": 0.016760691999999997,
+    "total_cycles": 1048576,
+    "user_cycles": 724808,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^/oauth/(authorize|token|revoke)$",
+    "str": "/oauth/authorize",
+    "proof_seconds": 54.075864054,
+    "verify_seconds": 0.015678489,
+    "total_cycles": 524288,
+    "user_cycles": 314380,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^/oauth/(authorize|token|revoke)$",
+    "str": "/admin/delete",
+    "proof_seconds": 53.984181924,
+    "verify_seconds": 0.015666804,
+    "total_cycles": 524288,
+    "user_cycles": 258765,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^([0-9]+.)+[0-9]+$",
+    "str": "1.2.3.4.5",
+    "proof_seconds": 164.976623565,
+    "verify_seconds": 0.031999124999999996,
+    "total_cycles": 1572864,
+    "user_cycles": 1144073,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([0-9]+\\.)+[0-9]+$",
+    "str": "v1.2.3",
+    "proof_seconds": 54.101165143,
+    "verify_seconds": 0.015696448,
+    "total_cycles": 524288,
+    "user_cycles": 296662,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9][a-zA-Z0-9-]*(?:.[a-zA-Z0-9][a-zA-Z0-9-]*)*.[a-zA-Z]{2,}$",
+    "str": "test@dev.example-internal.co.uk",
+    "proof_seconds": 112.13559466,
+    "verify_seconds": 0.016808776,
+    "total_cycles": 1048576,
+    "user_cycles": 524469,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:[A-Z][a-z]*.?\\s*)+$",
+    "str": "John A. Smith Jr.",
+    "proof_seconds": 500.656549383,
+    "verify_seconds": 0.080823639,
+    "total_cycles": 4718592,
+    "user_cycles": 3955644,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:[A-Z][a-z]*\\.?\\s*)+$",
+    "str": "mr. john doe",
+    "proof_seconds": 222.983059144,
+    "verify_seconds": 0.033086042999999996,
+    "total_cycles": 2097152,
+    "user_cycles": 1530558,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\d{1,2}/\\d{1,2}/\\d{4}$",
+    "str": "12/31/2025",
+    "proof_seconds": 333.967501924,
+    "verify_seconds": 0.049405851,
+    "total_cycles": 3145728,
+    "user_cycles": 1955081,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\d{1,2}/\\d{1,2}/\\d{4}$",
+    "str": "30/02/2025",
+    "proof_seconds": 337.925932768,
+    "verify_seconds": 0.049369390000000006,
+    "total_cycles": 3145728,
+    "user_cycles": 1955029,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\$6\\$[a-zA-Z0-9./]{8,16}\\$[a-zA-Z0-9./]{86}$",
+    "str": "\\$6\\$saltsalt\\$abcd1234efgh5678ijkl90mn...longhash...",
+    "proof_seconds": 112.9506764,
+    "verify_seconds": 0.0167543,
+    "total_cycles": 1048576,
+    "user_cycles": 368421,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\d{5}(?:-\\d{4})?$",
+    "str": "90210-1234",
+    "proof_seconds": 334.263792901,
+    "verify_seconds": 0.049496467,
+    "total_cycles": 3145728,
+    "user_cycles": 2147771,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\+[1-9]\\d{1,14}$",
+    "str": "+123456789012",
+    "proof_seconds": 447.909239663,
+    "verify_seconds": 0.077446524,
+    "total_cycles": 4227072,
+    "user_cycles": 3205627,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\+[1-9]\\d{1,14}$",
+    "str": "12345",
+    "proof_seconds": 445.457482188,
+    "verify_seconds": 0.065637294,
+    "total_cycles": 4194304,
+    "user_cycles": 3131826,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\d{1,3}.\\d{1,3}.\\d{1,3}.\\d{1,3}/\\d{1,2}$",
+    "str": "192.168.1.0/24",
+    "proof_seconds": 470.447595608,
+    "verify_seconds": 0.07991102700000001,
+    "total_cycles": 4456448,
+    "user_cycles": 3338022,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{0,4}$",
+    "str": "2001:db8::1",
+    "proof_seconds": 54.18773736,
+    "verify_seconds": 0.015666598,
+    "total_cycles": 524288,
+    "user_cycles": 310486,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{0,4}$",
+    "str": "invalid:::address::",
+    "proof_seconds": 54.139611002,
+    "verify_seconds": 0.015656855,
+    "total_cycles": 524288,
+    "user_cycles": 278300,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^([^-][a-zA-Z0-9-]{0,62}[^-].)+[a-zA-Z]{2,}$",
+    "str": "sub.domain.example.com",
+    "proof_seconds": 124.080425547,
+    "verify_seconds": 0.030295438,
+    "total_cycles": 1179648,
+    "user_cycles": 703559,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([^-][a-zA-Z0-9-]{0,62}[^-]\\.)+[a-zA-Z]{2,}$",
+    "str": "-invalid.start.com",
+    "proof_seconds": 112.13388259,
+    "verify_seconds": 0.016818773,
+    "total_cycles": 1048576,
+    "user_cycles": 595806,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\d{15,18}$",
+    "str": "4532123456789012",
+    "proof_seconds": 555.973239449,
+    "verify_seconds": 0.081886844,
+    "total_cycles": 5242880,
+    "user_cycles": 3962779,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\d{15,18}$",
+    "str": "1234",
+    "proof_seconds": 557.432215123,
+    "verify_seconds": 0.081917221,
+    "total_cycles": 5242880,
+    "user_cycles": 3810056,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}(:\\d+)?$",
+    "str": "user@localhost.local:8080",
+    "proof_seconds": 114.294464915,
+    "verify_seconds": 0.028602734,
+    "total_cycles": 1081344,
+    "user_cycles": 673355,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^https?://[^/]+/api/[vV]\\d+/.+$",
+    "str": "https://api.example.com/v2/users",
+    "proof_seconds": 111.578602033,
+    "verify_seconds": 0.016772659999999998,
+    "total_cycles": 1048576,
+    "user_cycles": 661918,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]{32}-[A-Za-z0-9+/]{8}-[A-Za-z0-9+/]{20}$",
+    "str": "QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaA==-YWJjZA==-YWJjZGVmZ2hpamtsbW5vcA==",
+    "proof_seconds": 54.077182187,
+    "verify_seconds": 0.015763961,
+    "total_cycles": 524288,
+    "user_cycles": 308085,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[A-Za-z0-9+/]{32}-[A-Za-z0-9+/]{8}-[A-Za-z0-9+/]{20}$",
+    "str": "invalid-format-now",
+    "proof_seconds": 54.11798806,
+    "verify_seconds": 0.01566809,
+    "total_cycles": 524288,
+    "user_cycles": 307999,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^(?:[0-9]{1,3}.){3}[0-9]{1,3}(?:\\s+(?:[0-9]{1,3}.){3}[0-9]{1,3})*$",
+    "str": "192.168.1.1 10.0.0.1 172.16.0.1",
+    "proof_seconds": 124.344497159,
+    "verify_seconds": 0.030252829,
+    "total_cycles": 1179648,
+    "user_cycles": 747120,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._-]+@([a-zA-Z0-9-]+.)+[a-zA-Z]{2,}$",
+    "str": "test@company.corporate-domain.global",
+    "proof_seconds": 276.068294664,
+    "verify_seconds": 0.048223771,
+    "total_cycles": 2621440,
+    "user_cycles": 2104071,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^{{[^{}]*}}$",
+    "str": "{{USER_ID}}",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.72s\n     Running `target/release/jwt-rsa-verify '{{USER_ID}}'`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^{{[^{}]*}}$\n      ^\nerror: repetition quantifier expects a valid decimal\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^{{[^{}]*}}$\n      ^\nerror: repetition quantifier expects a valid decimal\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^\\{\\{[^{}]*\\}\\}$",
+    "str": "{{NESTED{{INVALID}}}}",
+    "proof_seconds": 164.990351719,
+    "verify_seconds": 0.032000215,
+    "total_cycles": 1572864,
+    "user_cycles": 1008159,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+    "str": "PD94bWwgdmVyc2lvbj0iMS4wIj8+DQo8cm9vdD5IZWxsbyB3b3JsZCE8L3Jvb3Q+",
+    "proof_seconds": 111.820039688,
+    "verify_seconds": 0.016787465999999997,
+    "total_cycles": 1048576,
+    "user_cycles": 639872,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^https?://[^/]+/login\\?[\\w&=%.-]*$",
+    "str": "https://example.com/login?next=%2Fdashboard&amp;token=abc123",
+    "proof_seconds": 446.254008981,
+    "verify_seconds": 0.07660449,
+    "total_cycles": 4210688,
+    "user_cycles": 3250867,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-fA-F0-9]{64}$",
+    "str": "da96a6f8d1ceec5d34f5bf0f79d1c3a4693b1b2e47345c3b6e3e8a3d4f6b2c7a",
+    "proof_seconds": 111.550012834,
+    "verify_seconds": 0.016751095,
+    "total_cycles": 1048576,
+    "user_cycles": 501629,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-fA-F0-9]{64}$",
+    "str": "short",
+    "proof_seconds": 53.966977251,
+    "verify_seconds": 0.016079699000000003,
+    "total_cycles": 524288,
+    "user_cycles": 251609,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\d{4} \\d{4} \\d{4} \\d{4}$",
+    "str": "1234 5678 9012 3456",
+    "proof_seconds": 498.644952495,
+    "verify_seconds": 0.08084353799999999,
+    "total_cycles": 4718592,
+    "user_cycles": 3611508,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\d{4} \\d{4} \\d{4} \\d{4}$",
+    "str": "1234-5678-9012-3456",
+    "proof_seconds": 498.516787916,
+    "verify_seconds": 0.080880207,
+    "total_cycles": 4718592,
+    "user_cycles": 3541848,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^X-(?:Forwarded|Real)-IP:\\s+\\d{1,3}(?:.\\d{1,3}){3}$",
+    "str": "X-Forwarded-IP: 198.51.100.1",
+    "proof_seconds": 445.184025919,
+    "verify_seconds": 0.065617556,
+    "total_cycles": 4194304,
+    "user_cycles": 3051243,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^Authorization:\\s+(Basic|Bearer|Digest)\\s+[A-Za-z0-9./+=]+$",
+    "str": "Authorization: Bearer abcdefghijklmnopqrstuvwxyz1234567890",
+    "proof_seconds": 124.101396263,
+    "verify_seconds": 0.030261562000000002,
+    "total_cycles": 1179648,
+    "user_cycles": 692502,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+.)+[a-zA-Z]{2,63}$",
+    "str": "user@verylongtopleveldomainnameexample.info",
+    "proof_seconds": 165.144286076,
+    "verify_seconds": 0.031995334,
+    "total_cycles": 1572864,
+    "user_cycles": 942372,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$",
+    "str": "MyPass1234",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.66s\n     Running `target/release/jwt-rsa-verify MyPass1234`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": true
+  },
+  {
+    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$",
+    "str": "weakpass",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.68s\n     Running `target/release/jwt-rsa-verify weakpass`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{10,}$\n     ^^^\nerror: look-around, including look-ahead and look-behind, is not supported\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": false
+  },
+  {
+    "pattern": "^([a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*.)?[a-zA-Z0-9-]+.[a-zA-Z]{2,}$",
+    "str": "www.sub.domain.example.org",
+    "proof_seconds": 111.701072654,
+    "verify_seconds": 0.016790728,
+    "total_cycles": 1048576,
+    "user_cycles": 507831,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*\\.)?[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}$",
+    "str": "invalid..domain",
+    "proof_seconds": 111.538077251,
+    "verify_seconds": 0.016764862999999998,
+    "total_cycles": 1048576,
+    "user_cycles": 580257,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9+/]{64}$",
+    "str": "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5eg==",
+    "proof_seconds": 55.155106751,
+    "verify_seconds": 0.015725888,
+    "total_cycles": 524288,
+    "user_cycles": 273112,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9+/]{64}$",
+    "str": "too short base64",
+    "proof_seconds": 54.154456897,
+    "verify_seconds": 0.015701800000000002,
+    "total_cycles": 524288,
+    "user_cycles": 273035,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\d{9}[\\dX]$",
+    "str": "012345678X",
+    "proof_seconds": 333.556745663,
+    "verify_seconds": 0.049361038999999995,
+    "total_cycles": 3145728,
+    "user_cycles": 2344188,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\d{9}[\\dX]$",
+    "str": "1234567890",
+    "proof_seconds": 336.577407195,
+    "verify_seconds": 0.049330366,
+    "total_cycles": 3145728,
+    "user_cycles": 2344122,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[A-Za-z0-9]{10}-[A-Za-z0-9]{5}-[A-Za-z0-9]{15}$",
+    "str": "ABC123XYZ9-PQ5R8-MN9OL1234PQR5678",
+    "proof_seconds": 53.997367567,
+    "verify_seconds": 0.015670097,
+    "total_cycles": 524288,
+    "user_cycles": 216214,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\$scrypt\\$[0-9]+,[0-9]+,[0-9]+\\$[a-zA-Z0-9+/=]+\\$[a-zA-Z0-9+/=]+$",
+    "str": "\\$scrypt\\$16384,8,1\\$saltstring\\$derivedkeyinbase64",
+    "proof_seconds": 222.734725271,
+    "verify_seconds": 0.033026322999999996,
+    "total_cycles": 2097152,
+    "user_cycles": 1592878,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}-){5}[0-9a-fA-F]{2}$",
+    "str": "00-1A-2B-3C-4D-5E",
+    "proof_seconds": 111.635335766,
+    "verify_seconds": 0.016762256,
+    "total_cycles": 1048576,
+    "user_cycles": 768798,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}-){5}[0-9a-fA-F]{2}$",
+    "str": "00:1A:2B:3C:4D:5E",
+    "proof_seconds": 111.64206831,
+    "verify_seconds": 0.016792419,
+    "total_cycles": 1048576,
+    "user_cycles": 768224,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@([a-zA-Z0-9])(([a-zA-Z0-9-])*[a-zA-Z0-9])?\\.([a-zA-Z0-9]{2,})$",
+    "str": "user+filter@domain.co.uk",
+    "proof_seconds": 54.049306285,
+    "verify_seconds": 0.015667831,
+    "total_cycles": 524288,
+    "user_cycles": 323410,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^([a-zA-Z0-9])(([a-zA-Z0-9._-])*[a-zA-Z0-9])?@([a-zA-Z0-9])(([a-zA-Z0-9-])*[a-zA-Z0-9])?\\.([a-zA-Z0-9]{2,})$",
+    "str": "user@@example.com",
+    "proof_seconds": 54.122163594,
+    "verify_seconds": 0.015693287,
+    "total_cycles": 524288,
+    "user_cycles": 326055,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\d{1,3}(?:,\\d{3})*(?:.\\d+)?$",
+    "str": "1,234,567.89",
+    "proof_seconds": 276.446051623,
+    "verify_seconds": 0.048271079,
+    "total_cycles": 2621440,
+    "user_cycles": 1817680,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\d{1,3}(?:,\\d{3})*(?:\\.\\d+)?$",
+    "str": "1234.56",
+    "proof_seconds": 248.322414939,
+    "verify_seconds": 0.04734548,
+    "total_cycles": 2359296,
+    "user_cycles": 1757204,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\*(?:.[a-zA-Z0-9-]+)+$",
+    "str": "*.example.com",
+    "proof_seconds": 224.872781319,
+    "verify_seconds": 0.033078508,
+    "total_cycles": 2097152,
+    "user_cycles": 1308172,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\*(?:\\.[a-zA-Z0-9-]+)+$",
+    "str": "sub.example.com",
+    "proof_seconds": 111.700802325,
+    "verify_seconds": 0.016759956,
+    "total_cycles": 1048576,
+    "user_cycles": 393339,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9]{8}_[a-zA-Z0-9]{8}_[a-zA-Z0-9]{8}$",
+    "str": "a1b2c3d4_e5f6g7h8_i9j0k1l2",
+    "proof_seconds": 53.984810104,
+    "verify_seconds": 0.015695792,
+    "total_cycles": 524288,
+    "user_cycles": 328046,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(.[0-9]+)?(Z|([+-][0-9]{2}):([0-9]{2}))$",
+    "str": "2025-04-05T10:15:30.123+05:30",
+    "proof_seconds": 111.776312423,
+    "verify_seconds": 0.016758889,
+    "total_cycles": 1048576,
+    "user_cycles": 617683,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(\\.[0-9]+)?(Z|([+-][0-9]{2}):([0-9]{2}))$",
+    "str": "2025-04-05 10:15:30",
+    "proof_seconds": 53.904465327,
+    "verify_seconds": 0.015738633999999998,
+    "total_cycles": 524288,
+    "user_cycles": 333562,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]{2,15}$",
+    "str": "userName123",
+    "proof_seconds": 54.043579785,
+    "verify_seconds": 0.015703769,
+    "total_cycles": 524288,
+    "user_cycles": 235034,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-zA-Z][a-zA-Z0-9]{2,15}$",
+    "str": "ab",
+    "proof_seconds": 54.068953452,
+    "verify_seconds": 0.015676896,
+    "total_cycles": 524288,
+    "user_cycles": 167521,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\$s2k2\\$[a-zA-Z0-9+/=]+\\$[a-zA-Z0-9+/=]+$",
+    "str": "\\$s2k2\\$YWJjZGVmZ2g=\\$aGVsbG93b3JsZA==",
+    "proof_seconds": 111.376816509,
+    "verify_seconds": 0.016781373999999998,
+    "total_cycles": 1048576,
+    "user_cycles": 846851,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^(?:[a-zA-Z0-9+/]{4})*(?:[a-zA-Z0-9+/]{2}==|[a-zA-Z0-9+/]{3}=)?(?:\\s*[a-zA-Z0-9+/]{4})*$",
+    "str": "SGVsbG8gd29ybGQhIFRo\n    pcyBpcyBiYXNlNjQK",
+    "proof_seconds": 111.741227306,
+    "verify_seconds": 0.016743117999999998,
+    "total_cycles": 1048576,
+    "user_cycles": 496698,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+    "str": "127.0.0.1",
+    "proof_seconds": 124.223348517,
+    "verify_seconds": 0.030287845999999997,
+    "total_cycles": 1179648,
+    "user_cycles": 717203,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+    "str": "999.999.999.999",
+    "proof_seconds": 111.533677342,
+    "verify_seconds": 0.016764533,
+    "total_cycles": 1048576,
+    "user_cycles": 458683,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,30}$",
+    "str": "longemailaddresslabel@verylongdomainnameexamplefortestingpurposes.net",
+    "proof_seconds": 123.94100522,
+    "verify_seconds": 0.030254491999999997,
+    "total_cycles": 1179648,
+    "user_cycles": 775223,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(([^<>()[$$\\\\.,;:\\s@\\\"]+(\\.[^<>()[$$\\\\.,;:\\s@\\\"]+)*)|(\".+\"))@(($$[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$$)|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$",
+    "str": "quoted\"user\"@example.com",
+    "proof_seconds": null,
+    "verify_seconds": null,
+    "total_cycles": null,
+    "user_cycles": null,
+    "error": "host exit 101: Compiling jwt-rsa-verify-methods v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex/methods)\n   Compiling jwt-rsa-verify v0.1.0 (/home/walotta/ZK_Zero_Trust/independent_experiment/regex)\n    Finished `release` profile [optimized] target(s) in 1.71s\n     Running `target/release/jwt-rsa-verify 'quoted\"user\"@example.com'`\n\nthread 'main' panicked at src/main.rs:9:10:\ncalled `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(([^<>()[$$\\\\.,;:\\s@\\\"]+(\\.[^<>()[$$\\\\.,;:\\s@\\\"]+)*)|(\".+\"))@(($$[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$$)|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$\n                                ^^\nerror: unclosed character class\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' panicked at src/main.rs:36:10:\nprove signature verification: Guest panicked: called `Result::unwrap()` on an `Err` value: Syntax(\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nregex parse error:\n    ^(([^<>()[$$\\\\.,;:\\s@\\\"]+(\\.[^<>()[$$\\\\.,;:\\s@\\\"]+)*)|(\".+\"))@(($$[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$$)|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$\n                                ^^\nerror: unclosed character class\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+    "python_match": false
+  },
+  {
+    "pattern": "^\\$1\\$[a-zA-Z0-9./]{8}\\$[a-zA-Z0-9./]{22}$",
+    "str": "\\$1\\$salt1234\\$H/dI19u1bR8VfJ319s2vA0",
+    "proof_seconds": 54.271475406,
+    "verify_seconds": 0.015700753,
+    "total_cycles": 524288,
+    "user_cycles": 212102,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^([a-zA-Z0-9]|(?:%[0-9a-fA-F]{2}))+",
+    "str": "hello%20world%21",
+    "proof_seconds": 111.64380994,
+    "verify_seconds": 0.016750469,
+    "total_cycles": 1048576,
+    "user_cycles": 459336,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([a-zA-Z0-9]|(?:%[0-9a-fA-F]{2}))+",
+    "str": "normalstring",
+    "proof_seconds": 111.638582595,
+    "verify_seconds": 0.016804747,
+    "total_cycles": 1048576,
+    "user_cycles": 459385,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$",
+    "str": "01:02:03:04:05:06:07:08",
+    "proof_seconds": 119.323971699,
+    "verify_seconds": 0.029586666,
+    "total_cycles": 1114112,
+    "user_cycles": 876511,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^(?:[0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$",
+    "str": "01-02-03-04-05-06-07-08",
+    "proof_seconds": 117.666812558,
+    "verify_seconds": 0.029548748,
+    "total_cycles": 1114112,
+    "user_cycles": 876970,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+    "str": "2025-04-05",
+    "proof_seconds": 334.019171324,
+    "verify_seconds": 0.049363027000000004,
+    "total_cycles": 3145728,
+    "user_cycles": 1951034,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+    "str": "2025/04/05",
+    "proof_seconds": 276.13842365,
+    "verify_seconds": 0.04835519,
+    "total_cycles": 2621440,
+    "user_cycles": 1923512,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?(.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$",
+    "str": "valid-host-name-label",
+    "proof_seconds": 276.527470803,
+    "verify_seconds": 0.048273391,
+    "total_cycles": 2621440,
+    "user_cycles": 2015789,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$",
+    "str": "-invalid-host",
+    "proof_seconds": 111.674321903,
+    "verify_seconds": 0.016763133,
+    "total_cycles": 1048576,
+    "user_cycles": 521661,
+    "error": null,
+    "python_match": false
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "str": "Tm8gc3BlY2lhbCBjaGFyYWN0ZXJzLCBidXQgc3RpbGwgYmFzZTY0Lg==",
+    "proof_seconds": 111.751241062,
+    "verify_seconds": 0.016783822,
+    "total_cycles": 1048576,
+    "user_cycles": 639885,
+    "error": null,
+    "python_match": true
+  },
+  {
+    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$",
+    "str": "special chars! not base64",
+    "proof_seconds": 111.718686118,
+    "verify_seconds": 0.016790471,
+    "total_cycles": 1048576,
+    "user_cycles": 639845,
+    "error": null,
+    "python_match": false
+  }
+]
