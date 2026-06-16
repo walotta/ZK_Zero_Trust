@@ -3,6 +3,13 @@ set -e
 
 cd ~/ZK_Zero_Trust/tools/xacml-to-rust
 
+# Build compile_regex if not already installed
+if ! python3 -c "import compile_regex" 2>/dev/null; then
+    echo "Building compile_regex extension..."
+    (cd compile_regex && PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1 maturin develop --features python 2>&1 | tail -2)
+    echo ""
+fi
+
 echo "=== XACML-to-Rust Compiler ==="
 echo ""
 
