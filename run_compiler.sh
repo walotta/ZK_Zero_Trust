@@ -1,8 +1,4 @@
 #!/bin/bash
-# Step E0: Run the XACML-to-Rust compiler
-# This script compiles XACML policies to Rust code for zkVM execution.
-# It demonstrates the compiler pipeline described in the paper.
-
 set -e
 
 cd ~/ZK_Zero_Trust/tools/xacml-to-rust
@@ -10,26 +6,32 @@ cd ~/ZK_Zero_Trust/tools/xacml-to-rust
 echo "=== XACML-to-Rust Compiler ==="
 echo ""
 
-# --- Configuration ---
-# Set USE_RSA=true for the RSA dataset (E1), false for no-RSA (E2)
 USE_RSA=${1:-true}
 
 if [ "$USE_RSA" = "true" ]; then
-    OUTPUT_DIR="jwt_zkvm_testing_gen"
+    OUTPUT_DIR="jwt_zkvm_testing"
     RSA_FLAG="True"
     echo "Generating dataset WITH RSA verification (for E1, E3, E4)..."
 else
-    OUTPUT_DIR="zkvm_testing_without_rsa_gen"
+    OUTPUT_DIR="zkvm_testing_without_rsa"
     RSA_FLAG="False"
     echo "Generating dataset WITHOUT RSA verification (for E2)..."
 fi
 
-# Run compiler
+JWT_SRC="test_jwts"
+JWT_BACKUP="/tmp/prezta_jwts_backup"
+if [ -d "$JWT_SRC" ]; then
+    rm -rf "$JWT_BACKUP"
+    cp -r "$JWT_SRC" "$JWT_BACKUP"
+elif [ ! -d "$JWT_BACKUP" ]; then
+    echo "ERROR: JWT source not found at $JWT_SRC and no backup exists"
+    exit 1
+fi
+
 rm -rf "$OUTPUT_DIR"
 
 python3 -c "
 import sys, os, subprocess, time
-from collections import defaultdict
 from datetime import datetime
 
 USE_RSA_VERIFY = $RSA_FLAG
@@ -71,22 +73,18 @@ with open(log_file, 'w') as f:
     f.write(f'Total: {total}, Successful: {successes}, Failed: {failures}, Skipped: {skips}\n')
 "
 
-# Copy pre-generated JWT tokens (signed test data independent of compilation)
-if [ "$USE_RSA" = "true" ]; then
-    cp -r jwt_zkvm_testing/jwts "$OUTPUT_DIR/jwts"
-    echo ""
-    echo "JWT test tokens copied from repository (pre-signed, independent of compilation)."
-fi
+cp -r "$JWT_BACKUP" "$OUTPUT_DIR/jwts"
 
 echo ""
 echo "=== Compilation complete ==="
-echo "Output directory: ~/ZK_Zero_Trust/tools/xacml-to-rust/$OUTPUT_DIR/"
+echo "Output: tools/xacml-to-rust/$OUTPUT_DIR/"
 echo ""
-echo "To use this generated dataset for experiments, from ~/ZK_Zero_Trust run:"
+echo "Experiments can now be run directly from ~/ZK_Zero_Trust:"
 if [ "$USE_RSA" = "true" ]; then
-    echo "  sed -i 's|jwt_zkvm_testing\b|jwt_zkvm_testing_gen|' batch_exec.py"
+    echo "  python3 batch_exec.py                    # E1"
 else
-    echo "  sed -i 's|jwt_zkvm_testing|zkvm_testing_without_rsa_gen|' batch_exec.py"
+    echo "  sed -i 's|jwt_zkvm_testing|zkvm_testing_without_rsa|' batch_exec.py"
+    echo "  rm -rf target/"
+    echo "  python3 batch_exec.py                    # E2"
+    echo "  git checkout -- batch_exec.py"
 fi
-echo "  python3 batch_exec.py"
-echo "  git checkout -- batch_exec.py  # revert after"
