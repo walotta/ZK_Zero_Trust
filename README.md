@@ -9,11 +9,15 @@ curl -L https://risczero.com/install | bash
 rzup install
 ```
 
-2. Makesure `xacml-to-rust` installed under tools
+2. Clone `xacml-to-rust` compiler under tools
 ```bash
-git submodule update --init --recursive
+git clone https://github.com/osaidameer/xacml-to-rust.git tools/xacml-to-rust
 ```
-The compiled example policies is already under this submodule, you could also re-compile following the readme of `xacml-to-rust`
+Then generate the policy datasets by running the compiler (see artifact appendix for details):
+```bash
+bash run_compiler.sh true
+bash run_compiler.sh false
+```
 
 3. Running with batch
 
